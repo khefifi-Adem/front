@@ -66,7 +66,7 @@ function NavBar() {
 
   return (
     <>
-      <nav className='navbar1'>
+      <nav className='navbar1 '>
         <Link to='/' className='navbar-logo1 navbar-brand' onClick={closeMobileMenu}>
           SMS2I
 
@@ -181,7 +181,7 @@ function NavBar() {
               className='nav-links-mobile1'
               onClick={closeMobileMenu}
             >
-              S'inscrire'
+              S'inscrire
             </Link>
           </li>
           <li>
@@ -197,8 +197,8 @@ function NavBar() {
 
 
 
-        <Button titre={"S'inscrire"} databstoggle="modal" databstarget="#sinscriremodal"/>
-        <Button titre={"S'identifier"} databstoggle="modal" databstarget="#connexionmodal"/>
+        <Button titre={"S'inscrire"} />
+        <Button titre={"S'identifier"} />
 
 
 
