@@ -6,7 +6,6 @@ import DropDownServices from '../DropDown/dropDownServices';
 import DropDownFormations from "../DropDown/dropDownFormations";
 import DropDownReferences from "../DropDown/dropDownReferences";
 
-
 function NavBar() {
   const [click, setClick] = useState(false);
   const [dropdownS, setDropdownS] = useState(false);

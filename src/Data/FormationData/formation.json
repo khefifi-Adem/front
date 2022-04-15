@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "titre": "Automatisme industriel",
+    "description": "desc sec 1",
+    "childrens": [
+      {
+        "id": 1,
+        "titre": "SIEMENS",
+        "description": "desc dom 1",
+        "secteur_id": 1,
+        "childrens": [
+          {
+            "id": 1,
+            "titre": " S7 300/400",
+            "description": "desc theme 1",
+            "domaine_id": 1,
+            "childrens" : [
+              {
+                "id": 1,
+                "titre": "Initiation aux API SIEMENS S7 300/400 Niv1",
+                "description": "desc niv 1",
+                "theme_id": 1
+              },
+              {
+                "id": 2,
+                "titre": "Programmation des API siemens S7 300/400 Niv 2",
+                "description": "desc niv 1",
+                "theme_id": 1
+              },
+              {
+                "id": 3,
+                "titre": "Programmation avancée des API SIEMENS S 7300/400 Niv 2.1",
+                "description": "desc niv 1",
+                "theme_id": 1
+              },
+              {
+                "id": 4,
+                "titre": "Traitement analogique des API S7 300/400 Niv 3",
+                "description": "desc niv 1",
+                "theme_id": 1
+              },
+              {
+                "id": 5,
+                "titre": "Procédure de maintenace d'un système automatisé S7300/400 Niv 4",
+                "description": "desc niv 1",
+                "theme_id": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "titre": "dom 2",
+        "description": "desc dom 2",
+        "secteur_id": 2,
+        "childrens": [
+          {
+            "id": 2,
+            "titre": "theme 2",
+            "description": "desc theme 2",
+            "domaine_id": 2,
+            "childrens" : [
+              {
+                "id": 6,
+                "titre": "niv 2",
+                "description": "desc niv 2",
+                "theme_id": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titre": "Automatisme industriel",
+    "description": "desc sec 1",
+    "childrens": [
+      {
+        "id": 3,
+        "titre": "SIEMENS",
+        "description": "desc dom 1",
+        "secteur_id": 1,
+        "childrens": [
+          {
+            "id": 1,
+            "titre": " S7 300/400",
+            "description": "desc theme 1",
+            "domaine_id": 1,
+            "childrens" : [
+              {
+                "id": 7,
+                "titre": "Initiation aux API SIEMENS S7 300/400 Niv1",
+                "description": "desc niv 1",
+                "theme_id": 1
+              },
+              {
+                "id": 8,
+                "titre": "Programmation des API siemens S7 300/400 Niv 2",
+                "description": "desc niv 1",
+                "theme_id": 1
+              },
+              {
+                "id": 9,
+                "titre": "Programmation avancée des API SIEMENS S 7300/400 Niv 2.1",
+                "description": "desc niv 1",
+                "theme_id": 1
+              },
+              {
+                "id": 10,
+                "titre": "Traitement analogique des API S7 300/400 Niv 3",
+                "description": "desc niv 1",
+                "theme_id": 1
+              },
+              {
+                "id": 11,
+                "titre": "Procédure de maintenace d'un système automatisé S7300/400 Niv 4",
+                "description": "desc niv 1",
+                "theme_id": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "titre": "dom 2",
+        "description": "desc dom 2",
+        "secteur_id": 2,
+        "childrens": [
+          {
+            "id": 2,
+            "titre": "theme 2",
+            "description": "desc theme 2",
+            "domaine_id": 2,
+            "childrens" : [
+              {
+                "id": 12,
+                "titre": "niv 2",
+                "description": "desc niv 2",
+                "theme_id": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
