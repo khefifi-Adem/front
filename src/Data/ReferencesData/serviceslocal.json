@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "titre" : "Industrie laitière",
+    "childrens" : [
+      {
+        "id": 1,
+        "titre" : "Vitalait",
+        "childrens":[
+          {
+            "id": 1,
+            "titre": "Armoire de commande avec un Supervision Stérilisateur stork A",
+            "description": "Fourniture, installation et mise en service d’une armoire de commande avec un Supervision Stérilisateur stork A",
+            "annee": 2007
+          },
+          {
+            "id": 2,
+            "titre": "automatisation complète avec Pupitre TP277 10",
+            "description": " Projet de Développement de l’automatisation complète avec Pupitre TP277 10’’ et supervision PC Wincc Flexible de la NEP A/B (CIP) Vitalait ",
+            "annee": 2009
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "titre" : "Groupe-GIPA(Polina)",
+        "childrens":[
+          {
+            "id": 3,
+            "titre": "Installation et mise en service d’une armoire de commande complète ",
+            "description": "Installation et mise en service d’une armoire de commande complète (commande + puissance) avec supervision de la machine stérilisateur STORK ",
+            "annee": 2008
+          },
+          {
+            "id": 4,
+            "titre": "Audit et Etude Complete du Processus complet de l’usine Produits Frais GIPA",
+            "description": " Audit et Etude Complete (instrumentation et automatisation) du Processus complet (dès la réception jusqu’au conditionnement) de l’usine Produits Frais GIPA en Vue de sa mise à niveau.",
+            "annee": 2009
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titre" : "Industrie laitière",
+    "childrens" : [
+      {
+        "id": 3,
+        "titre" : "Vitalait",
+        "childrens":[
+          {
+            "id": 5,
+            "titre": "Armoire de commande avec un Supervision Stérilisateur stork A",
+            "description": "Fourniture, installation et mise en service d’une armoire de commande avec un Supervision Stérilisateur stork A",
+            "annee": 2007
+          },
+          {
+            "id": 6,
+            "titre": "automatisation complète avec Pupitre TP277 10",
+            "description": " Projet de Développement de l’automatisation complète avec Pupitre TP277 10’’ et supervision PC Wincc Flexible de la NEP A/B (CIP) Vitalait ",
+            "annee": 2009
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "titre" : "Groupe-GIPA(Polina)",
+        "childrens":[
+          {
+            "id": 7,
+            "titre": "Installation et mise en service d’une armoire de commande complète ",
+            "description": "Installation et mise en service d’une armoire de commande complète (commande + puissance) avec supervision de la machine stérilisateur STORK ",
+            "annee": 2008
+          },
+          {
+            "id": 8,
+            "titre": "Audit et Etude Complete du Processus complet de l’usine Produits Frais GIPA",
+            "description": " Audit et Etude Complete (instrumentation et automatisation) du Processus complet (dès la réception jusqu’au conditionnement) de l’usine Produits Frais GIPA en Vue de sa mise à niveau.",
+            "annee": 2009
+          }
+        ]
+      }
+    ]
+  }
+]
