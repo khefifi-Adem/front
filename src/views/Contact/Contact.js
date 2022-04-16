@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "../components/NavBar/navBar";
-import Footer from "../components/Footer/Footer";
+import NavBar from "../../components/NavBar/navBar";
+import Footer from "../../components/Footer/Footer";
 
 function Contact() {
     return(
@@ -16,18 +16,12 @@ function Contact() {
                             <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3">
                                 <i className="bi bi-envelope"/>
                             </div>
-                            <h1 className="fw-bolder">Get in touch</h1>
-                            <p className="lead fw-normal text-muted mb-0">We'd love to hear from you</p>
+                            <h1 className="fw-bolder">Entrer en contact</h1>
+                            <p className="lead fw-normal text-muted mb-0">Nous aimerions recevoir de vos nouvelles</p>
                         </div>
                         <div className="row gx-5 justify-content-center">
                             <div className="col-lg-8 col-xl-6">
-                                {/*// <!-- * * * * * * * * * * * * * * *-->*/}
-                                {/*// <!-- * * SB Forms Contact Form * *-->*/}
-                                {/*// <!-- * * * * * * * * * * * * * * *-->*/}
-                                {/*// <!-- This form is pre-integrated with SB Forms.-->*/}
-                                {/*// <!-- To make this form functional, sign up at-->*/}
-                                {/*// <!-- https://startbootstrap.com/solution/contact-forms-->*/}
-                                {/*// <!-- to get an API token!-->*/}
+
                                 <form id="contactForm" data-sb-form-api-token="API_TOKEN">
                                     {/*Name input*/}
                                     <div className="form-floating mb-3">
@@ -59,11 +53,21 @@ function Contact() {
                                             number is required.
                                         </div>
                                     </div>
+
+                                    {/*subject input*/}
+                                    <div className="form-floating mb-3">
+                                        <input className="form-control" id="sujet" type="text"
+                                               placeholder="(123) 12-345-678" data-sb-validations="required"/>
+                                        <label htmlFor="phone">sujet</label>
+                                        <div className="invalid-feedback" data-sb-feedback="phone:required">
+                                            A subject is required.
+                                        </div>
+                                    </div>
                                      {/*Message input*/}
                                     <div className="form-floating mb-3">
-                                        <textarea className="form-control" id="message" type="text"
+                                        <textarea className="form-control" id="message"
                                                   placeholder="Enter your message here..."
-                                                  data-sb-validations="required"></textarea>
+                                                  data-sb-validations="required"/>
                                         <label htmlFor="message">Message</label>
                                         <div className="invalid-feedback" data-sb-feedback="message:required">A message
                                             is required.
@@ -89,7 +93,7 @@ function Contact() {
                                     <div className="d-grid">
                                         <button className="btn btn-primary btn-lg disabled" id="submitButton"
                                                 type="submit">
-                                            Submit
+                                            Envoyer
                                         </button>
                                     </div>
                                 </form>
@@ -97,33 +101,38 @@ function Contact() {
                         </div>
                     </div>
                     {/*Contact cards*/}
-                    {/*<div className="row gx-5 row-cols-2 row-cols-lg-4 py-5">*/}
-                    {/*    <div className="col">*/}
-                    {/*        <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i*/}
-                    {/*            className="bi bi-chat-dots"/></div>*/}
-                    {/*        <div className="h5 mb-2">Chat with us</div>*/}
-                    {/*        <p className="text-muted mb-0">Chat live with one of our support specialists.</p>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="col">*/}
-                    {/*        <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i*/}
-                    {/*            className="bi bi-people"/></div>*/}
-                    {/*        <div className="h5">Ask the community</div>*/}
-                    {/*        <p className="text-muted mb-0">Explore our community forums and communicate with other*/}
-                    {/*            users.</p>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="col">*/}
-                    {/*        <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i*/}
-                    {/*            className="bi bi-question-circle"/></div>*/}
-                    {/*        <div className="h5">Support center</div>*/}
-                    {/*        <p className="text-muted mb-0">Browse FAQ's and support articles to find solutions.</p>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="col">*/}
-                    {/*        <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i*/}
-                    {/*            className="bi bi-telephone"/></div>*/}
-                    {/*        <div className="h5">Call us</div>*/}
-                    {/*        <p className="text-muted mb-0">Call us during normal business hours at (555) 892-9403.</p>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="row gx-5 row-cols-2 row-cols-lg-4 py-5">
+
+                        <div className="col">
+                            <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                                className="bi bi-telephone"/></div>
+                            <div className="h5">Call us</div>
+                            <p className="text-muted mb-0">Call us during normal business hours at (216) 26-821-891.</p>
+                        </div>
+
+                        <div className="col">
+                            <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                                className="bi bi-twitter"/></div>
+                            <div className="h5 mb-2">Chat with us</div>
+                            <p className="text-muted mb-0">Chat live with one of our support specialists.</p>
+                        </div>
+
+                        <div className="col">
+                            <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                                className="bi bi-facebook"/></div>
+                            <div className="h5">Ask the community</div>
+                            <p className="text-muted mb-0">Explore our community forums and communicate with other
+                                users.</p>
+                        </div>
+
+                        <div className="col">
+                            <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
+                                className="bi bi-instagram"/></div>
+                            <div className="h5">Support center</div>
+                            <p className="text-muted mb-0">Browse FAQ's and support articles to find solutions.</p>
+                        </div>
+
+                    </div>
                 </div>
             </section>
             <Footer/>

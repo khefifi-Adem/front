@@ -1,18 +1,17 @@
 import React from 'react';
-import { MenuItemsServices } from '../../Data/MenuItems/menuItemsServices';
 
-function InnerNavBar() {
+function InnerNavBar({data}) {
     return (
         <ul className="nav nav-tabs bg-dark justify-content-center fs-6 ">
             {
-                MenuItemsServices.map((item, index) => {
+                data.map((data => {
                         return (
-                            <li className="nav-item " key={index} >
-                                <a className="nav-link text-white" aria-current="page" href={item.path}>{item.title}</a>
+                            <li className="nav-item " key={data.id} >
+                                <a className="nav-link text-white" aria-current="page" href={`#${data.id}`}>{data.titre}</a>
                             </li>
                         )
                     }
-                )
+                ))
             }
         </ul>
     )

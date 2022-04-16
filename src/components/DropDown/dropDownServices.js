@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { MenuItemsServices } from '../../Data/MenuItems/menuItemsServices';
+// import { MenuItemsServices } from '../../Data/MenuItems/menuItemsServices';
 import './Dropdown.css';
+import services from "../../Data/ServicesData/services.json";
+import {Link} from "react-router-dom";
 function DropDownServices() {
   const [click, setClick] = useState(false);
 
@@ -12,19 +14,20 @@ function DropDownServices() {
         onClick={handleClick}
         className={click ? 'dropdown-menu1 clicked' : 'dropdown-menu1'}
       >
-        {MenuItemsServices.map((item, index) => {
-          return (
-            <li key={index}>
-              <a
-                className={item.cName}
-                href={item.path}
-                onClick={() => setClick(false)}
-              >
-                {item.title}
-              </a>
-            </li>
-          );
-        })}
+          {
+              services.map((service => {
+                  return (
+                      <li key={service.id}>
+                          <Link
+                              className="dropdown-link1"
+                              to={`#${service.id}`}
+                              onClick={() => setClick(false)}
+                          >
+                              {service.titre}
+                          </Link>
+                      </li>
+                  );
+              }))}
       </ul>
     </>
   );

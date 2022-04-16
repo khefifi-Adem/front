@@ -5,10 +5,7 @@ import InnerNavBar from "../../components/InnerNavBar/innerNavBar";
 import './Services.css';
 import smart from '../../assets/smart.jpg';
 import maintenance from '../../assets/maintenance.png';
-import formation from '../../assets/formation.jpg';
-import sys_information from '../../assets/sys_infor.jpg';
-import web_3_0 from '../../assets/web_3_0.webp';
-import etude_indus from '../../assets/etude_indus.jpg'
+import services from "../../Data/ServicesData/services.json";
 
 function Services() {
     return (
@@ -103,135 +100,63 @@ function Services() {
                     </div>
                 </div>
             </section>
-            <InnerNavBar/>
+            <InnerNavBar data={services}/>
             {/* Automatisme */}
-            <section className="py-5" id="automatisme">
-                <div className="container px-5 my-5">
-                    <div className="row gx-5 align-items-center">
-                        <div className="col-lg-6 order-first order-lg-last">
-                            <img className="img-fluid rounded mb-5 mb-lg-0" src={smart} alt="..."/></div>
-                        <div className="col-lg-6">
-                            <h2 className="fw-bolder">Automatisme</h2>
-                            <p className="lead fw-normal text-muted mb-0">
-                                Ce service s’intéresse à l’étude et le développement des applications d’automatisation du système industriel à base d’Automates ...
-                            </p>
-                            <div className="d-flex justify-content-end p-1">
-                            <button className="btn btn-primary ">Lire la suite</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            {/*Maintenance Industriels  */}
-            <section className="py-5 " id="maintenance-industriel">
-                <div className="container px-5 my-5  ">
-                    <div className="row gx-5 align-items-center">
-                        <div className="col-lg-6">
-                            <img className="img-fluid rounded mb-5 mb-lg-0" src={maintenance} alt="..."/>
-                        </div>
-                        <div className="col-lg-6">
-                            <h2 className="fw-bolder">Maintenance Industriels</h2>
-                            <p className="lead fw-normal text-muted mb-0">
-                                C’est un service complémentaire pour le service d’automatisme. Il s’intéresse à la tâche de maintenance des systèmes industriels ...
-                            </p>
-                            <div className="d-flex justify-content-end p-1">
-                                <button className="btn btn-primary ">Lire la suite</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            {
+                services.map(service=>
+                {
+                    if (service.id % 2===0)
+                    {
+                        return(
+                            <section className="py-5" id={service.id}>
+                                <div className="container px-5 my-5">
+                                    <div className="row gx-5 align-items-center">
+                                        <div className="col-lg-6 order-first order-lg-last">
+                                            <img className="img-fluid rounded mb-5 mb-lg-0" src={smart} alt="..."/>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <h2 className="fw-bolder">{service.titre}</h2>
+                                            <p className="lead fw-normal text-muted mb-0">
+                                                {service.description}
+                                            </p>
+                                            <div className="d-flex justify-content-end p-1">
+                                                <button className="btn btn-primary ">Lire la suite</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        )
+                    }
+                    else
+                    {
+                        return(
+                            <section className="py-5 " id={service.id}>
+                                <div className="container px-5 my-5  ">
+                                    <div className="row gx-5 align-items-center">
+                                        <div className="col-lg-6">
+                                            <img className="img-fluid rounded mb-5 mb-lg-0" src={maintenance} alt="..."/>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <h2 className="fw-bolder">{service.titre}</h2>
+                                            <p className="lead fw-normal text-muted mb-0">
+                                                {service.description}
+                                            </p>
+                                            <div className="d-flex justify-content-end p-1">
+                                                <button className="btn btn-primary ">Lire la suite</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
-            {/* Formation */}
-            <section className="py-5" id="formation">
-                <div className="container px-5 my-5">
-                    <div className="row gx-5 align-items-center">
-                        <div className="col-lg-6 order-first order-lg-last">
-                            <img className="img-fluid rounded mb-5 mb-lg-0" src={formation} alt="..."/></div>
-                        <div className="col-lg-6">
-                            <h2 className="fw-bolder">Formation</h2>
-                            <p className="lead fw-normal text-muted mb-0">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis
-                                impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque
-                                quisquam.
-                            </p>
-                            <div className="d-flex justify-content-end p-1">
-                                <button className="btn btn-primary ">Lire la suite</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        )
 
-            {/* Systeme d'information  */}
-            <section className="py-5" id="systeme-information">
-                <div className="container px-5 my-5 ">
-                    <div className="row gx-5 align-items-center">
-                        <div className="col-lg-6">
-                            <img className="img-fluid rounded mb-5 mb-lg-0" src={sys_information} alt="..."/>
-                        </div>
-                        <div className="col-lg-6">
-                            <h2 className="fw-bolder">Systeme d'information</h2>
-                            <p className="lead fw-normal text-muted mb-0">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis
-                                impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque
-                                quisquam.
-                            </p>
-                            <div className="d-flex justify-content-end p-1">
-                                <button className="btn btn-primary ">Lire la suite</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                }}
+                )
+            }
 
-            {/* programmation web 3.0 */}
-            <section className="py-5">
-                <div className="container px-5 my-5">
-                    <div className="row gx-5 align-items-center">
-                        <div className="col-lg-6 order-first order-lg-last">
-                            <img className="img-fluid rounded mb-5 mb-lg-0" src={web_3_0} alt="..."/></div>
-                        <div className="col-lg-6">
-                            <h2 className="fw-bolder">programmation web 3.0</h2>
-                            <p className="lead fw-normal text-muted mb-0">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis
-                                impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque
-                                quisquam.
-                            </p>
-                            <div className="d-flex justify-content-end p-1">
-                                <button className="btn btn-primary ">Lire la suite</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Etudes de processus industriels */}
-            <section className="py-5">
-                <div className="container px-5 my-5 ">
-                    <div className="row gx-5 align-items-center">
-                        <div className="col-lg-6">
-                            <img className="img-fluid rounded mb-5 mb-lg-0" src={etude_indus} alt="..."/>
-                        </div>
-                        <div className="col-lg-6">
-                            <h2 className="fw-bolder">Etudes de processus industriels</h2>
-                            <p className="lead fw-normal text-muted mb-0">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis
-                                impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque
-                                quisquam.
-                            </p>
-                            <div className="d-flex justify-content-end p-1">
-                                <button className="btn btn-primary ">Lire la suite</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <Footer/>
         </div>
@@ -239,3 +164,4 @@ function Services() {
 }
 
 export default Services;
+

@@ -24,7 +24,7 @@ function SidebarItem({item}){
         return (
 
             <Link to={`${item.id}`} state={item} className="sidebar-item plain">
-
+                <i className="fa fa-check"/>
                 {item.titre}
             </Link>
         )

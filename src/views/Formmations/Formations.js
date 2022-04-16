@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../../components/NavBar/navBar";
 import Footer from "../../components/Footer/Footer";
 import './Formations.css';
-import {Link,Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import formation_v1 from "../../assets/formation_v1.jpg";
 import SideBar from "../../components/SideBar/sideBar";
 import formations from '../../Data/FormationData/formation.json'
@@ -13,9 +13,9 @@ import formations from '../../Data/FormationData/formation.json'
 function Formations() {
     return(
         <div className="cont">
-            <div className="fixed-top">
+
                 <NavBar/>
-            </div>
+
             {/*Formation section*/}
             <section className=" py-5 ">
                 <div className="container px-5 ">
@@ -25,7 +25,7 @@ function Formations() {
                                 <h1 className="display-5 fw-bolder text-dark mb-2">La formation pour une industrie au top</h1>
                                 <p className="lead fw-normal text-dark-50 mb-4">Pour rester compétitif, il suffit d’assurer des formations de qualité à tous les employés, tout au long de leur vie professionnelle et adapter les formations aux opportunités professionnelles</p>
                                 <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a className="btn btn-primary btn-lg px-4 me-sm-3" href="#!">En vedette</a>
+                                    <a className="btn btn-primary btn-lg px-4 me-sm-3" href="#">En vedette</a>
                                 </div>
                             </div>
                         </div>
@@ -37,16 +37,15 @@ function Formations() {
             </section>
 
 
-                    <section className='mb-3 mt-3' >
-                                <div className="">
-                                    {/*<h2 className="fw-bolder align-self-lg-center p-5"></h2>*/}
-                                    <div className="cont_for">
-                                        <div className="side">
-
+            <section className='mb-3 mt-3' >
+                <div className="">
+                    {/*<h2 className="fw-bolder align-self-lg-center p-5"></h2>*/}
+                    <div className="cont_for">
+                        <div className="side">
                                             {
                                                 formations.map(formation=>(
-                                                    <div>
-                                                    <h2 className='py-5'>{formation.titre}</h2>
+                                                    <div key={formation.id}>
+                                                    <h2 className='py-2 p-5'>{formation.titre}</h2>
                                                     <SideBar data={formation.childrens}/>
                                                     </div>
                                                 ))

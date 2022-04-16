@@ -2,34 +2,21 @@ import React, { useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import DropDownServices from '../DropDown/dropDownServices';
 import DropDownFormations from "../DropDown/dropDownFormations";
 import DropDownReferences from "../DropDown/dropDownReferences";
 
 function NavBar() {
   const [click, setClick] = useState(false);
-  const [dropdownS, setDropdownS] = useState(false);
+
   const [dropdownF, setDropdownF] = useState(false);
   const [dropdownR, setDropdownR] = useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
-  const onMouseEnterS = () => {
-    if (window.innerWidth < 960) {
-      setDropdownS(false);
-    } else {
-      setDropdownS(true);
-    }
-  };
 
-  const onMouseLeaveS = () => {
-    if (window.innerWidth < 960) {
-      setDropdownS(false);
-    } else {
-      setDropdownS(false);
-    }
-  };
+
+
 
   const onMouseEnterF = () => {
     if (window.innerWidth < 960) {
@@ -79,19 +66,14 @@ function NavBar() {
               Acceuil
             </Link>
           </li>
-          <li
-            className='nav-item1'
-            onMouseEnter={onMouseEnterS}
-            onMouseLeave={onMouseLeaveS}
-          >
+          <li className='nav-item1'>
             <Link
-              to='/services'
-              className='nav-links1 text-uppercase'
-              onClick={closeMobileMenu}
+                to='/services'
+                className='nav-links1 text-uppercase'
+                onClick={closeMobileMenu}
             >
-              Services  <i className='fas fa-caret-down' />
+              services
             </Link>
-            {dropdownS && <DropDownServices />}
           </li>
           <li
             className='nav-item1'
@@ -114,7 +96,7 @@ function NavBar() {
             onMouseLeave={onMouseLeaveR}
           >
             <Link
-              to='/references'
+              to='/references/sms2i-service-locals'
               className='nav-links1 text-uppercase'
               onClick={closeMobileMenu}
             >

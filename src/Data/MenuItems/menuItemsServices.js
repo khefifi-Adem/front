@@ -1,7 +1,7 @@
 export const MenuItemsServices = [
   {
     title: 'Automatisme',
-    path: '/services/#automatisme',
+    path: '/services/#1',
     cName: 'dropdown-link1'
   },
   {
