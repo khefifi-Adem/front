@@ -108,7 +108,7 @@ function NavBar() {
 
           <li className='nav-item1'>
             <Link
-              to='/pieces-rechange'
+              to='/pieces-rechange/all'
               className='nav-links1 text-uppercase'
               onClick={closeMobileMenu}
             >

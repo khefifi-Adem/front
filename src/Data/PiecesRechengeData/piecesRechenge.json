@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "descripttion": "The most powerful Automation System within SIMATIC Superb communication capability and integrated interfaces make the SIMATIC S7-400 process controller ideal for larger tasks such as the coordination of entire systems. The graded range of CPUs enables scalable performance and the capacity for I/O periphery is virtually unlimited. What's more, process controller signal modules can be inserted and removed while the system is live (hot swapping), making it very easy to expand the system or replace modules.",
+    "domaine_utilisation": "Automate",
+    "marque": "siemens",
+    "model": "s700/400",
+    "edition": "2012"
+  },
+  {
+    "id": 2,
+    "descripttion": "The most powerful Automation System within SIMATIC Superb communication capability and integrated interfaces make the SIMATIC S7-400 process controller ideal for larger tasks such as the coordination of entire systems. The graded range of CPUs enables scalable performance and the capacity for I/O periphery is virtually unlimited. What's more, process controller signal modules can be inserted and removed while the system is live (hot swapping), making it very easy to expand the system or replace modules.",
+    "domaine_utilisation": "Automate",
+    "marque": "rockwell",
+    "model": "Allen Bradley",
+    "edition": "2015"
+  },
+  {
+    "id": 3,
+    "descripttion": "The most powerful Automation System within SIMATIC Superb communication capability and integrated interfaces make the SIMATIC S7-400 process controller ideal for larger tasks such as the coordination of entire systems. The graded range of CPUs enables scalable performance and the capacity for I/O periphery is virtually unlimited. What's more, process controller signal modules can be inserted and removed while the system is live (hot swapping), making it very easy to expand the system or replace modules.",
+    "domaine_utilisation":"Armoire electrique",
+    "marque": "Motorola",
+    "model": "Arm xxxxx",
+    "edition": "2016"
+  },
+  {
+    "id": 4,
+    "descripttion": "The most powerful Automation System within SIMATIC Superb communication capability and integrated interfaces make the SIMATIC S7-400 process controller ideal for larger tasks such as the coordination of entire systems. The graded range of CPUs enables scalable performance and the capacity for I/O periphery is virtually unlimited. What's more, process controller signal modules can be inserted and removed while the system is live (hot swapping), making it very easy to expand the system or replace modules.",
+    "domaine_utilisation":"HMI",
+    "marque": "SIEMENS",
+    "model": "HMI S",
+    "edition": "2013"
+  },
+  {
+    "id": 5,
+    "descripttion": "module Anybus AB6213-B Modbus TCP (https://www.anybus.com/support/file-doc-downloads/compactcom-30-series-specific/?orderCode=AB6213).Celui-ci est connecté sur une carte électronique, qui dispose d'un processeur pour la partie software",
+    "domaine_utilisation":"Ecran tactile couleur avec automate intégré",
+    "marque": "Panasonic",
+    "model": "ETCA_2018",
+    "edition": "2018"
+  }
+]

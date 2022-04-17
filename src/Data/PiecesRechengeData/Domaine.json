@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "domaine": "Automate"
+  },
+  {
+    "id": 2,
+    "domaine": "Armoire electrique"
+  },
+  {
+    "id": 3,
+    "domaine": "HMI"
+  },
+  {
+    "id": 4,
+    "domaine": "CPU"
+  },
+  {
+    "id": 5,
+    "domaine": "Ecran tactile couleur avec automate intégré"
+  }
+]

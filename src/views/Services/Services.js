@@ -10,9 +10,9 @@ import services from "../../Data/ServicesData/services.json";
 function Services() {
     return (
         <div className="cont">
-            <div className="fixed-top">
+
                 <NavBar/>
-            </div>
+
             {/*Services section*/}
             <section className="header py-5 ">
                 <div className="container px-5 my-5">

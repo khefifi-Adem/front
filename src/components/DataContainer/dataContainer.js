@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import formation_v1 from "../../assets/formation_v1.jpg";
 import {useLocation} from "react-router-dom";
 import ShowFileModal from "../ShowFileModal/showFileModal";
@@ -6,8 +6,7 @@ import "./dataContainer.css"
 
 function DataContainer(){
     const location = useLocation()
-    useEffect(()=> {
-    }, [])
+
     return(
 
             <div className=" px-0" id={location.state.id}>

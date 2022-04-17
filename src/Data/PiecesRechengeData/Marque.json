@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "marque": "siemens"
+  },
+  {
+    "id": 2,
+    "marque": "rockwell"
+  },
+  {
+    "id": 3,
+    "marque": "ifm"
+  },
+  {
+    "id": 4,
+    "marque": "motorola"
+  },
+  {
+    "id": 5,
+    "marque": "panasonic"
+  }
+]

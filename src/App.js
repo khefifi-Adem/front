@@ -11,6 +11,9 @@ import ServicesLocalData from "./components/ReferencesData/servicesLocalData";
 import SmiInternational from "./components/ReferencesData/smiInternational";
 import BtcCommercial from "./components/ReferencesData/BtcCommercial";
 import Sms3i from "./components/ReferencesData/sms3i";
+import PiecesRechenge from "./views/PiecesRechenge/piecesRechenge";
+import RechengeChoose from "./components/RechengeChoose/rechengeChoose";
+import Piece from "./components/Piece/Piece";
 
 
 
@@ -50,7 +53,11 @@ function App() {
 
             </Route>
 
-          {/*<Route path="/pieces-rechange" element={<PiecesDeRechenge/>}/>*/}
+            <Route path="/pieces-rechange" element={<PiecesRechenge/>}>
+                <Route path="all" element={<RechengeChoose/>}>
+                    <Route path=":id" element={<Piece/>}/>
+                </Route>
+            </Route>
           {/*<Route path="/galerie" element={<Galerie/>}/>*/}
           {/*<Route path="/groupe-sms2i" element={<GroupeSMS2I/>}/>*/}
           {/*<Route path="/espace-universitaire" element={<EspaceUniversitaire/>}/>*/}
