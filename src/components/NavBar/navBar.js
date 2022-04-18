@@ -147,15 +147,15 @@ function NavBar() {
               Groupe-sms2i
             </Link>
           </li>
-          <li className='nav-item1'>
-            <Link
-              to='/espace-universitaire'
-              className='nav-links1 text-uppercase'
-              onClick={closeMobileMenu}
-            >
-              espace universitaire
-            </Link>
-          </li>
+          {/*<li className='nav-item1'>*/}
+          {/*  <Link*/}
+          {/*    to='/espace-universitaire'*/}
+          {/*    className='nav-links1 text-uppercase'*/}
+          {/*    onClick={closeMobileMenu}*/}
+          {/*  >*/}
+          {/*    espace universitaire*/}
+          {/*  </Link>*/}
+          {/*</li>*/}
           <li>
             <Link
               to='/sign-up'

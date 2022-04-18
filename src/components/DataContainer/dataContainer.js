@@ -10,7 +10,7 @@ function DataContainer(){
     return(
 
             <div className=" px-0" id={location.state.id}>
-                <div className="marge row gx-5 align-items-center justify-content-center">
+                <div className="m-0 row gx-5 align-items-center justify-content-center">
                     <div className=" btn-outline-dark col-lg-6 col-xl-5 col-xxl-4">
                         <div className="my-5 text-center text-xl-start">
                             <h6 className="lead fw-normal text-dark-50 mb-5 text-uppercase">{location.state.titre}</h6>

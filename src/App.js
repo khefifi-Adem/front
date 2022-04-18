@@ -14,6 +14,8 @@ import Sms3i from "./components/ReferencesData/sms3i";
 import PiecesRechenge from "./views/PiecesRechenge/piecesRechenge";
 import RechengeChoose from "./components/RechengeChoose/rechengeChoose";
 import Piece from "./components/Piece/Piece";
+import Galerie from "./views/Galerie/Galerie";
+import GroupeSms2i from "./views/GroupeSms2i/groupeSms2i";
 
 
 
@@ -58,8 +60,8 @@ function App() {
                     <Route path=":id" element={<Piece/>}/>
                 </Route>
             </Route>
-          {/*<Route path="/galerie" element={<Galerie/>}/>*/}
-          {/*<Route path="/groupe-sms2i" element={<GroupeSMS2I/>}/>*/}
+          <Route path="/galerie" element={<Galerie/>}/>
+          <Route path="/groupe-sms2i" element={<GroupeSms2i/>}/>
           {/*<Route path="/espace-universitaire" element={<EspaceUniversitaire/>}/>*/}
 
 
