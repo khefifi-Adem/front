@@ -1,14 +1,18 @@
 import React from 'react';
 import './Button.css';
+import {Link} from "react-router-dom";
 
 
 
-export function Button({titre}) {
+export function Button({titre,path}) {
   return (
       <>
           {/*data-bs-toggle={databstoggle} data-bs-target={databstarget}*/}
-      <button className="btn1 "  >{titre}</button>
-
+          <Link className="lien" to={path}>
+              <button className="btn1 "  >
+                  {titre}
+              </button>
+          </Link>
       </>
   );
 }

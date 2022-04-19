@@ -16,6 +16,8 @@ import RechengeChoose from "./components/RechengeChoose/rechengeChoose";
 import Piece from "./components/Piece/Piece";
 import Galerie from "./views/Galerie/Galerie";
 import GroupeSms2i from "./views/GroupeSms2i/groupeSms2i";
+import SignUp from "./views/SignUp/signUp";
+import SignIn from "./views/SignIn/signIn";
 
 
 
@@ -56,12 +58,23 @@ function App() {
             </Route>
 
             <Route path="/pieces-rechange" element={<PiecesRechenge/>}>
+
                 <Route path="all" element={<RechengeChoose/>}>
+
                     <Route path=":id" element={<Piece/>}/>
+
                 </Route>
+
             </Route>
-          <Route path="/galerie" element={<Galerie/>}/>
-          <Route path="/groupe-sms2i" element={<GroupeSms2i/>}/>
+
+            <Route path="/galerie" element={<Galerie/>}/>
+
+            <Route path="/groupe-sms2i" element={<GroupeSms2i/>}/>
+
+            <Route path="/sign-up" element={<SignUp/>}/>*
+
+            <Route path="/sign-in" element={<SignIn/>}/>
+
           {/*<Route path="/espace-universitaire" element={<EspaceUniversitaire/>}/>*/}
 
 

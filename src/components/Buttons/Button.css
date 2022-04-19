@@ -9,10 +9,14 @@
   outline: none;
   border: none;
   font-size: 18px;
+  text-decoration: none;
   color: #fff;
   cursor: pointer;
   background-color: var(--primary);
 }
+
+
+
 
 .btn1:hover {
   padding: 6px 16px;

@@ -167,7 +167,7 @@ function NavBar() {
           </li>
           <li>
             <Link
-              to='/sign-up'
+              to='/sign-in'
               className='nav-links-mobile1'
               onClick={closeMobileMenu}
             >
@@ -178,8 +178,8 @@ function NavBar() {
 
 
 
-        <Button titre={"S'inscrire"} />
-        <Button titre={"S'identifier"} />
+        <Button titre={"S'inscrire"} path="/sign-up" />
+        <Button titre={"S'identifier"} path={"/sign-in"} />
 
 
 
