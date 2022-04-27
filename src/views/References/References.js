@@ -3,7 +3,7 @@ import "./References.css"
 import NavBar from "../../components/NavBar/navBar";
 import Footer from "../../components/Footer/Footer";
 import { Outlet} from "react-router-dom";
-import references from "../../assets/references.svg";
+import references from "../../assets/references.png";
 
 function References() {
     return (
@@ -23,10 +23,11 @@ function References() {
                         </div>
                     </div>
                 </div>
+
             </section>
-
-            <Outlet/>
-
+            <section className="py-5">
+                <Outlet/>
+            </section>
 
 
             <div className="pt-5">

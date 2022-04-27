@@ -17,7 +17,7 @@ function DataContainer(){
                             <p className=" fw-normal text-dark-50 mb-4">{location.state.description}</p>
                             <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                                 <div className="btn btn-primary btn-lg px-4 me-sm-3" data-bs-toggle="modal" data-bs-target="#showfilemodal">lire plus</div>
-                                <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview"/>
+                                <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfilemodal"/>
                             </div>
                         </div>
                     </div>

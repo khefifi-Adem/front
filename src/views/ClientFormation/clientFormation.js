@@ -1,20 +1,17 @@
 import React from "react";
-import NavBar from "../../components/NavBar/navBar";
-import Footer from "../../components/Footer/Footer";
-import './Formations.css';
-import {Outlet} from "react-router-dom";
+import ClientNavBar from "../../components/ClientNavBar/clientNavBar";
 import formation_v1 from "../../assets/formation_v1.jpg";
+import formations from "../../Data/FormationData/formation.json";
 import SideBar from "../../components/SideBar/sideBar";
-import formations from '../../Data/FormationData/formation.json'
+import {Outlet} from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
+import "./clientFormation.css"
+import ShowFileModal from "../../components/ShowFileModal/showFileModal";
 
-
-
-
-function Formations() {
+function ClientFormation() {
     return(
-        <div className="cont ">
-
-                <NavBar/>
+        <div className="cont">
+            <ClientNavBar/>
 
             {/*Formation section*/}
             <section className=" py-5 ">
@@ -51,13 +48,12 @@ function Formations() {
                                 ))
                             }
                         </div>
-                        <div className="formation ">
+                        <div className="formation  ">
                             <Outlet/>
                         </div>
                     </div>
                 </div>
             </section>
-
             <section className="py-5 bg-white" id="partners">
                 <div className="container px-5 my-5">
                     <div className="col-md- p-2 w-100 h-100">
@@ -83,8 +79,11 @@ function Formations() {
                                         <td>35</td>
                                         <td className="action">
                                             <button className="btn btn-outline-primary m-1">S'inscrire</button>
-                                            <button className="btn btn-outline-primary m-1">Détails</button>
-                                            <button className="btn btn-outline-primary m-1">Programme</button>
+                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
+                                            <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
+                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
+                                            <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
+
                                         </td>
                                     </tr>
 
@@ -100,8 +99,9 @@ function Formations() {
 
 
             <div className="pt-5"><Footer /></div>
-        </div>
-    );
-}
 
-export default Formations;
+        </div>
+    )
+
+}
+export default ClientFormation;

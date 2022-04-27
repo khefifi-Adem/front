@@ -2,7 +2,7 @@
 .sidebar{
     list-style: none;
     flex-shrink: 0;
-    background-color: rgba(22, 22, 22, 1);
+    background-color: #D9D9D9;
     height: 100%;
     overflow: auto;
 }
@@ -14,7 +14,7 @@
 
 
 .sidebar-item{
-    color: rgb(224, 224, 224);
+    color: #666;
     padding: .75em 1em;
     display: block;
     transition: background-color .15s;
@@ -50,11 +50,15 @@
 }
 
 .sidebar-item.plain{
-    color: #fff;
-    text-decoration: none;
+    font-family: -apple-system;
+    color: #404040;
+    text-decoration: none !important;
 }
 .sidebar-item.plain:hover{
-    text-decoration: underline;
+    color: #fff;
+    font-weight: bold;
+    transition: color,font-weight 0.5ms;
+
 }
 .sidebar-item.plain i{
     display: inline-block;

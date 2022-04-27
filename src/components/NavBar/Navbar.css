@@ -1,16 +1,16 @@
 .navbar1 {
-  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  background: #f9f9f9 !important;
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.9rem;
   position: relative;
-  opacity: 0.98;
+  opacity: 1;
 }
 
 .navbar-logo1 {
-  color: #fff;
+  color: #000080;
   justify-self: start;
   margin-left: 10px;
   cursor: pointer;
@@ -20,6 +20,8 @@
 
 
 .nav-menu1 {
+  font-family: "Open Sans";
+  font-weight: bold;
   display: inline-flex;
   grid-template-columns: repeat(5, auto);
   grid-gap: 10px;
@@ -37,19 +39,19 @@
 }
 
 .nav-links1 {
-  color: white;
+  color: #000080;
   text-decoration: none;
   padding: 0.3rem;
 }
 
 .nav-links1:hover {
-  background-color: #1888ff;
+  background-color: #1888ff !important;
   border-radius: 4px;
-  transition: all 0.2s ease-out;
+  transition: all 0.4s ease;;
 }
 
 .fa-bars {
-  color: #fff;
+  color: #000080;
 }
 
 .nav-links-mobile1 {
@@ -78,7 +80,7 @@
   }
 
   .nav-menu1.active {
-    background: #000000;
+    background: #f9f9f9;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
@@ -115,21 +117,21 @@
   }
 
   .fa-times {
-    color: #fff;
+    color: #000080;
     font-size: 2rem;
   }
 
   .nav-links-mobile1 {
     display: block;
     text-align: center;
-    padding: 1.5rem;
+    padding: 1rem;
     margin: 1rem auto;
     border-radius: 4px;
     width: 50%;
     background: #1888ff;
     text-decoration: none;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   .nav-links-mobile1:hover {

@@ -1,17 +1,47 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
 import {Link} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import automation from "../../assets/automation.jpg";
 import p_4 from "../../assets/p4.jpg"
 import './Acceruil.css';
+import axios from "axios";
 
 function Acceuil() {
+
+
+    const [cards, setCards]= useState([]);
+    const [partners, setPartners]= useState([]);
+    const [projects, setProjects]= useState([]);
+    useEffect(()=> {
+        axios.get('api/card-acceuils').then(res=> {
+            if (res.status === 200)
+            {
+
+                setCards(res.data.cards);
+            }
+        });
+
+        axios.get('api/nos_parteners').then(res=> {
+            if (res.status === 200)
+            {
+
+                setPartners(res.data.partners);
+            }
+        });
+        axios.get('api/projects').then(res=> {
+            if (res.status === 200)
+            {
+
+                setProjects(res.data.projects);
+            }
+        });
+
+    },[]);
+
     return(
         <div className="cont">
-            <div className="fixed-top">
-                <NavBar/>
-            </div>
+            <NavBar/>
             {/*Header*/}
             <header className=" py-5" >
                 <div className="container px-5">
@@ -33,47 +63,28 @@ function Acceuil() {
                 </div>
             </header>
             {/*Features section*/}
-            <section className="py-5" id="vedette">
+            <section className="py-5 bg-light" id="vedette">
                 <div className="container px-5 my-5">
-                    <div className="row gx-5">
-                        <div className="col-lg-4 mb-5 mb-lg-0">
-                            <h2 className="fw-bolder mb-0">
-                                Les plus importants module qui concernent SMS2I
-                            </h2>
-                        </div>
-                        <div className="col-lg-8">
+
+
+
                             <div className="row gx-5 row-cols-1 row-cols-md-2">
-                                <div className="col mb-5">
+
+                                {
+                                    cards.map(card=>(
+
+                                <div className="info col-md-4 mb-5 p-2 " key={card.id}>
                                     <div className="feature bg-primary bg-gradient text-white rounded mb-3 ">
-                                        <i className="bi bi-laptop "/>
+                                        <i className={card.card_icon}/>
                                     </div>
-                                    <h2 className="h5">Automatisme et Engineering Industriel</h2>
-                                    <p className="mb-0">Automatisme Control & Instrumentation Electrique, Processus Réseaux Electrique,</p>
+                                    <h2 className="h5">{card.card_head}</h2>
+                                    <p className="mb-0">{card.card_text}</p>
                                 </div>
-                                <div className="col mb-5 ">
-                                    <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                        <i className="bi bi-cpu"/>
-                                    </div>
-                                    <h2 className="h5">Integration des systèmes</h2>
-                                    <p className="mb-0">SMS2I assure l'intégration de plusieurs solutions dans les différents domaines industriels armoires électriques, câblage et réseaux électriques, Implémentation;</p>
-                                </div>
-                                <div className="col mb-5 mb-md-0 h-100">
-                                    <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                        <i className="bi bi-mortarboard"/>
-                                    </div>
-                                    <h2 className="h5">Formation Industrielle</h2>
-                                    <p className="mb-0">SMS2I supporte plusieurs industriels dans des domaines multiples, à savoir: laitière, électriques, Automatisme, industrie agroalimentaire...</p>
-                                </div>
-                                <div className="col h-100">
-                                    <div className="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                                        <i className="bi bi-question-circle"/>
-                                    </div>
-                                    <h2 className="h5">Supports clients de haute qualité</h2>
-                                    <p className="mb-0">En se basant sur une équipe compétente, expérimentée sur des domaines variés, haute disponibilité .</p>
-                                </div>
+                                    ))
+                                }
                             </div>
-                        </div>
-                    </div>
+
+
                 </div>
             </section>
             {/*Partners section*/}
@@ -86,24 +97,21 @@ function Acceuil() {
                                     Nos Parteners
                                 </h2>
                             </div>
-                            <div className="col-4 d-none d-xl-block text-center">
-                                <img className="img-fluid rounded-3 my-5" src={automation} alt="..." />
-                            </div>
-                            <div className="col-4 d-none d-xl-block text-center">
-                                <img className="img-fluid rounded-3 my-5" src={automation} alt="..." />
-                            </div>
-                            <div className="col-4 d-none d-xl-block text-center">
-                                <img className="img-fluid rounded-3 my-5" src={automation} alt="..." />
-                            </div>
-                            <div className="col-4 d-none d-xl-block text-center">
-                                <img className="img-fluid rounded-3 my-5" src={automation} alt="..." />
-                            </div>
+                            {
+                                partners.map(partner => (
+
+                                    <div className="col-3  d-xl-block text-center" key={partner.id}>
+                                        <img className=" img-fluid rounded-3 my-5" src={"http://127.0.0.1:8000/"+partner.image_path} alt="..." />
+                                    </div>
+                                    ))
+                            }
+
                         </div>
                     </div>
                 </div>
             </section>
             {/*Project section*/}
-            <section className="py-5">
+            <section className="py-5 bg-light">
                 <div className="container px-5 my-5">
                     <div className="row gx-5 justify-content-center">
                         <div className="col-lg-8 col-xl-6">

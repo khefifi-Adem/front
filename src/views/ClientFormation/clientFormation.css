@@ -1,0 +1,39 @@
+.cycle-container{
+    overflow-x: auto;
+}
+.cycle{
+    border-collapse: collapse;
+    border: none;
+    border-radius: 1em 1em 0em 0em;
+    overflow: hidden;
+    width: 100%;
+}
+.cycle-head{
+    text-align: center;
+    background-color: #1888ff !important;
+}
+.cycle-head>th{
+    padding: 1em !important;
+}
+.cycle-body{
+    text-align: center;
+    border-bottom: 1px solid #1888ff ;
+
+}
+
+.cycle-body:hover{
+    background-color: whitesmoke;
+}
+.cycle-body:hover>td{
+    padding: 2em;
+    transition: padding 2s !important;
+}
+.cycle-body>td{
+    padding: 1em !important;
+}
+.title{
+    width: 30%;
+}
+.action{
+    width: 30%;
+}

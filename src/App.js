@@ -18,9 +18,19 @@ import Galerie from "./views/Galerie/Galerie";
 import GroupeSms2i from "./views/GroupeSms2i/groupeSms2i";
 import SignUp from "./views/SignUp/signUp";
 import SignIn from "./views/SignIn/signIn";
+import ClientFormation from "./views/ClientFormation/clientFormation";
+import VosInscriptions from "./views/VosInscriptions/vosInscriptions";
+import InscriptionDetails from "./components/InscriptionDetails/inscriptionDetails";
 
 
+import axios from "axios";
 
+
+axios.defaults.withCredentials = true;
+
+axios.defaults.baseURL = "http://127.0.0.1:8000/"
+axios.defaults.headers.post["Content-Type"] = 'application/json';
+axios.defaults.headers.post["Accept"] = 'application/json';
 
 
 function App() {
@@ -71,11 +81,17 @@ function App() {
 
             <Route path="/groupe-sms2i" element={<GroupeSms2i/>}/>
 
-            <Route path="/sign-up" element={<SignUp/>}/>*
+            <Route path="/sign-up" element={<SignUp/>}/>
 
             <Route path="/sign-in" element={<SignIn/>}/>
 
-          {/*<Route path="/espace-universitaire" element={<EspaceUniversitaire/>}/>*/}
+            <Route path="/client/formations" element={<ClientFormation/>}>
+                <Route path=":id" element={<DataContainer/>}/>
+            </Route>
+
+            <Route path="/client/vos-inscriptions" element={<VosInscriptions/>}>
+                <Route path=":id" element={<InscriptionDetails/>}/>
+            </Route>
 
 
         </Routes>

@@ -1,0 +1,18 @@
+.containerr{
+    flex-shrink: 0;
+    margin: 20px;
+    height: calc(150px + 6vw);
+
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    background-size: cover;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px 5px rgba(125, 126, 127, 128);
+    background-image:  linear-gradient(#f9f047, #0fd850);
+    width: 100%;
+}
+
+.containerr:hover{
+    background-image:  linear-gradient(#0fd850,#f9f047);
+    transition: background-image  1s !important ;
+}

@@ -1,3 +1,10 @@
+.file{
+    align-self: center !important;
+    width: 100% !important;
+}
+.file-container{
+    width: 70vw !important;
+}
 .mod{
     height: 70vh;
 }

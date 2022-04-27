@@ -30,7 +30,7 @@ function Contact() {
                 button: "Fermer"
             })
         }
-    }, [formErrors]);
+    }, [formErrors,isSubmit]);
     const validate = (values) => {
         const errors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -102,7 +102,7 @@ function Contact() {
                                      {/*Phone number input*/}
                                     <div className="form-floating mb-3">
                                         <input className="form-control" id="phone" type="tel" name="phonenumber"
-                                               placeholder="(123) 456-7890" value={formValues.phonenumber}
+                                               placeholder="(216) 12345678" value={formValues.phonenumber}
                                                onChange={handleChange}/>
                                         <label htmlFor="phone">Phone number</label>
                                         <p>

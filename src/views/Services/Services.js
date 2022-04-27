@@ -37,26 +37,26 @@ function Services() {
                                 </p>
                             </div>
                             <div className="row ">
-                                <div className="col-4 ">
-                                    <div className="process-item ">
+                                <div className="col-md-4 ">
+                                    <div className="process-item p-1 ">
                                         <i className="icon fa fa-search fa-3x"/><br/>
                                         <h3 className="tit">Analyse</h3><br/>
-                                        <p className="font-m text-muted text-muted">
+                                        <p className=" font-m text-muted text-muted">
                                             Delimiter les périmètres des projets. Déterminer les
                                             besoins et les contraintes. Préparer les besoins fonctionnels
                                         </p>
                                     </div>
                                 </div>
-                                <div className="col-4">
-                                    <div className="process-item delay1">
+                                <div className="col-md-4">
+                                    <div className="process-item p-1">
                                         <i className="icon fa fa-thumb-tack fa-3x"/><br/>
                                         <h3 className="tit" >Planification</h3><br/>
                                         <p className="font-m text-muted">Déterminer et ordonnancer les tâches. Estimer les charges
                                             et déterminer les profils nécessaires à la réalisation</p>
                                     </div>
                                 </div>
-                                <div className="col-4">
-                                    <div className="process-item delay2">
+                                <div className="col-md-4">
+                                    <div className="process-item p-1">
                                         <i className=" icon fa fa-gavel fa-3x"/><br/>
                                         <h3 className="tit">Exécution</h3><br/>
                                         <p className="font-m text-muted">
@@ -65,8 +65,8 @@ function Services() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="col-4">
-                                    <div className="process-item delay3">
+                                <div className="col-md-4">
+                                    <div className="process-item p-1">
                                         <i className="icon fa fa-puzzle-piece fa-3x"/><br/>
                                         <h3 className="tit">Déploiement</h3><br/>
                                         <p className="font-m text-muted">
@@ -75,8 +75,8 @@ function Services() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="col-4">
-                                    <div className="process-item delay4">
+                                <div className="col-md-4">
+                                    <div className="process-item p-1">
                                         <i className="icon fa fa-undo fa-3x"/><br/>
                                         <h3 className="tit">Test </h3><br/>
                                         <p className="font-m text-muted">
@@ -85,8 +85,8 @@ function Services() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="col-4">
-                                    <div className="process-item delay5">
+                                <div className="col-md-4">
+                                    <div className="process-item p-1">
                                         <i className="icon fa  fa-key  fa-3x"/><br/>
                                         <h3 className="tit">Clôture</h3><br/>
                                         <p className="font-m text-muted">
@@ -109,7 +109,7 @@ function Services() {
                     if (service.id % 2===0)
                     {
                         return(
-                            <section className="py-5" id={service.id}>
+                            <section className="services py-5" id={service.id}>
                                 <div className="container px-5 my-5">
                                     <div className="row gx-5 align-items-center">
                                         <div className="col-lg-6 order-first order-lg-last">
@@ -117,7 +117,7 @@ function Services() {
                                         </div>
                                         <div className="col-lg-6">
                                             <h2 className="fw-bolder">{service.titre}</h2>
-                                            <p className="lead fw-normal text-muted mb-0">
+                                            <p className="lead fw-normal  mb-0">
                                                 {service.description}
                                             </p>
                                             <div className="d-flex justify-content-end p-1">
@@ -132,7 +132,7 @@ function Services() {
                     else
                     {
                         return(
-                            <section className="py-5 " id={service.id}>
+                            <section className="servicess py-5 " id={service.id}>
                                 <div className="container px-5 my-5  ">
                                     <div className="row gx-5 align-items-center">
                                         <div className="col-lg-6">
@@ -140,7 +140,7 @@ function Services() {
                                         </div>
                                         <div className="col-lg-6">
                                             <h2 className="fw-bolder">{service.titre}</h2>
-                                            <p className="lead fw-normal text-muted mb-0">
+                                            <p className="lead fw-normal  mb-0">
                                                 {service.description}
                                             </p>
                                             <div className="d-flex justify-content-end p-1">
