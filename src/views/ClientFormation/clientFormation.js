@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import ClientNavBar from "../../components/ClientNavBar/clientNavBar";
 import formation_v1 from "../../assets/formation_v1.jpg";
 import formations from "../../Data/FormationData/formation.json";
@@ -7,8 +7,16 @@ import {Outlet} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import "./clientFormation.css"
 import ShowFileModal from "../../components/ShowFileModal/showFileModal";
+import SinscrireModal from "../../components/SinscrireModal/sinscrireModal";
 
 function ClientFormation() {
+
+    const [show,setShow] = useState(false);
+    const onClickShow = () => setShow(true);
+    const onClickClose = () => setShow(false);
+
+
+
     return(
         <div className="cont">
             <ClientNavBar/>
@@ -78,7 +86,54 @@ function ClientFormation() {
                                         <td>31/12/2022</td>
                                         <td>35</td>
                                         <td className="action">
-                                            <button className="btn btn-outline-primary m-1">S'inscrire</button>
+                                            <button className="btn btn-outline-primary m-1" onClick={onClickShow} >S'inscrire</button>
+                                            <SinscrireModal show={show} niveau={"Niveau 1"} onClose={onClickClose}/>
+                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
+                                            <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
+                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
+                                            <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
+
+                                        </td>
+                                    </tr><tr className="cycle-body">
+                                        <td>Niveau 1</td>
+                                        <td>11/12/2022</td>
+                                        <td>31/12/2022</td>
+                                        <td>35</td>
+                                        <td className="action">
+                                            <button className="btn btn-outline-primary m-1" onClick={onClickShow} >S'inscrire</button>
+                                            <SinscrireModal show={show} niveau={"Niveau 1"} onClose={onClickClose}/>
+                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
+                                            <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
+                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
+                                            <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr className="cycle-body">
+                                        <td>Niveau 1</td>
+                                        <td>11/12/2022</td>
+                                        <td>31/12/2022</td>
+                                        <td>35</td>
+                                        <td className="action">
+                                            <button className="btn btn-outline-primary m-1" onClick={onClickShow} >S'inscrire</button>
+                                            <SinscrireModal show={show} niveau={"Niveau 1"} onClose={onClickClose}/>
+                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
+                                            <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
+                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
+                                            <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr className="cycle-body">
+                                        <td>Niveau 1</td>
+                                        <td>11/12/2022</td>
+                                        <td>31/12/2022</td>
+                                        <td>35</td>
+                                        <td className="action">
+                                            <button className="btn btn-outline-primary m-1" onClick={onClickShow} >S'inscrire</button>
+                                            <SinscrireModal show={show} niveau={"Niveau 1"} onClose={onClickClose}/>
                                             <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
                                             <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
                                             <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>

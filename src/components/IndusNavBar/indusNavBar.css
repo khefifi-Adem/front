@@ -1,4 +1,4 @@
-.navbar0 {
+.navbar2 {
     background: #f9f9f9;
     height: 80px;
     display: flex;
@@ -9,7 +9,7 @@
     opacity: 1;
 }
 
-.navbar-logo0 {
+.navbar-logo2 {
     color: #000080;
     justify-self: start;
     margin-left: 10px;
@@ -19,7 +19,7 @@
 }
 
 
-.nav-menu0{
+.nav-menu2{
     font-family: "Open Sans";
     font-weight: bold;
     display: inline-flex;
@@ -33,7 +33,7 @@
     padding-right: 20%;
 }
 
-.nav-item0 {
+.nav-item2 {
     display: flex;
     align-items: center;
     height: 80px;
@@ -41,13 +41,13 @@
 
 }
 
-.nav-links0 {
+.nav-links2 {
     color: #000080;
     text-decoration: none;
     padding: 0.3rem;
 }
 
-.nav-links0:hover {
+.nav-links2:hover {
     background-color: #1888ff;
     color: white !important;
     border-radius: 4px;
@@ -58,20 +58,20 @@
     color: #000080;
 }
 
-.nav-links-mobile0 {
+.nav-links-mobile2 {
     display: none;
 }
 
-.menu-icon0 {
+.menu-icon2 {
     display: none;
 }
 
 @media screen and (max-width: 1400px) {
-    .NavbarItems0 {
+    .NavbarItems2 {
         position: relative;
     }
 
-    .nav-menu0 {
+    .nav-menu2 {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -83,7 +83,7 @@
         transition: all 0.5s ease;
     }
 
-    .nav-menu0.active {
+    .nav-menu2.active {
         background: #f9f9f9;
         left: 0;
         opacity: 1;
@@ -91,7 +91,7 @@
         z-index: 1;
     }
 
-    .nav-links0 {
+    .nav-links2 {
         text-align: center;
         padding: 1rem;
         width: 100%;
@@ -103,14 +103,14 @@
         border-radius: 0;
     }
 
-    .navbar-logo0{
+    .navbar-logo2{
         position: absolute;
         top: 0;
         left: 0;
         transform: translate(25%, 50%);
     }
 
-    .menu-icon0 {
+    .menu-icon2 {
         display: block;
         position: absolute;
         top: 0;
@@ -125,7 +125,7 @@
         font-size: 2rem;
     }
 
-    .nav-links-mobile0 {
+    .nav-links-mobile2 {
         display: block;
         text-align: center;
         padding: 1rem;
@@ -138,7 +138,7 @@
         font-size: 1rem;
     }
 
-    .nav-links-mobile0:hover {
+    .nav-links-mobile2:hover {
         background: #fff;
         color: #1888ff;
         transition: 250ms;

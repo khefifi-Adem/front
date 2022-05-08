@@ -3,7 +3,7 @@ import './sideBar.css';
 
 function SideBar({data}){
     return (
-        <div className="sidebar">
+        <div className="sidebarr">
             {
 
                 data.map((dataa) => <SidebarItem key={dataa.id} item={dataa} />) }

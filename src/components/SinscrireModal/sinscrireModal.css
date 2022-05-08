@@ -1,0 +1,33 @@
+.modall{
+    margin-top: 15px;
+    height: 70vh;
+    position: fixed;
+    scroll-behavior: smooth;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modall-content{
+    overflow: scroll;
+    scroll-behavior: smooth;
+    border-radius: 1em;
+    width: 70%;
+    background-color: #ffffff;
+}
+
+.modall-head{
+    margin: 0;
+    padding: 5px;
+}
+
+.modall-body{
+    padding: 5px;
+
+}
+.modall-footer{
+    padding: 5px;
+}

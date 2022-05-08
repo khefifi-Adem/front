@@ -20,7 +20,7 @@
 
 
 .nav-menu1 {
-  font-family: "Open Sans";
+  font-family: "Montserrat Alternates";
   font-weight: bold;
   display: inline-flex;
   grid-template-columns: repeat(5, auto);
@@ -35,6 +35,7 @@
   display: flex;
   align-items: center;
   height: 80px;
+  padding-top: 25px;
 
 }
 

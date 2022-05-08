@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
 import Footer from "../../components/Footer/Footer";
 import swal from "sweetalert";
+import {Link} from "react-router-dom";
 
 function SignIn() {
 
@@ -101,9 +102,9 @@ function SignIn() {
 
                                     {/*Submit Button*/}
                                     <div className="d-grid">
-                                        <button className="btn btn-primary btn-lg "  type="submit">
+                                        <Link to="/dashboard-admin/acceuil" className="btn btn-primary btn-lg "  type="submit">
                                             Connexion
-                                        </button>
+                                        </Link>
                                     </div>
                                 </form>
                             </div>

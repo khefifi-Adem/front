@@ -4,13 +4,8 @@ header{
 }
 
 .cont {
-    /*background-color: #ffffff;*/
-    /*background-image: linear-gradient(315deg, #ffffff 0%, blue 74%);*/
 
-    /*background-color: #ffffff;*/
-    /*background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);*/
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%);
+    background-image: linear-gradient(90deg, rgba(255,255,255,1) 0%);
 }
 
 .feature {

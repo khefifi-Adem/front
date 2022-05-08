@@ -1,31 +1,31 @@
 import React from "react";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import "./inscriptionDetails.css"
 import ShowFileModal from "../ShowFileModal/showFileModal";
-import cycleFomations from "../../Data/CycleFormation/CycleFormation.json";
+
 function InscriptionDetails() {
 
     const location = useLocation()
     return (
-        <div className="cont m-5">
-            <div>
-            <h1>{location.state.titre}</h1>
-            <p>
+        <div className="cont m-5 ">
+            <div className="p-5">
+            <h1 className="fw-normal">{location.state.titre}</h1>
+            <p className="fw-normal">
                 {location.state.description}
             </p>
-            <p>
+            <p className="fw-normal">
                 {location.state.date_debut}
             </p>
-            <p>
+            <p className="fw-normal">
                 {location.state.date_fin}
             </p>
-            <a href={location.state.lien_teams}>
+            <a className="fw-normal" href={location.state.lien_teams}>
                Consulter le groupe de discussion de formation
             </a>
             </div>
 
             <div className="containerr mt-5" >
-                <h6>Course and exercises</h6>
+                <h6 className="p-4 fw-bold">Course and exercises</h6>
 
 
                         <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">

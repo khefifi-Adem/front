@@ -1,13 +1,46 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
 import Footer from "../../components/Footer/Footer";
 import InnerNavBar from "../../components/InnerNavBar/innerNavBar";
 import './Services.css';
 import smart from '../../assets/smart.jpg';
 import maintenance from '../../assets/maintenance.png';
-import services from "../../Data/ServicesData/services.json";
+import axios from "axios";
 
 function Services() {
+
+    const [cards, setCards]= useState([]);
+    const [pages, setPages]= useState({});
+    const [services, setServices] = useState([])
+
+
+    useEffect(()=> {
+        axios.get("api/card-services").then(res=> {
+            if (res.status === 200)
+            {
+
+                setCards(res.data.cards);
+            }
+        });
+
+        axios.get('api/pages/2').then(res=> {
+            if (res.status === 200)
+            {
+
+                setPages(res.data.pages);
+            }
+        });
+
+        axios.get('api/services').then(res=> {
+            if (res.status === 200)
+            {
+
+                setServices(res.data.services);
+            }
+        });
+    },[]);
+
+
     return (
         <div className="cont">
 
@@ -20,7 +53,7 @@ function Services() {
                         <div className="col-lg-8 col-xl-6">
                             <div className="text-center">
                                 <h2 className="tit fw-bolder fs-2 mb-4 fst-italic">
-                                    Comment nous le faisons
+                                    {pages.titre}
                                 </h2>
                             </div>
                         </div>
@@ -31,70 +64,26 @@ function Services() {
                         <div className="container ">
                             <div className="  heading ">
                                 <p>
-                                    Anticiper vos besoins grâce à notre proactivité. Proposer des solutions innovantes et
-                                    originales. Vous informez des dernières évolutions dans le domaine de Services et
-                                    maintenance des systèmes informatiques et Industriels
+                                    {pages.description}
                                 </p>
                             </div>
                             <div className="row ">
-                                <div className="col-md-4 ">
-                                    <div className="process-item p-1 ">
-                                        <i className="icon fa fa-search fa-3x"/><br/>
-                                        <h3 className="tit">Analyse</h3><br/>
-                                        <p className=" font-m text-muted text-muted">
-                                            Delimiter les périmètres des projets. Déterminer les
-                                            besoins et les contraintes. Préparer les besoins fonctionnels
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="process-item p-1">
-                                        <i className="icon fa fa-thumb-tack fa-3x"/><br/>
-                                        <h3 className="tit" >Planification</h3><br/>
-                                        <p className="font-m text-muted">Déterminer et ordonnancer les tâches. Estimer les charges
-                                            et déterminer les profils nécessaires à la réalisation</p>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="process-item p-1">
-                                        <i className=" icon fa fa-gavel fa-3x"/><br/>
-                                        <h3 className="tit">Exécution</h3><br/>
-                                        <p className="font-m text-muted">
-                                            Animer des réunions. Valider et suivre les décisions et
-                                            les tâches. Respecter l’échéancier prévu
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="process-item p-1">
-                                        <i className="icon fa fa-puzzle-piece fa-3x"/><br/>
-                                        <h3 className="tit">Déploiement</h3><br/>
-                                        <p className="font-m text-muted">
-                                            Déploiement des solutions développées sur les sites de
-                                            productions réelles. Produire les livrables
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="process-item p-1">
-                                        <i className="icon fa fa-undo fa-3x"/><br/>
-                                        <h3 className="tit">Test </h3><br/>
-                                        <p className="font-m text-muted">
-                                            Tester les solutions et le bon fonctionnement des
-                                            résultats ainsi que le respect des exigences fonctionnelles
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="process-item p-1">
-                                        <i className="icon fa  fa-key  fa-3x"/><br/>
-                                        <h3 className="tit">Clôture</h3><br/>
-                                        <p className="font-m text-muted">
-                                            Livrer les projets, former les équipes, documenter les
-                                            solutions et tirer les leçons pour les futurs projets
-                                        </p>
-                                    </div>
-                                </div>
+                                {
+                                    cards.map(card=>(
+
+                                        <div className="col-md-4 " key={card.id}>
+                                            <div className="process-item p-1 ">
+                                                <i className={card.icon+" fa-3x icon" } /><br/>
+                                                <h3 className="tit">{card.titre}</h3><br/>
+                                                <p className=" font-m text-muted text-muted">
+                                                    {card.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+
+
                             </div>
                         </div>
                     </div>
@@ -120,9 +109,7 @@ function Services() {
                                             <p className="lead fw-normal  mb-0">
                                                 {service.description}
                                             </p>
-                                            <div className="d-flex justify-content-end p-1">
-                                                <button className="btn btn-primary ">Lire la suite</button>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -143,9 +130,7 @@ function Services() {
                                             <p className="lead fw-normal  mb-0">
                                                 {service.description}
                                             </p>
-                                            <div className="d-flex justify-content-end p-1">
-                                                <button className="btn btn-primary ">Lire la suite</button>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

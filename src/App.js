@@ -24,6 +24,13 @@ import InscriptionDetails from "./components/InscriptionDetails/inscriptionDetai
 
 
 import axios from "axios";
+import IndusFormation from "./views/IndusFormation/indusFormation";
+import VosInscriptionIndus from "./views/VosInscriptionIndus/vosInscriptionIndus";
+import VosProjets from "./views/VosProjets/vosProjets";
+import ProjetDetails from "./components/ProjetDetails/projetDetails";
+import AdminDashboard from "./views/AdminDashboard/adminDashboard";
+import ModifyAcceuil from "./views/ModifyAcceuil/modifyAcceuil";
+import ModifyServices from "./views/ModifyServices/modifyServices";
 
 
 axios.defaults.withCredentials = true;
@@ -92,6 +99,24 @@ function App() {
             <Route path="/client/vos-inscriptions" element={<VosInscriptions/>}>
                 <Route path=":id" element={<InscriptionDetails/>}/>
             </Route>
+
+            <Route path="/client-indus/formations" element={<IndusFormation/>}>
+                <Route path=":id" element={<DataContainer/>}/>
+            </Route>
+
+            <Route path="/client-indus/vos-inscriptions" element={<VosInscriptionIndus/>}>
+                <Route path=":id" element={<InscriptionDetails/>}/>
+            </Route>
+
+            <Route path="/client-indus/vos-projets" element={<VosProjets/>}>
+                <Route path=":id" element={<ProjetDetails/>}/>
+            </Route>
+
+            <Route path="/dashboard-admin" element={<AdminDashboard/>}>
+                <Route path="acceuil" element={<ModifyAcceuil/>}/>
+                <Route path="services" element={<ModifyServices/>}/>
+            </Route>
+
 
 
         </Routes>
