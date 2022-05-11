@@ -31,6 +31,13 @@ import ProjetDetails from "./components/ProjetDetails/projetDetails";
 import AdminDashboard from "./views/AdminDashboard/adminDashboard";
 import ModifyAcceuil from "./views/ModifyAcceuil/modifyAcceuil";
 import ModifyServices from "./views/ModifyServices/modifyServices";
+import ModifyFormation from "./views/ModifyFormation/modifyFormation";
+import ModifyReference from "./views/ModifyReferences/modifyReferences";
+import ModifyGroupeSms2i from "./views/ModifyGroupeSms2i/modifyGroupeSms2i";
+import ModifyClients from "./views/ModifyClients/modifyClients";
+import ModifyClientsIndus from "./views/ModifyClientIndus/modifyClientIndus";
+import ModifyFormateur from "./views/ModifyFormateur/modifyFormateur";
+import ModifyAdmin from "./views/ModifyAdmin/modifyAdmin";
 
 
 axios.defaults.withCredentials = true;
@@ -38,6 +45,7 @@ axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://127.0.0.1:8000/"
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 axios.defaults.headers.post["Accept"] = 'application/json';
+window.axios = require('axios');
 
 
 function App() {
@@ -115,6 +123,15 @@ function App() {
             <Route path="/dashboard-admin" element={<AdminDashboard/>}>
                 <Route path="acceuil" element={<ModifyAcceuil/>}/>
                 <Route path="services" element={<ModifyServices/>}/>
+                <Route path="formation" element={<ModifyFormation/>}/>
+                <Route path="references" element={<ModifyReference/>}/>
+                <Route path="groupe-sms2i" element={<ModifyGroupeSms2i/>}/>
+                <Route path="clients" element={<ModifyClients/>}/>
+                <Route path="clients" element={<ModifyClients/>}/>
+                <Route path="clients-indus" element={<ModifyClientsIndus/>}/>
+                <Route path="formateurs" element={<ModifyFormateur/>}/>
+                <Route path="admins" element={<ModifyAdmin/>}/>
+
             </Route>
 
 

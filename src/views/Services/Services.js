@@ -15,7 +15,7 @@ function Services() {
 
 
     useEffect(()=> {
-        axios.get("api/card-services").then(res=> {
+       axios.get("api/card-services").then(res=> {
             if (res.status === 200)
             {
 
@@ -98,7 +98,7 @@ function Services() {
                     if (service.id % 2===0)
                     {
                         return(
-                            <section className="services py-5" id={service.id}>
+                            <section className="services py-5" key={service.id}>
                                 <div className="container px-5 my-5">
                                     <div className="row gx-5 align-items-center">
                                         <div className="col-lg-6 order-first order-lg-last">
@@ -119,7 +119,7 @@ function Services() {
                     else
                     {
                         return(
-                            <section className="servicess py-5 " id={service.id}>
+                            <section className="servicess py-5 " key={service.id}>
                                 <div className="container px-5 my-5  ">
                                     <div className="row gx-5 align-items-center">
                                         <div className="col-lg-6">

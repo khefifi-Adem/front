@@ -40,7 +40,7 @@ function EditCard({card}) {
                 <form className="w-50" onSubmit={updateCardData}>
                     <div className="form-floating mb-3 w-100">
                         <input className="form-control w-100" id="titre" type="text" name="card_head"
-                               placeholder=""
+                               placeholder="Enter your title here..."
                                value={updateCard.card_head}
                                onChange={handleInput}
 

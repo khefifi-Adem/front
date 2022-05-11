@@ -12,15 +12,15 @@ function SideNavBarAdmin() {
             <ul className="list-group list-group-flush my-3">
                 <li className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
 
-                    <a className="collapsed nav-link" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                       aria-expanded="false" aria-controls="collapseExample">
+                    <a className="collapsed nav-link" data-bs-toggle="collapse" href="#collapsePages" role="button"
+                       aria-expanded="false" aria-controls="collapsePages">
                         <i className="fa fa-folder me-1"/>
                         Pages
                         <i className=" fa fa-angle-down p-1"/>
                     </a>
 
 
-                    <div className="collapse" id="collapseExample">
+                    <div className="collapse" id="collapsePages">
                         <div className="card card-body">
                            <Link to="acceuil" className="nav-link">
                                <i className="fa fa-home me-1 "/>
@@ -32,20 +32,61 @@ function SideNavBarAdmin() {
                                Services
                            </Link>
 
-                            <Link to="#" className="nav-link">
+                            <Link to="formation" className="nav-link">
                                <i className="fa fa-graduation-cap me-1 "/>
                                Formations
                            </Link>
 
-                            <Link to="#" className="nav-link">
+                            <Link to="references" className="nav-link">
                                <i className="fa fa-book-medical me-1 "/>
                                References
+                           </Link>
+
+                            <Link to="groupe-sms2i" className="nav-link">
+                               <i className="fa fa-city me-1 "/>
+                               Grp-SMS2I
                            </Link>
                         </div>
                     </div>
                 </li>
 
                 <hr className="sidebar-divider my-0"/>
+
+
+                <li className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+
+                    <a className="collapsed nav-link" data-bs-toggle="collapse" href="#collapseUser" role="button"
+                       aria-expanded="false" aria-controls="collapseExample">
+                        <i className="fa fa-user me-1"/>
+                        Utilisateurs
+                        <i className=" fa fa-angle-down p-1"/>
+                    </a>
+
+
+                    <div className="collapse" id="collapseUser">
+                        <div className="card card-body">
+                            <Link to="clients" className="nav-link">
+                                <i className="fa fa-user-graduate me-1 "/>
+                                Client
+                            </Link>
+
+                            <Link to="clients-indus" className="nav-link">
+                                <i className="fa fa-user-gear me-1 "/>
+                                Client Indus
+                            </Link>
+
+                            <Link to="formateurs" className="nav-link">
+                                <i className="fa fa-user-tie me-1 "/>
+                                Formateur
+                            </Link>
+
+                            <Link to="admins" className="nav-link">
+                                <i className="fa fa-user-plus me-1 "/>
+                                Admin
+                            </Link>
+                        </div>
+                    </div>
+                </li>
 
                 {/*<a href="#" className="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i*/}
                 {/*    className="fas fa-project-diagram me-2"/>Projects</a>*/}

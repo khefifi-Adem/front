@@ -15,32 +15,49 @@ function ModifyAcceuil() {
     const [picture, setPicture] = useState([]);
 
     const initialValues ={ card_head: "", card_icon: "", card_text: ""};
-    const [updateCard, seUpdatetCard] = useState(initialValues);
+    const [updateCard, setUpdatetCard] = useState(initialValues);
 
     const handleInput = (e) => {
 
         const { name, value } = e.target;
-        seUpdatetCard({ ...updateCard, [name]: value });
+        setUpdatetCard({ ...updateCard, [name]: value });
 
     }
 
+
     useEffect(()=> {
-        axios.get('api/card-acceuils').then(res=> {
-            if (res.status === 200)
-            {
+        const getCards = async () => {
+            await axios.get("api/card-acceuils").then(res => {
+                if (res.status === 200) {
 
-                setCards(res.data.cards);
-            }
-        });
+                    setCards(res.data.cards);
 
-        axios.get('api/pages/1').then(res=> {
-            if (res.status === 200)
-            {
+                }
+            }).catch((e) => {
+                console.log(e)
+            });
+        };
+        getCards()
 
-                setPages(res.data.pages);
-            }
-        });
-    })
+    },[])
+
+    useEffect(()=> {
+        const getPage = async () => {
+            await axios.get("api/pages/1").then(res => {
+                if (res.status === 200) {
+
+                    setPages(res.data.pages);
+
+                }
+            }).catch((e) => {
+                console.log(e)
+            });
+        };
+        getPage()
+
+    },[])
+
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -56,7 +73,7 @@ function ModifyAcceuil() {
       e.preventDefault();
       const data= updateCard;
 
-      axios.post("http://127.0.0.1:8000/api/card-acceuils",data).then(res=>{
+      axios.post("api/card-acceuils",data).then(res=>{
           if (res.status === 200){
               if (res.data.status === 200)
               {
@@ -72,6 +89,9 @@ function ModifyAcceuil() {
 
     return(
         <div className="container bg-white rounded-3 shadow-lg">
+            <h5 className="display-5 p-2">
+                Acceuil Page
+            </h5>
             <section className=" d-flex py-5">
                 <div className="container d-flex flex-column  align-items-center">
                     <h1>
@@ -225,16 +245,18 @@ function ModifyAcceuil() {
                                     <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#card${card.id}`}>Edit</button>
                                     <EditCard card={card}/>
                                     <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#delete${card.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
-                                </th>
-                                        <div className="collapse" id={`delete${card.id}`}>
-                                            <div className="d-flex card card-body align-items-center">
-                                                <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
-                                                <div>
-                                                    <button className="btn btn-success m-1">Confirmer</button>
-                                                    <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#delete${card.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
-                                                </div>
+
+                                    <div className="collapse" id={`delete${card.id}`}>
+                                        <div className="d-flex card card-body align-items-center">
+                                            <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
+                                            <div>
+                                                <button className="btn btn-success m-1">Confirmer</button>
+                                                <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#delete${card.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                             </div>
                                         </div>
+                                    </div>
+                                </th>
+
                             </tr>
 
 
