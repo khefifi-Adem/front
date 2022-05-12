@@ -42,6 +42,8 @@ import ModifyDetails from "./views/ModifyDetails/modifyDetails";
 import ModifyDomaine from "./views/ModifyDomaine/modifyDomaine";
 import ModifyThemes from "./views/ModifyTheme/modifyThemes";
 import ModifyNiveaux from "./views/ModifyNiveaux/modifyNiveaux";
+import ModifyDomaineIndus from "./views/ModifyDomaineIndus/modifyDomaineIndus";
+import ModifyProjects from "./views/ModifyProjects/modifyProjects";
 
 
 axios.defaults.withCredentials = true;
@@ -142,6 +144,9 @@ function App() {
                         </Route>
                     </Route>
                 </Route>
+                <Route path="domaine-insdutriel" element={<ModifyDomaineIndus/>}/>
+
+                <Route path="projects" element={<ModifyProjects/>}/>
 
             </Route>
 

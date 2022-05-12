@@ -132,12 +132,12 @@ function SideNavBarAdmin() {
 
                     <div className="collapse" id="collapseProjects">
                         <div className="card card-body">
-                            <Link to="formations-details" className="nav-link">
-                                <i className="fa fa-list me-1 "/>
+                            <Link to="domaine-insdutriel" className="nav-link">
+                                <i className="fa fa-list  me-1 "/>
                                 Domaine Industrielle
                             </Link>
 
-                            <Link to="formations-details" className="nav-link">
+                            <Link to="projects" className="nav-link">
                                 <i className="fa fa-thumbs-up me-1 "/>
                                 Projets Realisé
                             </Link>
