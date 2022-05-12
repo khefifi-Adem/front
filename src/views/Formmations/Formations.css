@@ -17,6 +17,10 @@
     margin: auto !important;
 }
 
+.sideside{
+    margin-left: 1cm;
+}
+
 
 @media screen and (max-width: 900px) {
     .formation{

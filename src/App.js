@@ -38,6 +38,10 @@ import ModifyClients from "./views/ModifyClients/modifyClients";
 import ModifyClientsIndus from "./views/ModifyClientIndus/modifyClientIndus";
 import ModifyFormateur from "./views/ModifyFormateur/modifyFormateur";
 import ModifyAdmin from "./views/ModifyAdmin/modifyAdmin";
+import ModifyDetails from "./views/ModifyDetails/modifyDetails";
+import ModifyDomaine from "./views/ModifyDomaine/modifyDomaine";
+import ModifyThemes from "./views/ModifyTheme/modifyThemes";
+import ModifyNiveaux from "./views/ModifyNiveaux/modifyNiveaux";
 
 
 axios.defaults.withCredentials = true;
@@ -131,6 +135,13 @@ function App() {
                 <Route path="clients-indus" element={<ModifyClientsIndus/>}/>
                 <Route path="formateurs" element={<ModifyFormateur/>}/>
                 <Route path="admins" element={<ModifyAdmin/>}/>
+                <Route path="formations-details" element={<ModifyDetails/>}>
+                    <Route path=":id" element={<ModifyDomaine/>}>
+                        <Route path=":id" element={<ModifyThemes/>}>
+                            <Route path=":id" element={<ModifyNiveaux/>}/>
+                        </Route>
+                    </Route>
+                </Route>
 
             </Route>
 

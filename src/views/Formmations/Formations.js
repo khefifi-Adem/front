@@ -44,7 +44,7 @@ function Formations() {
                         <div className="side">
                             {
                                 formations.map(formation=>(
-                                    <div key={formation.id}>
+                                    <div key={formation.id} className="sideside">
                                         <h2 className='py-2 p-5'>{formation.titre}</h2>
                                         <SideBar data={formation.childrens}/>
                                     </div>

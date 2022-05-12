@@ -12,7 +12,7 @@ function ModifyFormateur() {
 
     useEffect(()=> {
         const getAdmins = async () => {
-            await axios.get("api/clients-indus").then(res => {
+            await axios.get("api/clients").then(res => {
                 if (res.status === 200) {
 
                     setFormateurs(res.data.users);

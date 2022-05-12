@@ -88,6 +88,66 @@ function SideNavBarAdmin() {
                     </div>
                 </li>
 
+
+                <hr className="sidebar-divider my-0"/>
+
+
+                <li className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+
+                    <a className="collapsed nav-link" data-bs-toggle="collapse" href="#collapseFormation" role="button"
+                       aria-expanded="false" aria-controls="collapseExample">
+                        <i className="fa fa-rectangle-list me-1"/>
+                        Formations
+                        <i className=" fa fa-angle-down p-1"/>
+                    </a>
+
+
+                    <div className="collapse" id="collapseFormation">
+                        <div className="card card-body">
+                            <Link to="formations-details" className="nav-link">
+                                <i className="fa fa-file-lines me-1 "/>
+                                Details
+                            </Link>
+
+                            <Link to="cycle-formations" className="nav-link">
+                                <i className="fa fa-arrows-spin me-1 "/>
+                                Cycle formation
+                            </Link>
+
+                        </div>
+                    </div>
+                </li>
+
+                <hr className="sidebar-divider my-0"/>
+
+                <li className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+
+                    <a className="collapsed nav-link" data-bs-toggle="collapse" href="#collapseProjects" role="button"
+                       aria-expanded="false" aria-controls="collapseExample">
+                        <i className="fa fa-hands-holding-child me-1"/>
+                        Projets
+                        <i className=" fa fa-angle-down p-1"/>
+                    </a>
+
+
+                    <div className="collapse" id="collapseProjects">
+                        <div className="card card-body">
+                            <Link to="formations-details" className="nav-link">
+                                <i className="fa fa-list me-1 "/>
+                                Domaine Industrielle
+                            </Link>
+
+                            <Link to="formations-details" className="nav-link">
+                                <i className="fa fa-thumbs-up me-1 "/>
+                                Projets Realisé
+                            </Link>
+
+
+
+                        </div>
+                    </div>
+                </li>
+
                 {/*<a href="#" className="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i*/}
                 {/*    className="fas fa-project-diagram me-2"/>Projects</a>*/}
                 {/*<a href="#" className="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i*/}
