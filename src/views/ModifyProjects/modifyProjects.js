@@ -3,6 +3,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import {Link, Outlet} from "react-router-dom";
 import EditCard from "../EditCard/editCard";
+import EditProject from "../EditProjects/editProject";
 
 function ModifyProjects() {
     const [projects, setProjects] = useState([]);
@@ -104,13 +105,31 @@ function ModifyProjects() {
         e.preventDefault();
         const data= [{title: addproject.title},{description: addproject.description},{image: picture},{id_soc : selectedSociete}, {id_client_indus:selectedClient},{id_domaine_indus:selectedDomain}];
 
-        axios.post("api/secteurs",data).then(res=>{
+        axios.post("api/projects",data).then(res=>{
                 if (res.status === 200){
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
 
                     }
+                }
+            }
+        )
+    }
+    const deleteProject = (e, id) => {
+
+        e.preventDefault();
+        axios.delete(`api/projects/${id}`).then(res=>{
+            console.log(res)
+                if (res.status === 200){
+                    if (res.data.status === 200)
+                    {
+                        swal("Success",res.data.message,"success");
+
+                    }
+                }
+                else {
+                    swal("Failed",res.data.message,"failed");
                 }
             }
         )
@@ -243,16 +262,16 @@ function ModifyProjects() {
                                             <th className="w-auto">{project.user.nom_jurdique}</th>
                                             <th className="w-auto">{project.societe.nom_soc}</th>
                                             <th className="w-auto">
-                                                <Link className="btn btn-primary  m-1" to={`${project.titre}`} state={project.id}>Consulter</Link>
-                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#card${project.id}`}>Edit</button>
-                                                <EditCard card={project}/>
+                                                <Link className="btn btn-primary  m-1" to={`${project.title}`} state={project}>Consulter</Link>
+                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#project${project.id}`}>Edit</button>
+                                                <EditProject project={project} clientIndus={clientIndus} domaines={domaines} societes={societes}/>
                                                 <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletesecteur${project.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
 
                                                 <div className="collapse" id={`deletesecteur${project.id}`}>
                                                     <div className="d-flex card card-body align-items-center">
                                                         <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                         <div>
-                                                            <button className="btn btn-success m-1">Confirmer</button>
+                                                            <button className="btn btn-success m-1" onClick={(e) => deleteProject(e,project.id)}>Confirmer</button>
                                                             <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletesecteur${project.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                         </div>
                                                     </div>

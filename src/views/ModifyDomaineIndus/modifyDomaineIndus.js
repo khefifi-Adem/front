@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import EditCard from "../EditCard/editCard";
+import EditDomaineIndus from "../EditDomainIndus/editDomaineIndus";
 
 
 function ModifyDomaineIndus() {
@@ -39,7 +40,7 @@ function ModifyDomaineIndus() {
         e.preventDefault();
         const data= addDomaine;
 
-        axios.post("api/domaines",data).then(res=>{
+        axios.post("api/domaine_indus",data).then(res=>{
                 if (res.status === 200){
                     if (res.data.status === 200)
                     {
@@ -132,8 +133,8 @@ function ModifyDomaineIndus() {
                                             <th className="w-25">{indus.titre}</th>
                                             <th className="w-50">{indus.description}</th>
                                             <th className="w-25">
-                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#card${indus.id}`}>Edit</button>
-                                                <EditCard card={indus}/>
+                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#indus${indus.id}`}>Edit</button>
+                                                <EditDomaineIndus indus={indus}/>
                                                 <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deleteindus${indus.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
 
                                                 <div className="collapse" id={`deleteindus${indus.id}`}>

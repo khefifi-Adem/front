@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {Link, Outlet, useLocation} from "react-router-dom";
-import EditCard from "../EditCard/editCard";
+import EditTheme from "../EditTheme/editTheme";
 
 function ModifyThemes() {
 
@@ -136,8 +136,8 @@ function ModifyThemes() {
                                             <th className="w-50">{theme.description}</th>
                                             <th className="w-25">
                                                 <Link className="btn btn-primary  m-1" to={`${theme.titre}`} state={theme.id} >Consulter</Link>
-                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#card${theme.id}`}>Edit</button>
-                                                <EditCard card={theme}/>
+                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#theme${theme.id}`}>Edit</button>
+                                                <EditTheme theme={theme}/>
                                                 <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletetheme${theme.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
 
                                                 <div className="collapse" id={`deletetheme${theme.id}`}>

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
-import EditCard from "../EditCard/editCard";
 import {useLocation} from "react-router-dom";
+import EditNiveau from "../EditNiveaux/editNiveau";
 
 function ModifyNiveaux() {
 
@@ -137,8 +137,8 @@ function ModifyNiveaux() {
                                             <th className="w-25">{niveau.titre}</th>
                                             <th className="w-50">{niveau.description}</th>
                                             <th className="w-25">
-                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#card${niveau.id}`}>Edit</button>
-                                                <EditCard card={niveau}/>
+                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#niveau${niveau.id}`}>Edit</button>
+                                                <EditNiveau niveau={niveau}/>
                                                 <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deleteniveau${niveau.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
 
                                                 <div className="collapse" id={`deleteniveau${niveau.id}`}>

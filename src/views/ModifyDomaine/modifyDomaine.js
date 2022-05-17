@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {Link, Outlet, useLocation} from "react-router-dom";
-import EditCard from "../EditCard/editCard";
+import EditDomaine from "../EditDomain/editDomain";
 
 function ModifyDomaines() {
 
@@ -138,8 +138,8 @@ function ModifyDomaines() {
                                             <th className="w-50">{domaine.description}</th>
                                             <th className="w-25">
                                                 <Link className="btn btn-primary  m-1" to={`${domaine.titre}`} state={domaine.id}>Consulter</Link>
-                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#card${domaine.id}`}>Edit</button>
-                                                <EditCard card={domaine}/>
+                                                <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#domain${domaine.id}`}>Edit</button>
+                                                <EditDomaine domain={domaine}/>
                                                 <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletedomaine${domaine.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
 
                                                 <div className="collapse" id={`deletedomaine${domaine.id}`}>

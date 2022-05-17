@@ -51,6 +51,7 @@ axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://127.0.0.1:8000/"
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 axios.defaults.headers.post["Accept"] = 'application/json';
+axios.defaults.headers.post["Authorization"] = 'Bearer 3|NcoZDGBkOzsYYb20SBHFhWH9sgjpxwru8neEb6QD';
 window.axios = require('axios');
 
 
@@ -70,11 +71,11 @@ function App() {
 
             <Route path="/references" element={<References/>}>
 
-                <Route path="sms2i-service-locals" element={<ServicesLocalData/>}>
+                <Route path="SMS2I" element={<ServicesLocalData/>}>
                     <Route path=":id" element={<DataContainer/>}/>
                 </Route>
 
-                <Route path="btc-commerce-international" element={<BtcCommercial/>}>
+                <Route path="BTC%20Commerce%20International" element={<BtcCommercial/>}>
                     <Route path=":id" element={<DataContainer/>}/>
                 </Route>
 
@@ -146,7 +147,9 @@ function App() {
                 </Route>
                 <Route path="domaine-insdutriel" element={<ModifyDomaineIndus/>}/>
 
-                <Route path="projects" element={<ModifyProjects/>}/>
+                <Route path="projects" element={<ModifyProjects/>}>
+                    <Route path=":id" element={<ProjetDetails/>}/>
+                </Route>
 
             </Route>
 
