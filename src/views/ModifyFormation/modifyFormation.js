@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import swal from "sweetalert";
 
 function ModifyFormation() {
 
@@ -33,6 +34,20 @@ function ModifyFormation() {
         getPage()
 
     },[])
+
+    const updateFormationIntro = (e) => {
+        e.preventDefault();
+
+        const data = formation;
+        axios.post("api/pages/3", data).then(res=>{
+            if (res.data.status === 200)
+            {
+                swal("Success",res.data.message);
+                window.location.reload(false);
+            }
+        })
+    }
+
 
     return(
         <div className="container bg-white rounded-3 shadow-lg">
@@ -77,7 +92,7 @@ function ModifyFormation() {
                         <div className="collapse" id="edit">
                             <div className="d-flex card card-body align-items-center">
                                 <h1 className="fw-normal"> Edit </h1>
-                                <form className="w-50">
+                                <form className="w-50" onSubmit={updateFormationIntro}>
                                     <div className="form-floating mb-3 w-100">
                                         <input className="form-control w-100" id="titre" type="text" name="titre"
                                                placeholder="Enter your titre here..."
@@ -106,7 +121,7 @@ function ModifyFormation() {
                                     </div>
 
                                     <div className="d-flex justify-content-center">
-                                        <button className="btn btn-primary m-1">Valider</button>
+                                        <button className="btn btn-primary m-1" type="submit">Valider</button>
                                         <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                     </div>
 

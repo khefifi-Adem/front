@@ -4,7 +4,7 @@ import swal from "sweetalert";
 
 function EditSociete({societe}) {
 
-    const initialValues ={ titre: "", description: ""};
+    const initialValues ={ nom_soc: "", description: ""};
     const [updatesociete, seUpdatetsociete] = useState(initialValues);
     const [picture, setPicture] = useState([]);
 
@@ -21,7 +21,7 @@ function EditSociete({societe}) {
     }
 
 
-    const updatesocieteData = (e) => {
+    const updateSocieteData = (e) => {
         e.preventDefault();
 
         const societe_id = societe.id;
@@ -43,16 +43,16 @@ function EditSociete({societe}) {
         <div className=" modal fade"   id={`groupe${societe.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog ">
                 <div className="modal-content d-flex align-items-center p-2">
-                    <h1 className="fw-normal "> Edit {societe.titre} societe </h1>
-                    <form className="w-75" onSubmit={updatesocieteData}>
+                    <h1 className="fw-normal "> Edit {societe.nom_soc} societe </h1>
+                    <form className="w-75" onSubmit={updateSocieteData}>
                         <div className="form-floating mb-3 w-100">
-                            <input className="form-control w-100" id="titre" type="text" name="titre"
+                            <input className="form-control w-100" id="nom_soc" type="text" name="nom_soc"
                                    placeholder="Enter your title here..."
-                                   value={updatesociete.titre}
+                                   value={updatesociete.nom_soc}
                                    onChange={handleInput}
 
                             />
-                            <label htmlFor="titre">Titre</label>
+                            <label htmlFor="nom_soc">Titre</label>
 
                         </div>
                         <div className="form-floating mb-3 w-100">

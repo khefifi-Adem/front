@@ -4,7 +4,7 @@ import swal from "sweetalert";
 
 function EditService({service}) {
 
-    const initialValues ={ titre: "", description: ""};
+    const initialValues ={ titre: service.titre, description: service.description};
     const [updateService, seUpdatetService] = useState(initialValues);
     const [picture, setPicture] = useState([]);
 
@@ -25,12 +25,12 @@ function EditService({service}) {
         e.preventDefault();
 
         const service_id = service.id;
-        const data = updateService;
+        const data =updateService;
         axios.post(`api/services/${service_id}`, data).then(res=>{
             if (res.data.status === 200)
             {
                 swal("Success",res.data.message,"success");
-                console.log(res.data.status)
+                window.location.reload(false);
             }
             else {
 
@@ -43,7 +43,7 @@ function EditService({service}) {
         <div className=" modal fade"   id={`service${service.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog ">
                 <div className="modal-content d-flex align-items-center p-2">
-                    <h1 className="fw-normal "> Edit {service.titre} service </h1>
+                    <h1 className="fw-normal "> Edit {service.titre}  </h1>
                     <form className="w-75" onSubmit={updateServiceData}>
                         <div className="form-floating mb-3 w-100">
                             <input className="form-control w-100" id="titre" type="text" name="titre"

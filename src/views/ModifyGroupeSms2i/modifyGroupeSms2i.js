@@ -85,9 +85,9 @@ function ModifyGroupeSms2i() {
 
     const addGroupe = (e) => {
         e.preventDefault();
-        const data= groupe;
+        const data= updateGroupe;
 
-        axios.post("api/card-acceuils",data).then(res=>{
+        axios.post("api/groupe_sms2i",data).then(res=>{
                 if (res.status === 200){
                     if (res.data.status === 200)
                     {
@@ -97,6 +97,19 @@ function ModifyGroupeSms2i() {
                 }
             }
         )
+    }
+
+    const updateGroupeIntro = (e) => {
+        e.preventDefault();
+
+        const data = groupe;
+        axios.post("api/pages/5", data).then(res=>{
+            if (res.data.status === 200)
+            {
+                swal("Success",res.data.message);
+                window.location.reload(false);
+            }
+        })
     }
 
     return(
@@ -142,7 +155,7 @@ function ModifyGroupeSms2i() {
                         <div className="collapse" id="edit">
                             <div className="d-flex card card-body align-items-center">
                                 <h1 className="fw-normal"> Edit </h1>
-                                <form className="w-50">
+                                <form className="w-50" onSubmit={updateGroupeIntro}>
                                     <div className="form-floating mb-3 w-100">
                                         <input className="form-control w-100" id="titre" type="text" name="titre"
                                                placeholder="Enter your titre here..."
@@ -171,7 +184,7 @@ function ModifyGroupeSms2i() {
                                     </div>
 
                                     <div className="d-flex justify-content-center">
-                                        <button className="btn btn-primary m-1">Valider</button>
+                                        <button className="btn btn-primary m-1" type="submit">Valider</button>
                                         <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                     </div>
 
@@ -191,7 +204,7 @@ function ModifyGroupeSms2i() {
             <section className=" d-flex py-5">
                 <div className="container d-flex flex-column  align-items-center">
                     <h1>
-                        Modify page cards
+                        Modify Societies
                     </h1>
                     <button className="btn btn-primary  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#ajouter" aria-expanded="false" aria-controls="collapseExample">Nouveau Societe</button>
 
@@ -199,7 +212,7 @@ function ModifyGroupeSms2i() {
                     <div className="collapse w-100" id="ajouter">
                         <div className="d-flex card card-body align-items-center">
                             <h1 className="fw-normal"> Ajouer </h1>
-                            <form className="w-50"  >
+                            <form className="w-50"  onSubmit={addGroupe}>
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="nom_soc" type="text" name="nom_soc"
                                            placeholder="Enter your Societe here... "

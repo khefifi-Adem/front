@@ -11,12 +11,12 @@ function ModifyFormateur() {
     const [updateAdmin, setUpdatetAdmin] = useState(initialValues);
 
     useEffect(()=> {
-        const getAdmins = async () => {
-            await axios.get("api/clients").then(res => {
+        const getFormmateur = async () => {
+            await axios.get("api/formateurs").then(res => {
                 if (res.status === 200) {
 
                     setFormateurs(res.data.users);
-                    console.log(res.data.users);
+
 
 
                 }
@@ -24,7 +24,7 @@ function ModifyFormateur() {
                 console.log(e)
             });
         };
-        getAdmins()
+        getFormmateur()
 
     },[])
 
@@ -35,26 +35,22 @@ function ModifyFormateur() {
 
     }
 
-    const addAdmin = (e) => {
+    const addFormateur = (e) => {
         e.preventDefault();
         const data= updateAdmin;
 
-        axios.post("api/registerindusclient",data).then(res=>{
+        axios.post("api/registerformateur",data).then(res=>{
                 if (res.status === 200){
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
-                        console.log(res.data.status)
+                        window.location.reload(false);
+
                     }
                 }
             }
         )
     }
-
-
-
-
-
 
     return(
         <div className="container bg-white rounded-3 shadow-lg">
@@ -67,13 +63,13 @@ function ModifyFormateur() {
                         Formateur List
                     </h1>
 
-                    <button className="btn btn-primary  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#ajouter" aria-expanded="false" aria-controls="collapseExample">Nouveau Admin Industriel</button>
+                    <button className="btn btn-primary  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#ajouter" aria-expanded="false" aria-controls="collapseExample">Nouveau Formateur</button>
 
 
                     <div className="collapse w-100" id="ajouter">
                         <div className="d-flex card card-body align-items-center">
                             <h1 className="fw-normal"> Ajouer </h1>
-                            <form className="w-50" onSubmit={addAdmin} >
+                            <form className="w-50" onSubmit={addFormateur} >
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="nom" type="text" name="nom"
                                            placeholder="Enter your nom here... "

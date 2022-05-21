@@ -9,28 +9,28 @@ function ModifyClientsIndus() {
 
 
     const initialValues ={ nom_jurdique: "", num_tel: "", adresse: "", email: ""};
-    const [updateClient, setUpdatetClient] = useState(initialValues);
+    const [addClients, setAddClients] = useState(initialValues);
 
 
     const handleInput = (e) => {
 
         const { name, value } = e.target;
-        setUpdatetClient({ ...updateClient, [name]: value });
+        setAddClients({ ...addClients, [name]: value });
 
     }
 
     const addClient = (e) => {
         e.preventDefault();
-        const data= updateClient;
 
-        axios.post("api/registerindusclient",data).then(res=>{
-                if (res.status === 200){
+
+
+        axios.post("api/registerindusclient",addClients).then(res=>{
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
-                        console.log(res.data.status)
+                        window.location.reload(false);
                     }
-                }
+
             }
         )
     }
@@ -44,7 +44,6 @@ function ModifyClientsIndus() {
                 if (res.status === 200) {
 
                     setClients(res.data.users);
-                    console.log(res.data.users);
 
 
                 }
@@ -79,7 +78,7 @@ function ModifyClientsIndus() {
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="nom_jurdique" type="text" name="nom_jurdique"
                                            placeholder="Enter your num_tel here... "
-                                           value={updateClient.nom_jurdique}
+                                           value={addClients.nom_jurdique}
                                            onChange={handleInput}
 
                                     />
@@ -90,7 +89,7 @@ function ModifyClientsIndus() {
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="num_tel" type="tel" name="num_tel"
                                            placeholder="fontawesome icons , bootstrap icons"
-                                           value={updateClient.num_tel}
+                                           value={addClients.num_tel}
                                            onChange={handleInput}
                                     /><label htmlFor="num_tel">Numero du téléphone</label>
                                 </div>
@@ -98,7 +97,7 @@ function ModifyClientsIndus() {
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="adresse" type="text" name="adresse"
                                            placeholder="fontawesome icons , bootstrap icons"
-                                           value={updateClient.adresse}
+                                           value={addClients.adresse}
                                            onChange={handleInput}
                                     /><label htmlFor="adresse">Adresse</label>
                                 </div>
@@ -106,7 +105,7 @@ function ModifyClientsIndus() {
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="email" type="email" name="email"
                                            placeholder="fontawesome icons , bootstrap icons"
-                                           value={updateClient.email}
+                                           value={addClients.email}
                                            onChange={handleInput}
                                     /><label htmlFor="email">Email</label>
                                 </div>
@@ -129,7 +128,7 @@ function ModifyClientsIndus() {
                         <table className="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th className="w-20">Nom Juridique</th>
+                                <th className="w-20">Nom jurdique</th>
                                 <th className="w-20">Numero du telephone</th>
                                 <th className="w-20">Adresse</th>
                                 <th className="w-20">Email</th>
