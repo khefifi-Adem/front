@@ -18,7 +18,6 @@ function ModifyDetails() {
                 if (res.status === 200) {
 
                     setSecteurs(res.data.secteurs);
-                    console.log(res.data.secteurs);
 
 
                 }
@@ -46,7 +45,7 @@ function ModifyDetails() {
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
-                        console.log(res.data.status)
+                        window.location.reload(false);
                     }
                 }
             }
@@ -89,13 +88,13 @@ function ModifyDetails() {
                                 </div>
 
                                 <div className="form-floating mb-3 w-100">
-                                    <input className="form-control w-100" id="prenom" type="text" name="prenom"
+                                    <input className="form-control w-100" id="description" type="text" name="description"
                                            placeholder="Enter your prenom here... "
                                            value={addsecteur.description}
                                            onChange={handleInput}
 
                                     />
-                                    <label htmlFor="nom_jurdique">Description </label>
+                                    <label htmlFor="description">Description </label>
 
                                 </div>
 

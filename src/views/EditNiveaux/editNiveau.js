@@ -23,7 +23,7 @@ function EditNiveau({niveau}) {
             if (res.data.status === 200)
             {
                 swal("Success",res.data.message,"success");
-                console.log(res.data.status)
+                window.location.reload(false);
             }
             else {
 

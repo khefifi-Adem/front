@@ -20,11 +20,11 @@ function EditDomaine({domain}) {
 
         const domain_id = domain.id;
         const data = updateDomain;
-        axios.post(`api/domaine/${domain_id}`, data).then(res=>{
+        axios.post(`api/domaines/${domain_id}`, data).then(res=>{
             if (res.data.status === 200)
             {
                 swal("Success",res.data.message,"success");
-                console.log(res.data.status)
+                window.location.reload(false);
             }
             else {
 

@@ -19,11 +19,11 @@ function EditSecteur({secteur}) {
 
         const secteur_id = secteur.id;
         const data = updateSecteur;
-        axios.post(`api/secteur/${secteur_id}`, data).then(res=>{
+        axios.post(`api/secteurs/${secteur_id}`, data).then(res=>{
             if (res.data.status === 200)
             {
                 swal("Success",res.data.message,"success");
-                console.log(res.data.status)
+                window.location.reload(false);
             }
             else {
 

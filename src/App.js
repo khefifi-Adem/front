@@ -51,9 +51,12 @@ axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://127.0.0.1:8000/"
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 axios.defaults.headers.post["Accept"] = 'application/json';
-axios.defaults.headers.post["Authorization"] = 'Bearer 3|NcoZDGBkOzsYYb20SBHFhWH9sgjpxwru8neEb6QD';
 window.axios = require('axios');
-
+axios.interceptors.request.use(function (config){
+    const token = localStorage.getItem('auth_token');
+    config.headers.Authorization = token ? `Bearer ${token}` : '';
+    return config;
+});
 
 function App() {
   return (

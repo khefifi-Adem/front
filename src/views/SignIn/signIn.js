@@ -2,10 +2,13 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
 import Footer from "../../components/Footer/Footer";
 import swal from "sweetalert";
-import {Link} from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 function SignIn() {
 
+    let navigate = useNavigate()
     const initialValues ={ email: "", password: "" };
     const [formConnexion, setFormConnexion] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -25,11 +28,23 @@ function SignIn() {
     useEffect(() => {
 
         if (Object.keys(formErrors).length === 0 && isSubmit) {
-            swal({
-                title:"success!",
-                text:"Message received successfully",
-                icon:"success",
-                button: "Fermer"
+            // swal({
+            //     title:"success!",
+            //     text:"Message received successfully",
+            //     icon:"success",
+            //     button: "Fermer"
+            // })
+            axios.post("api/login",formConnexion).then(res=>{
+                if (res.data.status === 200){
+                    localStorage.setItem('auth_token',res.data.token);
+                    localStorage.setItem('auth_nom',res.data.user.nom);
+                    localStorage.setItem('auth_prenom',res.data.user.prenom);
+                    if (res.data.user.type === "admin"){
+                        navigate('/dashboard-admin/acceuil');
+                    }else if (res.data.user.type === "admin"){
+                        navigate('/client/formations');
+                    }
+                }
             })
         }
         }, [formErrors,isSubmit]
@@ -102,9 +117,9 @@ function SignIn() {
 
                                     {/*Submit Button*/}
                                     <div className="d-grid">
-                                        <Link to="/dashboard-admin/acceuil" className="btn btn-primary btn-lg "  type="submit">
+                                        <button className="btn btn-primary btn-lg "  type="submit">
                                             Connexion
-                                        </Link>
+                                        </button>
                                     </div>
                                 </form>
                             </div>

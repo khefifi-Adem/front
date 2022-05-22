@@ -12,11 +12,10 @@ function ModifyAdmin() {
 
     useEffect(()=> {
         const getAdmins = async () => {
-            await axios.get("api/clients").then(res => {
+            await axios.get("api/admin").then(res => {
                 if (res.status === 200) {
 
                     setAdmins(res.data.users);
-                    console.log(res.data.users);
 
 
                 }
@@ -39,12 +38,12 @@ function ModifyAdmin() {
         e.preventDefault();
         const data= updateAdmin;
 
-        axios.post("api/registerindusclient",data).then(res=>{
+        axios.post("api/admin",data).then(res=>{
                 if (res.status === 200){
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
-                        console.log(res.data.status)
+                        window.location.reload(false);
                     }
                 }
             }
@@ -79,7 +78,7 @@ function ModifyAdmin() {
                                            onChange={handleInput}
 
                                     />
-                                    <label htmlFor="nom_jurdique">Nom</label>
+                                    <label htmlFor="nom">Nom</label>
 
                                 </div>
 

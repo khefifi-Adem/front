@@ -11,7 +11,7 @@ function ModifyDomaines() {
 
     const [domaines, setDomaines] = useState([]);
 
-    const initialValues ={ titre: "",description: ""};
+    const initialValues ={ titre: "",description: "",secteur_id: location.state};
     const [adddomaine, setAdddomaine] = useState(initialValues);
 
     useEffect(()=> {
@@ -20,7 +20,6 @@ function ModifyDomaines() {
                 if (res.status === 200) {
 
                     setDomaines(res.data.domaines);
-                    console.log(res.data.domaines);
 
 
                 }
@@ -48,7 +47,7 @@ function ModifyDomaines() {
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
-                        console.log(res.data.status)
+                        window.location.reload(false);
                     }
                 }
             }
