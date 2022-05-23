@@ -9,6 +9,16 @@ import { useNavigate } from 'react-router-dom';
 function SignIn() {
 
     let navigate = useNavigate()
+
+
+    useEffect(()=>{
+        if (localStorage.getItem('auth_token'))
+        {
+            navigate('/');
+        }
+    },[])
+
+
     const initialValues ={ email: "", password: "" };
     const [formConnexion, setFormConnexion] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -26,27 +36,32 @@ function SignIn() {
     };
 
     useEffect(() => {
-
         if (Object.keys(formErrors).length === 0 && isSubmit) {
-            // swal({
-            //     title:"success!",
-            //     text:"Message received successfully",
-            //     icon:"success",
-            //     button: "Fermer"
-            // })
+
             axios.post("api/login",formConnexion).then(res=>{
                 if (res.data.status === 200){
+
                     localStorage.setItem('auth_token',res.data.token);
                     localStorage.setItem('auth_nom',res.data.user.nom);
                     localStorage.setItem('auth_prenom',res.data.user.prenom);
                     if (res.data.user.type === "admin"){
                         navigate('/dashboard-admin/acceuil');
+                        swal("Success",res.data.message,"success")
                     }else if (res.data.user.type === "admin"){
                         navigate('/client/formations');
+                        swal("Success",res.data.message,"success")
+                    }else {
+                        navigate('/client/formations');
+                        swal("Success",res.data.message,"success")
                     }
+
+
                 }
             })
         }
+
+
+
         }, [formErrors,isSubmit]
     );
     const validate = (values) => {

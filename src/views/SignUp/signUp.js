@@ -2,10 +2,20 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
 import Footer from "../../components/Footer/Footer";
 import swal from "sweetalert";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function SignUp() {
 
-    const initialValues ={ lastname: "",name: "",email: "",phone_number: "",birthday: "", password: "" ,repeterpassword:""};
+    let navigate = useNavigate();
+
+    useEffect(()=>{
+        if (localStorage.getItem('auth_token'))
+        {
+            navigate('/');
+        }
+    },[])
+    const initialValues ={ nom: "",prenom: "",email: "",num_tel: "",adresse:"", birthday: "", password: "" ,password_confirmation:""};
     const [formSignUp, setFormSignUp] = useState(initialValues);
     const [formSignErrors, setFormSignErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -24,11 +34,15 @@ function SignUp() {
     useEffect(() => {
 
             if (Object.keys(formSignErrors).length === 0 && isSubmit) {
-                swal({
-                    title:"success!",
-                    text:"Message received successfully",
-                    icon:"success",
-                    button: "Fermer"
+
+                axios.post("api/registerclient",formSignUp).then(res=>{
+                    if (res.data.status === 200){
+                        localStorage.setItem('auth_token',res.data.token);
+                        localStorage.setItem('auth_nom',res.data.user.nom);
+                        localStorage.setItem('auth_prenom',res.data.user.prenom);
+                            navigate('/client/formations');
+                        swal("Success",res.data.message,"success")
+                    }
                 })
             }
         }, [formSignErrors,isSubmit]
@@ -36,12 +50,12 @@ function SignUp() {
     const validate = (values) => {
         const errors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-        if(!values.lastname){
-            errors.lastname = "lastname is required!";
+        if(!values.nom){
+            errors.nom = "nom is required!";
         }
-        if (!values.name)
+        if (!values.prenom)
         {
-            errors.name = "name is required!";
+            errors.prenom = "prenom is required!";
         }
         if (!values.email)
         {
@@ -51,13 +65,16 @@ function SignUp() {
         {
             errors.email = "This is not a valid email format!";
         }
-        if (!values.phone_number) {
-            errors.phone_number = "phone number is required";
-        } else if (values.phone_number.length !== 8) {
-            errors.phone_number = "phone number must be equal to 8 digits";
+        if (!values.num_tel) {
+            errors.num_tel = "phone number is required";
+        } else if (values.num_tel.length !== 8) {
+            errors.num_tel = "phone number must be equal to 8 digits";
         }
         if (!values.birthday){
             errors.birthday="date is required"
+        }
+        if (!values.adresse){
+            errors.adresse="adresse is required"
         }
         if (!values.password)
         {
@@ -67,13 +84,13 @@ function SignUp() {
         {
             errors.password = "Password must be more than 8 characters";
         }
-        else if(values.password !== values.repeterpassword){
-            errors.repeterpassword ="La mot de passe repeter n'est pas correcte";
+        else if(values.password !== values.password_confirmation){
+            errors.password_confirmation ="La mot de passe repeter n'est pas correcte";
         }
 
-        else if (values.password && !values.repeterpassword)
+        else if (values.password && !values.password_confirmation)
         {
-            errors.repeterpassword = "password repeat is required";
+            errors.password_confirmation = "password repeat is required";
         }
 
         return errors;
@@ -101,23 +118,23 @@ function SignUp() {
                                 <form id="contactForm" onSubmit={handleSubmit} >
                                     {/*nom input*/}
                                     <div className="form-floating mb-3">
-                                        <input className="form-control" id="lastname" type="text" name="lastname"
-                                               placeholder="Enter your last name..." value={formSignUp.lastname}
+                                        <input className="form-control" id="nom" type="text" name="nom"
+                                               placeholder="Enter your last name..." value={formSignUp.nom}
                                                onChange={handleChange}/>
                                         <label htmlFor="lastname">Nom</label>
                                         <p>
-                                            {formSignErrors.lastname}
+                                            {formSignErrors.nom}
                                         </p>
 
                                     </div>
                                     {/*prenom input*/}
                                     <div className="form-floating mb-3">
-                                        <input className="form-control" id="name" type="text" name="name"
-                                               placeholder="Enter your name..." value={formSignUp.name}
+                                        <input className="form-control" id="prenom" type="text" name="prenom"
+                                               placeholder="Enter your name..." value={formSignUp.prenom}
                                                onChange={handleChange}/>
-                                        <label htmlFor="name">Prénom</label>
+                                        <label htmlFor="prenom">Prénom</label>
                                         <p>
-                                            {formSignErrors.name}
+                                            {formSignErrors.prenom}
                                         </p>
 
                                     </div>
@@ -135,12 +152,25 @@ function SignUp() {
                                     </div>
                                     {/*phone number input*/}
                                     <div className="form-floating mb-3">
-                                        <input className="form-control" id="phone_number" type="tel" name="phone_number"
-                                               placeholder="Enter your name..." value={formSignUp.phone_number}
+                                        <input className="form-control" id="num_tel" type="tel" name="num_tel"
+                                               placeholder="Enter your name..." value={formSignUp.num_tel}
                                                onChange={handleChange}/>
-                                        <label htmlFor="phone_number">Phone number</label>
+                                        <label htmlFor="num_tel">Phone number</label>
                                         <p>
-                                            {formSignErrors.phone_number}
+                                            {formSignErrors.num_tel}
+                                        </p>
+
+                                    </div>
+
+
+                                    {/*adresse input*/}
+                                    <div className="form-floating mb-3">
+                                        <input className="form-control" id="adresse" type="text" name="adresse"
+                                               placeholder="Enter your adresse..." value={formSignUp.adresse}
+                                               onChange={handleChange}/>
+                                        <label htmlFor="adresse">Adresse</label>
+                                        <p>
+                                            {formSignErrors.adresse}
                                         </p>
 
                                     </div>
@@ -170,12 +200,12 @@ function SignUp() {
                                     
                                     {/*RepeterPassworinput*/}
                                     <div className="form-floating mb-3">
-                                        <input className="form-control" id="repeterpassword" type="password" name="repeterpassword"
-                                               placeholder="Write again ur password" value={formSignUp.repeterpassword}
+                                        <input className="form-control" id="password_confirmation" type="password" name="password_confirmation"
+                                               placeholder="Write again ur password" value={formSignUp.password_confirmation}
                                                onChange={handleChange}/>
-                                        <label htmlFor="repeterpassword">Répeter Mot de Passe</label>
+                                        <label htmlFor="password_confirmation">Répeter Mot de Passe</label>
                                         <p>
-                                            {formSignErrors.repeterpassword}
+                                            {formSignErrors.password_confirmation}
                                         </p>
                                     </div>
 

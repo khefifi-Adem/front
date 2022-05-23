@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {Link, Outlet} from "react-router-dom";
-import EditCard from "../EditCard/editCard";
 import EditProject from "../EditProjects/editProject";
 
 function ModifyProjects() {

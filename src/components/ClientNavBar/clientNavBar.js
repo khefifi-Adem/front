@@ -1,9 +1,25 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./clientNavBar.css"
 import {Button} from "../Buttons/Button";
+import axios from "axios";
+import swal from "sweetalert";
 
 function ClientNavBar() {
+
+    let navigate = useNavigate()
+    const logout = (e) => {
+        e.preventDefault();
+        axios.post('/api/logout').then(res =>{
+            if (res.data.status === 200) {
+                localStorage.clear();
+                swal("Success",res.data.message,"success")
+                navigate('/');
+            }
+        })
+    }
+
+
     const [clickk, setClickk] = useState(false);
 
     const handleClick = () => setClickk(!clickk);
@@ -69,8 +85,7 @@ function ClientNavBar() {
 
 
                 <Button titre={"Profile"} path="/client/profile" />
-                <Button titre={"Déconnexion"} path={"/"} />
-
+                <button className="btn1" type="button" onClick={logout} >Déconnexion</button>
 
 
             </nav>

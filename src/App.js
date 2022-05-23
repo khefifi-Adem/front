@@ -44,6 +44,8 @@ import ModifyThemes from "./views/ModifyTheme/modifyThemes";
 import ModifyNiveaux from "./views/ModifyNiveaux/modifyNiveaux";
 import ModifyDomaineIndus from "./views/ModifyDomaineIndus/modifyDomaineIndus";
 import ModifyProjects from "./views/ModifyProjects/modifyProjects";
+import ModifyCycleFormation from "./views/ModifyCycleFormation/modifyCycleFormation";
+import CycleFormationDetails from "./views/CycleFormationDetails/cycleFormationDetails";
 
 
 axios.defaults.withCredentials = true;
@@ -62,6 +64,15 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
+            <Route
+                path="*"
+                element={
+                    <main style={{ padding: "1rem" }}>
+                        <p>There's nothing here!</p>
+                    </main>
+                }
+            />
+
             <Route path="/" element={<Acceuil/>}/>
 
             <Route path="/contact" element={<Contact/>}/>
@@ -82,7 +93,7 @@ function App() {
                     <Route path=":id" element={<DataContainer/>}/>
                 </Route>
 
-                <Route path="smi-international" element={<SmiInternational/>}>
+                <Route path="SMI" element={<SmiInternational/>}>
                     <Route path=":id" element={<DataContainer/>}/>
                 </Route>
 
@@ -101,6 +112,7 @@ function App() {
                 </Route>
 
             </Route>
+
 
             <Route path="/galerie" element={<Galerie/>}/>
 
@@ -152,6 +164,10 @@ function App() {
 
                 <Route path="projects" element={<ModifyProjects/>}>
                     <Route path=":id" element={<ProjetDetails/>}/>
+                </Route>
+
+                <Route path="cycle-formations" element={<ModifyCycleFormation/>}>
+                    <Route path=":id" element={<CycleFormationDetails/>}/>
                 </Route>
 
             </Route>
