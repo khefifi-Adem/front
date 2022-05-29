@@ -14,7 +14,7 @@ function SignIn() {
     useEffect(()=>{
         if (localStorage.getItem('auth_token'))
         {
-            navigate('/');
+            navigate(-1);
         }
     },[])
 
@@ -44,14 +44,20 @@ function SignIn() {
                     localStorage.setItem('auth_token',res.data.token);
                     localStorage.setItem('auth_nom',res.data.user.nom);
                     localStorage.setItem('auth_prenom',res.data.user.prenom);
+                    localStorage.setItem('auth_type',res.data.user.type);
+                    localStorage.setItem('auth_id',res.data.user.id);
+
                     if (res.data.user.type === "admin"){
                         navigate('/dashboard-admin/acceuil');
                         swal("Success",res.data.message,"success")
-                    }else if (res.data.user.type === "admin"){
+                    }else if (res.data.user.type === "client"){
                         navigate('/client/formations');
                         swal("Success",res.data.message,"success")
-                    }else {
-                        navigate('/client/formations');
+                    }else if (res.data.user.type === "client_indus"){
+                        navigate('/client-indus/formations');
+                        swal("Success",res.data.message,"success")
+                    }else{
+                        navigate('/formateur');
                         swal("Success",res.data.message,"success")
                     }
 

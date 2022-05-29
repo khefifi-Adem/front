@@ -2,8 +2,19 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
 import Footer from "../../components/Footer/Footer";
 import swal from "sweetalert";
+import {useNavigate} from "react-router-dom";
 function Contact() {
 
+    let navigate = useNavigate();
+
+
+    useEffect(()=>{
+        if (localStorage.getItem('auth_token'))
+        {
+            navigate(-1);
+            swal('Success',"u have to deconnect", "success");
+        }
+    },[])
     const initialValues ={ username: "", email: "", phonenumber: "",subject:"",message:"" };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});

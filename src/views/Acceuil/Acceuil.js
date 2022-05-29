@@ -1,19 +1,66 @@
 import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import automation from "../../assets/automation.jpg";
 import p_4 from "../../assets/p4.jpg"
 import './Acceruil.css';
 import axios from "axios";
+import swal from "sweetalert";
 
 function Acceuil() {
+
+    let navigate = useNavigate();
+    useEffect(()=>{
+        if (localStorage.getItem('auth_token'))
+        {
+            navigate(-1);
+            swal('Success',"u have to deconnect", "success");
+        }
+    },[])
 
 
     const [cards, setCards]= useState([]);
     const [partners, setPartners]= useState([]);
     const [projects, setProjects]= useState([]);
+    const [pages, setPages] = useState([]);
+
+    const Pages = (pages) => {
+        if (pages)
+        {
+            return(
+                <div className="row gx-5 align-items-center justify-content-center">
+                    <div className="col-lg-8 col-xl-7 col-xxl-6">
+                        <div className="my-5 text-center text-xl-start">
+                            <h1 className="display-5 fw-bolder text-white mb-2">{pages.titre}</h1>
+                            <p className="lead fw-normal text-white-50 mb-4">{pages.description}</p>
+                            <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                <a className="btn btn-primary btn-lg px-4 me-sm-3" href="#vedette">En vedette</a>
+                                <Link className="btn btn-outline-light btn-lg px-4" to="#!">Learn More</Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
+                        <img className="img-fluid rounded-3 my-5" src={`http://127.0.0.1:8000/${pages.image_path}`} alt="..." />
+                    </div>
+                </div>
+            )
+        }else {
+            return null;
+        }
+    }
+
+
+
     useEffect(()=> {
+        axios.get("api/pages/1").then(res => {
+            if (res.status === 200) {
+                setPages(res.data.pages);
+            }
+        }).catch((e) => {
+            console.log(e)
+        });
+
         axios.get('api/card-acceuils').then(res=> {
             if (res.status === 200)
             {
@@ -45,21 +92,7 @@ function Acceuil() {
             {/*Header*/}
             <header className=" py-5" >
                 <div className="container px-5">
-                    <div className="row gx-5 align-items-center justify-content-center">
-                        <div className="col-lg-8 col-xl-7 col-xxl-6">
-                            <div className="my-5 text-center text-xl-start">
-                                <h1 className="display-5 fw-bolder text-white mb-2">SMS2i</h1>
-                                <p className="lead fw-normal text-white-50 mb-4">L’axe principal des activités de la société est le développement de projet d’automatisation et de supervision de processus industrielle.</p>
-                                <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a className="btn btn-primary btn-lg px-4 me-sm-3" href="#vedette">En vedette</a>
-                                    <Link className="btn btn-outline-light btn-lg px-4" to="#!">Learn More</Link>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                            <img className="img-fluid rounded-3 my-5" src={automation} alt="..." />
-                        </div>
-                    </div>
+                    {Pages(pages)}
                 </div>
             </header>
             {/*Features section*/}
@@ -101,7 +134,7 @@ function Acceuil() {
                                 partners.map(partner => (
 
                                     <div className="col-3  d-xl-block text-center" key={partner.id}>
-                                        <img className=" img-fluid rounded-3 my-5" src={"http://127.0.0.1:8000/"+partner.image_path} alt="..." />
+                                        <img className=" img-fluid rounded-3 my-5" src={`http://127.0.0.1:8000/${partner.image_path}`} alt="..." />
                                     </div>
                                     ))
                             }

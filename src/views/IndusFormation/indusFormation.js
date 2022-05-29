@@ -3,17 +3,89 @@ import IndusNavBar from "../../components/IndusNavBar/indusNavBar";
 import formation_v1 from "../../assets/formation_v1.jpg";
 import formations from "../../Data/FormationData/formation.json";
 import SideBar from "../../components/SideBar/sideBar";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import swal from "sweetalert";
 import './indusFormation.css'
+import axios from "axios";
 
 function IndusFormation() {
 
-    const initialValues ={ nbrpersonne: "",subject:"",message:"" };
+    let navigate = useNavigate();
+    useEffect(()=>{
+        if ((localStorage.getItem('auth_token') && localStorage.getItem('auth_type')!== 'client_indus')||(!localStorage.getItem('auth_token')))
+        {
+            navigate(-1);
+            swal('Success',"Unhothorized", "success");
+        }
+    },[])
+
+    const [secteurs, setSecteurs]= useState([]);
+    const initialValues ={ nb_personne: "",message:"" };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+
+    const [niveaux, setNiveaux] = useState([]);
+    const [selectedNiveau, setSelectedNiveau] = useState([]);
+    const [selectedType, setSelectedType] = useState([]);
+
+
+    const addDemands = () => {
+
+
+
+        const data = new FormData();
+        data.append('type', selectedType);
+        data.append('message', formValues.message);
+        data.append('id_client_indus', localStorage.getItem('auth_id'));
+        data.append('id_niveau', selectedNiveau);
+        data.append('nb_personne', formValues.nb_personne);
+
+
+        axios.post("api/demande_cycle", data).then(res => {
+
+                if (res.data.status === 200) {
+                    swal("Success", res.data.message, "success");
+                    window.location.reload(false);
+
+                }
+            }
+        )
+    }
+
+
+    useEffect(() => {
+        axios.get('api/secteurs').then(res=> {
+            if (res.status === 200)
+            {
+
+                setSecteurs(res.data.secteurs);
+
+            }});
+        },[]);
+
+
+
+
+
+
+    useEffect(()=> {
+        const getNiveaux = async () => {
+            await axios.get("api/niveaux").then(res => {
+                if (res.status === 200) {
+
+                    setNiveaux(res.data.niveaux);
+
+                }
+            }).catch((e) => {
+                console.log(e)
+            });
+        };
+        getNiveaux();
+
+    },[]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,30 +98,33 @@ function IndusFormation() {
         setIsSubmit(true);
     };
 
+
+
     useEffect(() => {
 
+
         if (Object.keys(formErrors).length === 0 && isSubmit) {
-            swal({
-                title:"success!",
-                text:"demand received successfully",
-                icon:"success",
-                button: "Fermer"
-            })
+            addDemands();
         }
     }, [formErrors,isSubmit]);
+
+
     const validate = (values) => {
         const errors = {};
 
-        if (!values.nbrpersonne) {
-            errors.nbrpersonne = "Nomber personne is required!";
+        if (!values.nb_personne) {
+            errors.nb_personne = "Nombre personne is required!";
         }
 
-        if (!values.subject) {
-            errors.subject = "subject is required";
-        }
+        // if (!values.type) {
+        //     errors.type = "Type is required";
+        // }
         if (!values.message) {
-            errors.message = "message is required";
+            errors.message = "Message is required";
         }
+        // if (!values.niveau) {
+        //     errors.niveau = "Niveau is required";
+        // }
         return errors;
     };
 
@@ -83,15 +158,15 @@ function IndusFormation() {
                     <div className="cont_for">
                         <div className="side">
                             {
-                                formations.map(formation=>(
-                                    <div key={formation.id}>
-                                        <h2 className='py-2 p-5'>{formation.titre}</h2>
-                                        <SideBar data={formation.childrens}/>
+                                secteurs.map(secteur=>(
+                                    <div key={secteur.id} className="sideside">
+                                        <h2 className='py-2 p-5'>{secteur.titre}</h2>
+                                        <SideBar data={secteur.childrens}/>
                                     </div>
                                 ))
                             }
                         </div>
-                        <div className="formation  ">
+                        <div className="formation ">
                             <Outlet/>
                         </div>
                     </div>
@@ -103,7 +178,7 @@ function IndusFormation() {
             <section className="py-5">
                 <div className="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                     <div className="text-center mb-5">
-                        <p className="lead fw-normal text-muted mb-0">Demande d'une formation en intra-entreprise</p>
+                        <p className="lead fw-normal text-muted mb-0">Demande d'une formation Industriel</p>
                     </div>
                     <div className="row gx-5 justify-content-center">
                         <div className="col-lg-8 col-xl-6">
@@ -111,31 +186,40 @@ function IndusFormation() {
                             <form id="contactForm" onSubmit={handleSubmit} >
 
                                 {/*subject input*/}
-                                <div className="form-floating mb-3">
-                                    <select className="form-control" id="sujet" type="text" name="subject"
-                                           placeholder="(123) 12-345-678" value={formValues.subject}
-                                            onChange={handleChange}>
-                                        <option value="">--Please choose an option--</option>
-                                        <option value="dog">Niveau 1</option>
-                                        <option value="cat">Niveau 1</option>
-                                        <option value="hamster">Niveau 1</option>
-                                        <option value="parrot">Niveau 1</option>
-                                        <option value="spider">Niveau 1</option>
-                                        <option value="goldfish">Niveau 1</option>
+                                <div className="mb-3 w-100">
+                                    <select className="form-select" id="niveau" name="niveau"
+                                            aria-label="Floating label select example"
+                                            onChange={e=>setSelectedNiveau(e.target.value)}>
+                                        <option value="">Choose Niveau</option>
+                                        {niveaux.map(niveau=>(<option key={niveau.id} value={niveau.id}>{niveau.titre}</option>))}
                                     </select>
-                                    <label htmlFor="sujet">Niveau</label>
                                     <p>
-                                        {formErrors.subject}
+                                        {formErrors.niveau}
                                     </p>
                                 </div>
 
                                 <div className="form-floating mb-3">
-                                    <input className="form-control" id="nbr_personne" type="text" name="nbr_personne"
-                                           placeholder="Nombre personne" value={formValues.nbrpersonne}
-                                           onChange={handleChange}/>
-                                    <label htmlFor="nbr_personne">Nombre personne</label>
+                                    <select className="form-control" id="type" name="type"
+                                           placeholder="(123) 12-345-678"
+                                            onChange={e=>setSelectedType(e.target.value)}>
+                                        <option value="">--Please choose an option--</option>
+                                        <option value="intra">Intra Entreprise</option>
+                                        <option value="inter">Inter Entreprise</option>
+
+                                    </select>
+                                    <label htmlFor="type">Type</label>
                                     <p>
-                                        {formErrors.nbrpersonne}
+                                        {formErrors.type}
+                                    </p>
+                                </div>
+
+                                <div className="form-floating mb-3">
+                                    <input className="form-control" id="nb_personne" type="text" name="nb_personne"
+                                           placeholder="Nombre personne"
+                                           onChange={handleChange}/>
+                                    <label htmlFor="nb_personne">Nombre personne</label>
+                                    <p>
+                                        {formErrors.nb_personne}
                                     </p>
                                 </div>
                                 {/*Message input*/}

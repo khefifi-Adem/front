@@ -16,23 +16,37 @@ function EditProject({project,clientIndus,societes,domaines}) {
         setUpdateProject({ ...updateProject, [name]: value });
 
     }
+    const handlePicture = (e) => {
+
+
+        setPicture({ image: e.target.files[0] });
+
+    }
 
     const updateProjectData = (e) => {
         e.preventDefault();
 
         const project_id = project.id;
-        const data= [{title: updateProject.title},{description: updateProject.description},{image: picture},{id_soc : selectedSociete}, {id_client_indus:selectedClient},{id_domaine_indus:selectedDomain}];
-        axios.post(`api/projects/${project_id}`, data).then(res=>{
-            if (res.data.status === 200)
-            {
-                swal("Success",res.data.message,"success");
-                console.log(res.data.status)
-            }
-            else {
 
-                console.log(res.data.status)
+        const data = new FormData();
+        data.append('image',picture.image )
+        data.append('title',updateProject.title )
+        data.append('description',updateProject.description )
+        data.append('id_soc',selectedSociete )
+        data.append('id_client_indus',selectedClient )
+        data.append('id_domaine_indus',selectedDomain )
+
+        console.log(data)
+        axios.post(`api/projects/${project_id}`, data).then(res=>{
+                if (res.status === 200){
+                    if (res.data.status === 200)
+                    {
+                        swal("Success",res.data.message,"success");
+
+                    }
+                }
             }
-        })
+        )
     }
 
     return (
@@ -101,7 +115,7 @@ function EditProject({project,clientIndus,societes,domaines}) {
                         <div className=" mb-3">
                             <label htmlFor="image" className="form-label">Selectionner une image</label>
                             <input className="form-control" type="file" id="image"
-                                   onChange={e=>setPicture(e.target.file)}
+                                   onChange={handlePicture}
                             />
 
                         </div>

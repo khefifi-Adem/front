@@ -1,9 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import cycleFomations from "../../Data/CycleFormation/CycleFormation.json";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
 import IndusNavBar from "../../components/IndusNavBar/indusNavBar";
+import swal from "sweetalert";
 
 function VosInscriptionIndus() {
+
+    let navigate = useNavigate();
+    useEffect(()=>{
+        if ((localStorage.getItem('auth_token') && localStorage.getItem('auth_type')!== 'client_indus')||(!localStorage.getItem('auth_token')))
+        {
+            navigate(-1);
+            swal('Success',"Unhothorized", "success");
+        }
+    },[])
+
+
     return(
         <div className="cont">
             <IndusNavBar/>

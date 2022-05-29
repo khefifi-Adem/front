@@ -46,6 +46,13 @@ import ModifyDomaineIndus from "./views/ModifyDomaineIndus/modifyDomaineIndus";
 import ModifyProjects from "./views/ModifyProjects/modifyProjects";
 import ModifyCycleFormation from "./views/ModifyCycleFormation/modifyCycleFormation";
 import CycleFormationDetails from "./views/CycleFormationDetails/cycleFormationDetails";
+import FormateurSpace from "./views/FormateurSpace/formateurSpace";
+import ModifyDemands from "./views/ModifyDemands/modifyDemands";
+import CycleFormationIndusDetails from "./views/CycleFormationIndusDetails/cycleFormationIndusDetails";
+import ModifyArticles from "./views/ModifyArticles/modifyArticles";
+import FormateurCycleDetails from "./views/FormateurCycleDetails/formateurCycleDetails";
+import FormateurSpaceIndus from "./views/FormateurSpaceIndus/formateurSpaceIndus";
+import FormateurCycleDetailsIndus from "./views/FormateurCycleDetailsIndus/formateurCycleDetailsIndus";
 
 
 axios.defaults.withCredentials = true;
@@ -142,6 +149,15 @@ function App() {
                 <Route path=":id" element={<ProjetDetails/>}/>
             </Route>
 
+
+            <Route path='/formateur' element={<FormateurSpace/>}>
+                <Route path=":id" element={<FormateurCycleDetails/>}/>
+            </Route>
+
+            <Route path='/formateur-indus' element={<FormateurSpaceIndus/>}>
+                <Route path=":id" element={<FormateurCycleDetailsIndus/>}/>
+            </Route>
+
             <Route path="/dashboard-admin" element={<AdminDashboard/>}>
                 <Route path="acceuil" element={<ModifyAcceuil/>}/>
                 <Route path="services" element={<ModifyServices/>}/>
@@ -160,6 +176,9 @@ function App() {
                         </Route>
                     </Route>
                 </Route>
+                <Route path="demande-formations" element={<ModifyDemands/>}>
+                    <Route path=":id" element={<CycleFormationIndusDetails/>}/>
+                </Route>
                 <Route path="domaine-insdutriel" element={<ModifyDomaineIndus/>}/>
 
                 <Route path="projects" element={<ModifyProjects/>}>
@@ -169,6 +188,7 @@ function App() {
                 <Route path="cycle-formations" element={<ModifyCycleFormation/>}>
                     <Route path=":id" element={<CycleFormationDetails/>}/>
                 </Route>
+                <Route path="articles" element={<ModifyArticles/>}/>
 
             </Route>
 

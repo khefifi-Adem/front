@@ -51,7 +51,7 @@ function ModifyGroupeSms2i() {
                 if (res.status === 200) {
 
                     setPages(res.data.pages);
-                    console.log(res.data.pages)
+
 
                 }
             }).catch((e) => {
@@ -69,7 +69,7 @@ function ModifyGroupeSms2i() {
                 if (res.status === 200) {
 
                     setGroupeSms2i(res.data.groupesms2i);
-                    console.log(res.data.groupesms2i)
+
 
                 }
             }).catch((e) => {

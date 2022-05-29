@@ -25,7 +25,14 @@ function EditService({service}) {
         e.preventDefault();
 
         const service_id = service.id;
-        const data =updateService;
+
+        const data = new FormData();
+
+        data.append('titre',updateService.titre);
+        data.append('description',updateService.description);
+        data.append('image_path',picture.image);
+
+
         axios.post(`api/services/${service_id}`, data).then(res=>{
             if (res.data.status === 200)
             {

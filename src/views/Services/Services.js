@@ -6,8 +6,19 @@ import './Services.css';
 import smart from '../../assets/smart.jpg';
 import maintenance from '../../assets/maintenance.png';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import swal from "sweetalert";
 
 function Services() {
+
+    let navigate = useNavigate();
+    useEffect(()=>{
+        if (localStorage.getItem('auth_token'))
+        {
+            navigate(-1);
+            swal('Success',"u have to deconnect", "success");
+        }
+    },[])
 
     const [cards, setCards]= useState([]);
     const [pages, setPages]= useState({});
@@ -18,7 +29,6 @@ function Services() {
        axios.get("api/card-services").then(res=> {
             if (res.status === 200)
             {
-
                 setCards(res.data.cards);
             }
         });

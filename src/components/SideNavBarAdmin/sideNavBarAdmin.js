@@ -114,6 +114,11 @@ function SideNavBarAdmin() {
                                 Cycle formation
                             </Link>
 
+                            <Link to="demande-formations" className="nav-link">
+                                <i className="fa fa-handshake-angle me-1 "/>
+                                Demande Cycle formation
+                            </Link>
+
                         </div>
                     </div>
                 </li>
@@ -143,6 +148,27 @@ function SideNavBarAdmin() {
                             </Link>
 
 
+
+                        </div>
+                    </div>
+                </li>
+
+                <li className="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+
+                    <a className="collapsed nav-link" data-bs-toggle="collapse" href="#collapseArticles" role="button"
+                       aria-expanded="false" aria-controls="collapseExample">
+                        <i className="fa fa-screwdriver me-1"/>
+                        Spare Parts
+                        <i className=" fa fa-angle-down p-1"/>
+                    </a>
+
+
+                    <div className="collapse" id="collapseArticles">
+                        <div className="card card-body">
+                            <Link to="articles" className="nav-link">
+                                <i className="fa fa-box-open  me-1 "/>
+                                Articles
+                            </Link>
 
                         </div>
                     </div>

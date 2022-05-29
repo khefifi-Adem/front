@@ -1,15 +1,49 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ClientNavBar from "../../components/ClientNavBar/clientNavBar";
 import formation_v1 from "../../assets/formation_v1.jpg";
-import formations from "../../Data/FormationData/formation.json";
 import SideBar from "../../components/SideBar/sideBar";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import "./clientFormation.css"
 import ShowFileModal from "../../components/ShowFileModal/showFileModal";
 import SinscrireModal from "../../components/SinscrireModal/sinscrireModal";
+import swal from "sweetalert";
+import axios from "axios";
 
 function ClientFormation() {
+
+    const [secteurs, setSecteurs]= useState([]);
+    const [cycles, setCycles]= useState([]);
+
+
+    let navigate = useNavigate();
+    useEffect(()=>{
+        if ((localStorage.getItem('auth_token') && localStorage.getItem('auth_type')!== 'client')||(!localStorage.getItem('auth_token')))
+        {
+            navigate(-1);
+            swal('Success',"Unhothorized", "success");
+        }
+
+        axios.get('api/secteurs').then(res=> {
+            if (res.status === 200)
+            {
+
+                setSecteurs(res.data.secteurs);
+
+            }
+        });
+
+        axios.get('api/cycle_formations').then(res=> {
+            if (res.status === 200)
+            {
+
+                setCycles(res.data.cycles);
+
+            }
+        });
+
+    },[])
+
 
     const [show,setShow] = useState(false);
     const onClickShow = () => setShow(true);
@@ -48,20 +82,23 @@ function ClientFormation() {
                     <div className="cont_for">
                         <div className="side">
                             {
-                                formations.map(formation=>(
-                                    <div key={formation.id}>
-                                        <h2 className='py-2 p-5'>{formation.titre}</h2>
-                                        <SideBar data={formation.childrens}/>
+                                secteurs.map(secteur=>(
+                                    <div key={secteur.id} className="sideside">
+                                        <h2 className='py-2 p-5'>{secteur.titre}</h2>
+                                        <SideBar data={secteur.childrens}/>
                                     </div>
                                 ))
                             }
                         </div>
-                        <div className="formation  ">
+                        <div className="formation ">
                             <Outlet/>
                         </div>
                     </div>
                 </div>
             </section>
+
+
+
             <section className="py-5 bg-white" id="partners">
                 <div className="container px-5 my-5">
                     <div className="col-md- p-2 w-100 h-100">
@@ -78,69 +115,29 @@ function ClientFormation() {
                                         <th>Date de debut</th>
                                         <th>Date de fin</th>
                                         <th>Nombre d'heure</th>
+                                        <th>Prix</th>
                                         <th>Action</th>
                                     </tr>
-                                    <tr className="cycle-body">
-                                        <td>Niveau 1</td>
-                                        <td>11/12/2022</td>
-                                        <td>31/12/2022</td>
-                                        <td>35</td>
-                                        <td className="action">
-                                            <button className="btn btn-outline-primary m-1" onClick={onClickShow} >S'inscrire</button>
-                                            <SinscrireModal show={show} niveau={"Niveau 1"} onClose={onClickClose}/>
-                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
-                                            <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
-                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
-                                            <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
+                                    {
+                                        cycles.map(cycle=>(
+                                        <tr className="cycle-body" key={cycle.id}>
+                                            <td>{cycle.titre}</td>
+                                            <td>{cycle.date_debut}</td>
+                                            <td>{cycle.date_fin}</td>
+                                            <td>{cycle.nb_heures}</td>
+                                            <td>{cycle.cout}</td>
+                                            <td className="action">
+                                                <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target={`#cycle${cycle.id}`} >S'inscrire</button>
+                                                <SinscrireModal cycle={cycle}/>
+                                                <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
+                                                <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
+                                                <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
+                                                <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
 
-                                        </td>
-                                    </tr><tr className="cycle-body">
-                                        <td>Niveau 1</td>
-                                        <td>11/12/2022</td>
-                                        <td>31/12/2022</td>
-                                        <td>35</td>
-                                        <td className="action">
-                                            <button className="btn btn-outline-primary m-1" onClick={onClickShow} >S'inscrire</button>
-                                            <SinscrireModal show={show} niveau={"Niveau 1"} onClose={onClickClose}/>
-                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
-                                            <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
-                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
-                                            <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
+                                            </td>
+                                        </tr>
+                                        ))}
 
-                                        </td>
-                                    </tr>
-
-                                    <tr className="cycle-body">
-                                        <td>Niveau 1</td>
-                                        <td>11/12/2022</td>
-                                        <td>31/12/2022</td>
-                                        <td>35</td>
-                                        <td className="action">
-                                            <button className="btn btn-outline-primary m-1" onClick={onClickShow} >S'inscrire</button>
-                                            <SinscrireModal show={show} niveau={"Niveau 1"} onClose={onClickClose}/>
-                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
-                                            <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
-                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
-                                            <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr className="cycle-body">
-                                        <td>Niveau 1</td>
-                                        <td>11/12/2022</td>
-                                        <td>31/12/2022</td>
-                                        <td>35</td>
-                                        <td className="action">
-                                            <button className="btn btn-outline-primary m-1" onClick={onClickShow} >S'inscrire</button>
-                                            <SinscrireModal show={show} niveau={"Niveau 1"} onClose={onClickClose}/>
-                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
-                                            <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
-                                            <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
-                                            <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
-
-                                        </td>
-                                    </tr>
 
                                 </table>
                             </div>

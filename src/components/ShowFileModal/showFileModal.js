@@ -8,7 +8,7 @@ function ShowFileModal( {path,id} ) {
                 <div className="file-container modal-dialog">
                     <div className="file-content m-0 p-0 modal-content">
                         <div className="mod modal-body">
-                            <iframe className="m-0 p-0 w-100 h-100"  src={path}   allow="autoplay" />
+                            <iframe className="m-0 p-0 w-100 h-100"  src={`http://127.0.0.1:8000/${path}`}   allow="autoplay" />
                         </div>
                     </div>
                 </div>

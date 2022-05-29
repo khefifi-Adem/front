@@ -9,6 +9,7 @@ function ModifyFormateur() {
 
     const initialValues ={ nom: "",prenom: "", num_tel: "", adresse: "", email: ""};
     const [updateAdmin, setUpdatetAdmin] = useState(initialValues);
+    const [errors, setErrors] = useState([]);
 
     useEffect(()=> {
         const getFormmateur = async () => {
@@ -40,14 +41,17 @@ function ModifyFormateur() {
         const data= updateAdmin;
 
         axios.post("api/registerformateur",data).then(res=>{
-                if (res.status === 200){
+
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
                         window.location.reload(false);
 
+                    }else {
+                        setErrors(res.errors);
+                        console.log(res);
                     }
-                }
+               
             }
         )
     }
@@ -78,7 +82,9 @@ function ModifyFormateur() {
 
                                     />
                                     <label htmlFor="nom_jurdique">Nom</label>
-
+                                    <p>
+                                        {errors.nom}
+                                    </p>
                                 </div>
 
                                 <div className="form-floating mb-3 w-100">
@@ -89,7 +95,9 @@ function ModifyFormateur() {
 
                                     />
                                     <label htmlFor="nom_jurdique">Prénom </label>
-
+                                    <p>
+                                        {errors.prenom}
+                                    </p>
                                 </div>
 
                                 <div className="form-floating mb-3 w-100">
@@ -98,6 +106,9 @@ function ModifyFormateur() {
                                            value={updateAdmin.num_tel}
                                            onChange={handleInput}
                                     /><label htmlFor="num_tel">Numero du téléphone</label>
+                                    <p>
+                                        {errors.num_tel}
+                                    </p>
                                 </div>
 
                                 <div className="form-floating mb-3 w-100">
@@ -105,7 +116,11 @@ function ModifyFormateur() {
                                            placeholder="fontawesome icons , bootstrap icons"
                                            value={updateAdmin.adresse}
                                            onChange={handleInput}
-                                    /><label htmlFor="adresse">Adresse</label>
+                                    />
+                                    <label htmlFor="adresse">Adresse</label>
+                                    <p>
+                                        {errors.adresse}
+                                    </p>
                                 </div>
 
                                 <div className="form-floating mb-3 w-100">
@@ -113,7 +128,11 @@ function ModifyFormateur() {
                                            placeholder="fontawesome icons , bootstrap icons"
                                            value={updateAdmin.email}
                                            onChange={handleInput}
-                                    /><label htmlFor="email">Email</label>
+                                    />
+                                    <label htmlFor="email">Email</label>
+                                    <p>
+                                        {errors.email}
+                                    </p>
                                 </div>
 
 

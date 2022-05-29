@@ -12,6 +12,7 @@ function ModifyAcceuil() {
     const initialValueHome = { titre:"", description:"" };
     const [home, setHome] = useState(initialValueHome);
 
+
     const [picture, setPicture] = useState([]);
 
     const initialValues ={ card_head: "", card_icon: "", card_text: ""};
@@ -41,21 +42,19 @@ function ModifyAcceuil() {
 
     },[])
 
+
     useEffect(()=> {
-        const getPage = async () => {
-            await axios.get("api/pages/1").then(res => {
+        axios.get("api/pages/1").then(res => {
                 if (res.status === 200) {
-
                     setPages(res.data.pages);
-
                 }
             }).catch((e) => {
                 console.log(e)
             });
-        };
-        getPage()
 
-    },[])
+    },[]);
+
+
 
 
 
@@ -66,7 +65,7 @@ function ModifyAcceuil() {
 
     const handlepicture = (e) => {
 
-        setPicture({ image:e.target.file[0]});
+        setPicture({ image:e.target.files[0]});
     }
 
     const addCard = (e) => {
@@ -107,7 +106,11 @@ function ModifyAcceuil() {
     const updateAcceuilIntro = (e) => {
         e.preventDefault();
 
-        const data = home;
+        const data = new FormData();
+        data.append('page_name','home');
+        data.append('titre',home.titre);
+        data.append('description',home.description);
+        data.append('image_path',picture.image);
         axios.post("api/pages/1", data).then(res=>{
             if (res.data.status === 200)
             {
@@ -143,19 +146,14 @@ function ModifyAcceuil() {
                                 </tr>
                             </thead>
                             <tbody>
-
-
-
-
-                                    <tr key={pages.id}>
-                                        <th className="w-25">{pages.titre}</th>
-                                        <th className="w-25">{pages.description}</th>
-                                        <th className="w-25">{pages.image_path}</th>
-                                        <th className="w-25">
-                                            <button className="btn btn-success  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="false" aria-controls="collapseExample">Edit</button>
-                                        </th>
-                                    </tr>
-
+                                <tr key={pages.id}>
+                                    <th className="w-25">{pages.titre}</th>
+                                    <th className="w-25">{pages.description}</th>
+                                    <th className="w-25"><img src={`http://localhost:8000/${pages.image_path}`}/></th>
+                                    <th className="w-25">
+                                        <button className="btn btn-success  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="false" aria-controls="collapseExample">Edit</button>
+                                    </th>
+                                </tr>
 
                             </tbody>
                         </table>

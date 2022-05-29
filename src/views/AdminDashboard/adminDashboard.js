@@ -1,10 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import SideNavBarAdmin from "../../components/SideNavBarAdmin/sideNavBarAdmin";
 import "./adminDashboard.css";
 import TopBarDashboard from "../../components/TopBarDashboard/topBarDashboard";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
+import swal from "sweetalert";
 
 function AdminDashboard() {
+
+
+    let navigate = useNavigate();
+    useEffect(()=>{
+        if ((localStorage.getItem('auth_token') && localStorage.getItem('auth_type')!== 'admin')||(!localStorage.getItem('auth_token')))
+        {
+            navigate(-1);
+            swal('Success',"Unhothorized", "success");
+        }
+    },[])
+
+
+
     return(
 
         <div className="conttt d-flex" id="wrapper">

@@ -40,7 +40,10 @@ function SignUp() {
                         localStorage.setItem('auth_token',res.data.token);
                         localStorage.setItem('auth_nom',res.data.user.nom);
                         localStorage.setItem('auth_prenom',res.data.user.prenom);
-                            navigate('/client/formations');
+                        localStorage.setItem('auth_type',res.data.user.type);
+                        localStorage.setItem('auth_id',res.data.user.id);
+
+                        navigate('/client/formations');
                         swal("Success",res.data.message,"success")
                     }
                 })

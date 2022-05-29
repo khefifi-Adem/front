@@ -1,132 +1,90 @@
 import React, { useState} from "react";
-import "./sinscrireModal.css"
+import axios from "axios";
+import swal from "sweetalert";
 
+function SinscrireModal({cycle}) {
 
+    const initialValues ={ card_number: "", yy: "", mm: "", cvc: ""};
+    const [inscrire, setInscrire] = useState(initialValues);
 
-const SinscrireModal = props => {
+    const handleInput = (e) => {
 
-    const initialValues ={ username: "flen fouleni ", email: "flenfouleni@gmail.com", phonenumber: "26821891",subject:"aaa",message:"aaa" };
-    const [insValues, setInsValues] = useState(initialValues);
-
-    const [isSubmit, setIsSubmit] = useState(false);
-
-    const [insPaiement, setInsPaiement] = useState({methode:"paiement"});
-
-    const handleRadio = (e) => {
         const { name, value } = e.target;
-        setInsPaiement( { ...insPaiement, [name]: value });
-        console.log(insPaiement);
-
+        setInscrire({ ...inscrire, [name]: value });
 
     }
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setInsValues({ ...insValues, [name]: value });
-    // };
-
-    const handleSubmit = (e) => {
+    const addInscription = (e) => {
         e.preventDefault();
-        setIsSubmit(true);
-    };
 
-    const vue =() => {
-        if ( insPaiement.methode === "paiement")
-        {
-            return (
-                <div className="">
-                <h1>
-                    this is paiement
-                </h1>
-            {/*Submit Button*/}
 
-                <button className="btn btn-lg btn-outline-success p-2 m-2" >Suivant <i className='bi bi-chevron-right'/> </button>
-            </div>
-            )
-        }
+        const data = new FormData();
+        data.append('id_user',localStorage.getItem('auth_id'));
+        data.append('id_cycle_formation',cycle.id);
+        data.append('etat','confirmed');
+        axios.post(`api/inscriptions`, data).then(res=>{
+            if (res.data.status === 200)
+            {
+                swal("Success",res.data.message);
+                window.location.reload(false);
+            }
+        })
     }
 
+    return (
+        <div className=" modal fade"   id={`cycle${cycle.id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog ">
+                <div className="modal-content d-flex align-items-center p-2">
+                    <h1 className="fw-normal"> Paiement d'inscription </h1>
+                    <form className="w-100" onSubmit={addInscription}>
+                        <div className="form-floating mb-3 w-100">
+                            <input className="form-control w-100" id="card_number" type="text" name="card_number"
+                                   placeholder="Enter your title here..."
+                                   value={inscrire.card_number}
+                                   onChange={handleInput}
 
-    if (!props.show)
-    {
-        return null;
-    }
-    else {
-        return (
-            <div className="modall">
-                <div className="modall-content">
-                    <div className="modall-head">
-                        <div className="text-center mb-5">
-                            <h1 className="fw-bolder">{props.niveau}</h1>
-                            <p className="lead fw-normal text-muted mb-0">Merci de completer votre Inscription</p>
+                            />
+                            <label htmlFor="card_number"><i className="fa-solid fa-credit-card"/>Card Number</label>
+
                         </div>
-                    </div>
-                    <div className="modall-body">
-                            <section className="py-5">
-                                <div className="container ">
-                                    {/* Contact form */}
-                                    <div className="bg-light rounded-3 py-5 px-4 px-md-5 mb-1 ">
-
-                                        <div className="row gx-5 justify-content-center">
-                                            <div className="col-lg-8 col-xl-6">
-                                                <div className="align-items-start w-100 d-flex flex-column bg-white rounded-3 p-5 ">
-                                                    <div className="font-monospace">
-                                                        <h6>Nom et Prénom: {insValues.username}</h6>
-                                                    </div>
-                                                    <div className="font-monospace">
-                                                        <h6>Email: {insValues.email}</h6>
-                                                    </div>
-                                                    <div className="font-monospace">
-                                                        <h6>Numero de téléphone: {insValues.phonenumber}</h6>
-                                                    </div>
-                                                </div>
-                                                <form id="contactForm" onSubmit={handleSubmit} >
-                                                    {/*Name input*/}
-
-                                                    <div className="form-floating mb-3">
-                                                        <div className="form-check"/>
-                                                        <input className="form-check-input" type="radio"
-                                                               name="methode1" id="methode1" value="paiement" onChange={handleRadio} checked/>
-                                                            <label className="form-check-label"
-                                                                   htmlFor="methode1">
-                                                                Paiement en ligne
-                                                            </label>
-                                                    </div>
-
-                                                    <div className="form-floating mb-3">
-                                                        <div className="form-check"/>
-                                                        <input className="form-check-input" type="radio"
-                                                               name="methode1" id="methode1" value="caisse" onChange={handleRadio}/>
-                                                            <label className="form-check-label"
-                                                                   htmlFor="methode1">
-                                                                Paiement a la caisse
-                                                            </label>
-                                                    </div>
-
-                                                </form>
-                                                <div className="container">
-                                                    {
-                                                      vue()
-                                                    }
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </section>
-                    </div>
-                    <div className="modall-footer">
-                        <div className=" d-flex justify-content-end">
-
-                            <button className="btn btn-lg btn-outline-danger p-2 m-2" onClick={props.onClose} >Fermer</button>
+                        <div className="row ">
+                        <div className="col-md-4 form-floating mb-3 ">
+                            <input className="form-control w-100" id="mm" type="text" name="mm"
+                                   placeholder="fontawesome icons , bootstrap icons"
+                                   value={inscrire.mm}
+                                   onChange={handleInput}
+                                /><label htmlFor="mm">MM</label>
                         </div>
-                    </div>
+                        <div className=" col-md-4 form-floating mb-3">
+                            <input className="form-control w-100" id="yy" type="text" name="yy"
+                                   placeholder="fontawesome icons , bootstrap icons"
+                                   value={inscrire.yy}
+                                   onChange={handleInput}
+                            /><label htmlFor="yy">YY</label>
+                        </div>
+
+                        <div className=" col-md-4 form-floating mb-3">
+                            <input className="form-control w-100" id="cvc" type="text" name="cvc"
+                                   placeholder="fontawesome icons , bootstrap icons"
+                                   value={inscrire.cvc}
+                                   onChange={handleInput}
+                            /><label htmlFor="icon">CvC</label>
+                        </div>
+                        </div>
+
+
+
+                        <div className="d-flex justify-content-center">
+                            <button className="btn btn-primary m-1" type="submit" >Valider</button>
+                            <button className="btn btn-success m-1" type="button" data-bs-dismiss="modal" aria-label="Close">Annuler</button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 
 }
-export default SinscrireModal;
+
+export  default  SinscrireModal;

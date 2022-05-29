@@ -13,7 +13,7 @@ function Piece({}) {
                             <div className="my-5 text-center text-xl-start">
                                 <ul className="align-items-center ">
                                     <li className="display-6 list-unstyled">
-                                        {`Marque: ${piece.state.marque}`}
+                                        {`Marque: ${piece.state.marque.marque}`}
                                     </li>
                                     <li className="display-6 list-unstyled">
                                         {`Model: ${piece.state.model}`}
@@ -22,12 +22,12 @@ function Piece({}) {
                                         {`Edition: ${piece.state.edition}`}
                                     </li>
                                 </ul>
-                                <p className="lead fw-normal">{piece.state.descripttion}</p>
+                                <p className="lead fw-normal">{piece.state.description}</p>
 
                             </div>
                         </div>
                         <div className="col-xl-5 col-xxl-6d-xl-block text-center">
-                            <img className="img-fluid rounded-3 my-1" src={automation} alt="..." />
+                            <img className="img-fluid rounded-3 my-1" src={`http://localhost:8000/${piece.state.image_path}`} alt="..." />
                         </div>
                     </div>
                 </div>

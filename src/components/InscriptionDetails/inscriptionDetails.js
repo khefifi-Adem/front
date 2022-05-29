@@ -8,20 +8,38 @@ function InscriptionDetails() {
     const location = useLocation()
     return (
         <div className="cont m-5 ">
-            <div className="p-5">
-            <h1 className="fw-normal">{location.state.titre}</h1>
-            <p className="fw-normal">
-                {location.state.description}
-            </p>
-            <p className="fw-normal">
-                {location.state.date_debut}
-            </p>
-            <p className="fw-normal">
-                {location.state.date_fin}
-            </p>
-            <a className="fw-normal" href={location.state.lien_teams}>
-               Consulter le groupe de discussion de formation
-            </a>
+            <div className=" w-100 p-5 justify-content-center  ">
+                <h4 className="w-100 fw-bold display-4">{location.state.titre}</h4>
+                <table className="w-100 table table-bordered table-striped">
+                    <tbody className="">
+                    <tr>
+                        <th className="w-auto">Description</th>
+                        <th className="w-auto">{location.state.description}</th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Date Debut</th>
+                        <th className="w-auto">{location.state.date_debut}</th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Date fin</th>
+                        <th className="w-auto">{location.state.date_fin}</th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Nombre de jours</th>
+                        <th className="w-auto">{location.state.nb_jours}</th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Nombre d'heures</th>
+                        <th className="w-auto">{location.state.nb_heures}</th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Nombre des places disponible</th>
+                        <th className="w-auto">{location.state.nb_places_dispo}</th>
+                    </tr>
+
+                    </tbody>
+                </table>
+
             </div>
 
             <div className="containerr mt-5" >

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import axios from "axios";
 import swal from "sweetalert";
 import EditServiceCard from "../EditServiceCard/editServiceCard";
@@ -8,6 +8,61 @@ function ModifyServices() {
     const [cards, setCards]= useState([]);
     const [pages, setPages]= useState({});
     const [services, setServices] = useState([])
+
+    const initialValueService = { titre:"", description:"" };
+    const [addServices, setAddServices] = useState([])
+    const [picture, setPicture] = useState([]);
+
+
+    const deleteService = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
+
+
+            axios.delete(`api/services/${id}`).then(res=>{
+                    if (res.status === 200){
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+                    }
+                }
+            )}
+    })
+
+    const deleteCardService = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
+
+
+            axios.delete(`api/card-services/${id}`).then(res=>{
+                    if (res.status === 200){
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+                    }
+                }
+            )}
+    })
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setAddServices({ ...addServices, [name]: value });
+    }
+
+    const handlepicture = (e) => {
+
+        setPicture({ image:e.target.files[0]});
+    }
+
+
+
 
     const initialValueHome = { titre:"", description:"" };
     const [home, setHome] = useState(initialValueHome);
@@ -70,7 +125,7 @@ function ModifyServices() {
 
     },[])
 
-    const handleChange = (e) => {
+    const handleChangeHome = (e) => {
         const { name, value } = e.target;
         setHome({ ...home, [name]: value });
     }
@@ -87,11 +142,29 @@ function ModifyServices() {
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
-                        console.log(res.data.status)
+                        window.location.reload(false);
                     }
                 }
             }
         )
+    }
+
+    const addService = (e) => {
+        e.preventDefault();
+
+        const data = new FormData();
+
+        data.append('titre',addServices.titre);
+        data.append('description',addServices.description);
+        data.append('image_path',picture.image);
+
+        axios.post("api/services", data).then(res=>{
+            if (res.data.status === 200)
+            {
+                swal("Success",res.data.message);
+                window.location.reload(false);
+            }
+        })
     }
 
     const updateServiceIntro = (e) => {
@@ -155,7 +228,7 @@ function ModifyServices() {
                                         <input className="form-control w-100" id="titre" type="text" name="titre"
                                                placeholder="Enter your titre here..."
                                                value={home.titre}
-                                               onChange={handleChange}
+                                               onChange={handleChangeHome}
                                         />
                                         <label htmlFor="titre">Titre</label>
                                     </div>
@@ -164,7 +237,7 @@ function ModifyServices() {
                                         <textarea className="form-control" id="description" name="description"
                                                   placeholder="Enter your description here..."
                                                   value={home.description}
-                                                  onChange={handleChange}
+                                                  onChange={handleChangeHome}
                                         />
                                         <label htmlFor="description">Description</label>
 
@@ -201,7 +274,7 @@ function ModifyServices() {
                             <h1 className="fw-normal"> Ajouer </h1>
                             <form className="w-50" onSubmit={addCard} >
                                 <div className="form-floating mb-3 w-100">
-                                    <input className="form-control w-100" id="titre" type="text" name="card_head"
+                                    <input className="form-control w-100" id="titre" type="text" name="titre"
                                            placeholder="Enter your titre here... "
                                            value={updateCard.titre}
                                            onChange={handleInput}
@@ -211,14 +284,14 @@ function ModifyServices() {
 
                                 </div>
                                 <div className="form-floating mb-3 w-100">
-                                    <input className="form-control w-100" id="icon" type="text" name="card_icon"
+                                    <input className="form-control w-100" id="icon" type="text" name="icon"
                                            placeholder="fontawesome icons , bootstrap icons"
                                            value={updateCard.icon}
                                            onChange={handleInput}
                                     /><label htmlFor="icon">Icon</label>
                                 </div>
                                 <div className="form-floating mb-3">
-                                    <textarea className="form-control" id="description" name="card_text"
+                                    <textarea className="form-control" id="description" name="description"
                                               placeholder="Enter your description here..."
                                               value={updateCard.description}
                                               onChange={handleInput}
@@ -263,7 +336,7 @@ function ModifyServices() {
                                                 <div className="d-flex card card-body align-items-center">
                                                     <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                     <div>
-                                                        <button className="btn btn-success m-1">Confirmer</button>
+                                                        <button className="btn btn-success m-1" type={"button"} onClick={deleteCardService(card.id)}>Confirmer</button>
                                                         <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#delete${card.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                     </div>
                                                 </div>
@@ -292,6 +365,47 @@ function ModifyServices() {
                     <h1>
                         Modify services
                     </h1>
+                    <button className="btn btn-primary  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#ajouter-service" aria-expanded="false" aria-controls="collapseExample">Nouveau Service</button>
+
+                    <div className="collapse w-100" id="ajouter-service">
+                        <div className="d-flex card card-body align-items-center">
+                            <h1 className="fw-normal"> Edit </h1>
+                            <form className="w-50" onSubmit={addService}>
+                                <div className="form-floating mb-3 w-100">
+                                    <input className="form-control w-100" id="titre" type="text" name="titre"
+                                           placeholder="Enter your titre here..."
+                                           value={setAddServices.titre}
+                                           onChange={handleChange}
+                                    />
+                                    <label htmlFor="titre">Titre</label>
+                                </div>
+
+                                <div className="form-floating mb-3">
+                                        <textarea className="form-control" id="description" name="description"
+                                                  placeholder="Enter your description here..."
+                                                  value={setAddServices.description}
+                                                  onChange={handleChange}
+                                        />
+                                    <label htmlFor="description">Description</label>
+
+                                </div>
+
+                                <div className=" mb-3">
+                                    <label htmlFor="image" className="form-label">Selectionner une image</label>
+                                    <input className="form-control" type="file" id="image"
+                                           onChange={handlepicture}
+                                    />
+
+                                </div>
+
+                                <div className="d-flex justify-content-center">
+                                    <button className="btn btn-primary m-1" type="submit">Valider</button>
+                                    <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="false" aria-controls="collapseExample">Annuler</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
 
 
 
@@ -325,7 +439,7 @@ function ModifyServices() {
                                                 <div className="d-flex card card-body align-items-center">
                                                     <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                     <div>
-                                                        <button className="btn btn-success m-1">Confirmer</button>
+                                                        <button className="btn btn-success m-1" type={"button"} onClick={deleteService(service.id)}>Confirmer</button>
                                                         <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletes${service.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                     </div>
                                                 </div>
