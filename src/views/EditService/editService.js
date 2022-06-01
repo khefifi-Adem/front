@@ -17,7 +17,7 @@ function EditService({service}) {
 
     const handlepicture = (e) => {
 
-        setPicture({ image:e.target.file[0]});
+        setPicture({ image:e.target.files[0]});
     }
 
 

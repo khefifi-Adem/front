@@ -20,7 +20,7 @@ function VosInscriptions() {
         }
 
         axios.get('api/cycle_formations').then(res=> {
-            if (res.status === 200)
+            if (res.data.status === 200)
             {
 
                 setCycles(res.data.cycles);
@@ -29,8 +29,8 @@ function VosInscriptions() {
 
             axios.get(`api/inscriptions-cycle/${localStorage.getItem('auth_id')}`).then(res=>{
                 if (res.data.status){
-                    setInscriptions(res.data.inscription);
-                    console.log(res.data.inscription);
+                    setInscriptions(res.data.inscriptions);
+                    console.log(res.data.inscriptions);
                 }
             })
         });

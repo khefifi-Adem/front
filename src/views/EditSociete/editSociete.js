@@ -4,7 +4,8 @@ import swal from "sweetalert";
 
 function EditSociete({societe}) {
 
-    const initialValues ={ nom_soc: "", description: ""};
+
+    const initialValues ={ nom_soc: societe.nom_soc, description: societe.description};
     const [updatesociete, seUpdatetsociete] = useState(initialValues);
     const [picture, setPicture] = useState([]);
 
@@ -17,7 +18,7 @@ function EditSociete({societe}) {
 
     const handlepicture = (e) => {
 
-        setPicture({ image:e.target.file[0]});
+        setPicture({ image:e.target.files[0]});
     }
 
 
@@ -25,12 +26,16 @@ function EditSociete({societe}) {
         e.preventDefault();
 
         const societe_id = societe.id;
-        const data = updatesociete;
+        const data = new FormData();
+        data.append('nom_soc',updatesociete.nom_soc);
+        data.append('description',updatesociete.description);
+        data.append('image_path',picture.image);
         axios.post(`api/groupe_sms2i/${societe_id}`, data).then(res=>{
             if (res.data.status === 200)
             {
                 swal("Success",res.data.message,"success");
                 console.log(res.data.status)
+                window.location.reload(false);
             }
             else {
 

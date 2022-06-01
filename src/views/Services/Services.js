@@ -108,11 +108,11 @@ function Services() {
                     if (service.id % 2===0)
                     {
                         return(
-                            <section className="services py-5" key={service.id}>
+                            <section className="services py-5" id={service.id} key={service.id}>
                                 <div className="container px-5 my-5">
                                     <div className="row gx-5 align-items-center">
                                         <div className="col-lg-6 order-first order-lg-last">
-                                            <img className="img-fluid rounded mb-5 mb-lg-0" src={smart} alt="..."/>
+                                            <img className="img-fluid rounded mb-5 mb-lg-0" src={`http://localhost:8000/${service.image_path}`} alt="..."/>
                                         </div>
                                         <div className="col-lg-6">
                                             <h2 className="fw-bolder">{service.titre}</h2>
@@ -129,11 +129,11 @@ function Services() {
                     else
                     {
                         return(
-                            <section className="servicess py-5 " key={service.id}>
+                            <section className="servicess py-5 " id={service.id} key={service.id}>
                                 <div className="container px-5 my-5  ">
                                     <div className="row gx-5 align-items-center">
                                         <div className="col-lg-6">
-                                            <img className="img-fluid rounded mb-5 mb-lg-0" src={maintenance} alt="..."/>
+                                            <img className="img-fluid rounded mb-5 mb-lg-0" src={`http://localhost:8000/${service.image_path}`} alt="..."/>
                                         </div>
                                         <div className="col-lg-6">
                                             <h2 className="fw-bolder">{service.titre}</h2>

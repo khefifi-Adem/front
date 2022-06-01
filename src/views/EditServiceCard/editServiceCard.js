@@ -19,7 +19,7 @@ function EditServiceCard({card}) {
 
         const card_id = card.id;
         const data = updateCard;
-        axios.post(`api/card-services-update/${card_id}`, data).then(res=>{
+        axios.put(`api/card-services-update/${card_id}`, data).then(res=>{
             if (res.data.status === 200)
             {
                 swal("Success",res.data.message,"success");

@@ -23,12 +23,14 @@ function SinscrireModal({cycle}) {
         data.append('id_cycle_formation',cycle.id);
         data.append('etat','confirmed');
         axios.post(`api/inscriptions`, data).then(res=>{
-            if (res.data.status === 200)
-            {
+            if (res.status === 200){
+
                 swal("Success",res.data.message);
-                window.location.reload(false);
             }
-        })
+        }).catch((e)=>(
+            swal("Success","vous etes deja inscrit")
+        ))
+
     }
 
     return (

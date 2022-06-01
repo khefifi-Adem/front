@@ -9,9 +9,9 @@ function FomateurCycleDetails() {
 
 
     const location = useLocation()
-    console.log(location.state.inscription);
+    console.log(location.state);
 
-
+    const [link,setLink] = useState([]);
     const [fileName,setFileName] = useState([]);
     const [file,setFile] = useState([]);
 
@@ -26,6 +26,32 @@ function FomateurCycleDetails() {
         const { name, value } = e.target;
         setFileName({ ...fileName, [name]: value });
     }
+
+
+    const handleChangeLink = (e) => {
+        const { name, value } = e.target;
+        setLink({ ...link, [name]: value });
+    }
+
+    const updateLink = (e) => {
+        e.preventDefault();
+        const data= new FormData;
+        data.append('link',link.link);
+        console.log(data)
+        axios.post(`api/cycle_formations/${location.state.id}`,data).then(res=>{
+
+            if (res.data.status === 200)
+            {
+                swal("Success",res.data.message,"success");
+                window.location.reload(false);
+
+            }
+
+
+        })
+    }
+
+
     const addFile = (e) => {
         e.preventDefault();
         const data= new FormData;
@@ -56,7 +82,7 @@ function FomateurCycleDetails() {
                 {
                     swal("Success",res.data.message,"success");
 
-                    window.location.reload(false);
+                    window.location.reload(true);
                 }
 
 
@@ -89,7 +115,7 @@ function FomateurCycleDetails() {
 
                     {
                         inscription.map(client=>(
-                            <tr>
+                            <tr key={client.id}>
                                 <th className="w-auto">{client.clients.nom}</th>
                                 <th className="w-auto">{client.clients.prenom}</th>
                                 <th className="w-auto">{client.clients.num_tel}</th>
@@ -125,7 +151,7 @@ function FomateurCycleDetails() {
 
                     {
                         files.map(file=>(
-                            <tr>
+                            <tr key={file.id}>
                                 <th className="w-auto"><a className="link-info" href={`http://127.0.0.1:8000/${file.file_path}`}> {file.titre} </a></th>
                                 <th className="w-auto">
                                     <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#file${file.id}`}>Edit</button>
@@ -186,6 +212,37 @@ function FomateurCycleDetails() {
                     <tr>
                         <th className="w-auto">Nombre des places disponible</th>
                         <th className="w-auto">{location.state.nb_places_dispo}</th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">
+                            <a href={`${location.state.link}`} target='_blank'>
+                                Groupe discussion
+                            </a>
+                        </th>
+                        <th className="w-auto">
+                            <button className="btn  btn-success  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#update${location.state.id}`} aria-expanded="false" aria-controls="collapseExample">Edit Link</button>
+
+                            <div className="collapse" id={`update${location.state.id}`}>
+                                <div className="d-flex card card-body align-items-center">
+                                    <form className="w-50" onSubmit={updateLink}>
+                                        <div className="form-floating mb-3 w-100">
+                                            <input className="form-control w-100" id="link" type="text" name="link"
+                                                   placeholder="Enter your titre here..."
+                                                   value={link.link}
+                                                   onChange={handleChangeLink}
+                                            />
+                                            <label htmlFor="link">Link</label>
+                                        </div>
+                                        <div>
+                                            <button className="btn btn-success m-1" type='submit'>Confirmer</button>
+                                            <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#update${location.state.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </th>
+
                     </tr>
 
                     </tbody>

@@ -129,10 +129,9 @@ function ClientFormation() {
                                             <td className="action">
                                                 <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target={`#cycle${cycle.id}`} >S'inscrire</button>
                                                 <SinscrireModal cycle={cycle}/>
-                                                <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfiledetailmodal">Détails</button>
-                                                <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfiledetailmodal"/>
-                                                <button className="btn btn-outline-primary m-1" data-bs-toggle="modal" data-bs-target="#showfileprogrammemodal">Programme</button>
-                                                <ShowFileModal path="https://drive.google.com/file/d/1DFH8SBbEz19qG6mFQcKTSOmF7m3rGZ77/view?usp=sharing" id="showfileprogrammemodal"/>
+                                                <a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_details.file_path}`}>Détails</a>
+                                                <a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_programme.file_path}`}>Programme</a>
+
 
                                             </td>
                                         </tr>

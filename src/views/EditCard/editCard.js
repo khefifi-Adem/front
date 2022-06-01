@@ -4,7 +4,8 @@ import swal from "sweetalert";
 
 function EditCard({card}) {
 
-    const initialValues ={ card_head: "", card_icon: "", card_text: ""};
+
+    const initialValues ={ card_head: card.card_head, card_icon: card.card_icon, card_text: card.card_text};
     const [updateCard, seUpdatetCard] = useState(initialValues);
 
     const handleInput = (e) => {
@@ -19,7 +20,7 @@ function EditCard({card}) {
 
       const card_id = card.id;
       const data = updateCard;
-      axios.post(`api/card-acceuils-update/${card_id}`, data).then(res=>{
+      axios.put(`api/card-acceuils-update/${card_id}`, data).then(res=>{
           if (res.data.status === 200)
           {
               swal("Success",res.data.message);

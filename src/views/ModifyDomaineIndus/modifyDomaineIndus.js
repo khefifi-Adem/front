@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import EditCard from "../EditCard/editCard";
@@ -14,7 +14,7 @@ function ModifyDomaineIndus() {
     useEffect(()=> {
         const getDomaineIndus = async () => {
             await axios.get(`api/domaine_indus`).then(res => {
-                if (res.status === 200) {
+                if (res.data.status === 200) {
 
                     setDomaineIndus(res.data.domaineindus);
                     console.log(res.data.domaineindus);
@@ -29,6 +29,24 @@ function ModifyDomaineIndus() {
 
     },[])
 
+    const deleteDomaine = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
+
+
+            axios.delete(`api/domaine_indus/${id}`).then(res=>{
+                    if (res.status === 200){
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+                    }
+                }
+            )}
+    })
+
     const handleInput = (e) => {
 
         const { name, value } = e.target;
@@ -41,13 +59,12 @@ function ModifyDomaineIndus() {
         const data= addDomaine;
 
         axios.post("api/domaine_indus",data).then(res=>{
-                if (res.status === 200){
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
                         console.log(res.data.status)
                     }
-                }
+
             }
         )
     }
@@ -73,7 +90,7 @@ function ModifyDomaineIndus() {
 
                     <div className="collapse w-100" id="ajouter-domaine">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addAdmin} >
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="titre" type="text" name="titre"
@@ -141,7 +158,7 @@ function ModifyDomaineIndus() {
                                                     <div className="d-flex card card-body align-items-center">
                                                         <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                         <div>
-                                                            <button className="btn btn-success m-1">Confirmer</button>
+                                                            <button className="btn btn-success m-1" onClick={deleteDomaine(indus.id)}>Confirmer</button>
                                                             <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deleteindus${indus.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                         </div>
                                                     </div>

@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import swal from "sweetalert";
-import ClientNavBar from "../../components/ClientNavBar/clientNavBar";
-import SinscrireModal from "../../components/SinscrireModal/sinscrireModal";
-import ShowFileModal from "../../components/ShowFileModal/showFileModal";
 import axios from "axios";
 import FormateurNavBar from "../../components/FormateurNavBar/formateurNavBar";
 import Footer from "../../components/Footer/Footer";
@@ -40,10 +37,10 @@ function FormateurSpace() {
     const fileProgramme = (cycle) => {
         if(cycle.file_programme.length !==0)
         {
-            return(<a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_programme[0].file_path}`} target="_blank">Programme</a>)
+            return(<a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_programme.file_path}`} >Programme</a>)
         }
         else {
-            return(<a className="nav-link disabled" href={"#"} target="_blank">Programme</a>)
+            return(<a className="nav-link disabled" href={"#"} >Programme</a>)
         }
 
 
@@ -51,10 +48,10 @@ function FormateurSpace() {
     const fileDetails = (cycle) => {
         if(cycle.file_details.length !==0)
         {
-            return(<a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_details[0].file_path}`} target="_blank">Détails</a>)
+            return(<a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_details.file_path}`} >Détails</a>)
         }
         else {
-            return(<a className="nav-link disabled " href={"#"} target="_blank" >Détails</a>)
+            return(<a className="nav-link disabled " href={"#"}  >Détails</a>)
         }
 
 

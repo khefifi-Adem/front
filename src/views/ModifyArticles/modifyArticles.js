@@ -1,6 +1,9 @@
 import React, { useEffect, useState} from 'react';
 import axios from "axios";
 import swal from "sweetalert";
+import EditMarque from "../EditMarque/editMarque";
+import EditCategorie from "../EditCategorie/editCategorie";
+import EditArticle from "../EditArticle/editArticle";
 
 
 function ModifyArticles() {
@@ -124,44 +127,33 @@ function ModifyArticles() {
 
 
     useEffect(()=> {
-        const getCategories = async () => {
-            await axios.get('api/categorie_utilisation').then(res => {
+        axios.get('api/categorie_utilisation').then(res => {
                 if (res.data.status === 200) {
                     setCategorie(res.data.categories);
                     console.log(res.data.categories)
 
                 }
-            }).catch((e) => {
-                console.log(e)
-            });
-        };
 
-        const getArticles = async () => {
-            await axios.get('api/articles').then(res => {
+        });
+
+         axios.get('api/articles').then(res => {
                 if (res.data.status === 200) {
                     setArticles(res.data.articles);
                     console.log(res.data.articles)
 
                 }
-            }).catch((e) => {
-                console.log(e)
-            });
-        };
 
-        const getMarques = async () => {
-            await axios.get('api/marques').then(res => {
-                if (res.data.status === 200) {
-                    setMarques(res.data.marques);
-                    console.log(res.data.marques)
+        });
 
-                }
-            }).catch((e) => {
-                console.log(e)
-            });
-        };
-        getCategories();
-        getArticles();
-        getMarques();
+         axios.get('api/marques').then(res => {
+             if (res.data.status === 200) {
+                 setMarques(res.data.marques);
+                 console.log(res.data.marques)
+
+             }
+
+         });
+
 
     },[])
 
@@ -294,7 +286,7 @@ function ModifyArticles() {
                                     </th>
                                     <th className="w-auto">
                                         <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#categorie${categorie.id}`}>Edit</button>
-                                        {/*<EditCategorie categorie{categorie}/>*/}
+                                        <EditCategorie categories={categorie}/>
                                         <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletecategorie${categorie.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
 
                                         <div className="collapse" id={`deletecategorie${categorie.id}`}>
@@ -377,8 +369,8 @@ function ModifyArticles() {
                                             <img className="img-fluid rounded-3 my-5" src={`http://127.0.0.1:8000/${marque.image_path}`} alt="..." />
                                         </th>
                                         <th >
-                                            <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#marque${marque.id}`}>Edit</button>
-                                            {/*<EditMarque marque={marque}/>*/}
+                                            <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#marques${marque.id}`}>Edit</button>
+                                            <EditMarque marques={marque}/>
                                             <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#delete${marque.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
                                             <div className="collapse" id={`delete${marque.id}`}>
                                                 <div className="d-flex card card-body align-items-center">
@@ -518,11 +510,11 @@ function ModifyArticles() {
                                                 <img className="img-fluid rounded-3 my-5" src={`http://127.0.0.1:8000/${article.image_path}`} alt="..." />
                                             </th>
                                             <th className="w-25">{article.marque.marque}</th>
-                                            <th className="w-25">{article.category.categorie}</th>
+
                                             <th className="w-25">
                                                 <th>
                                                     <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#article${article.id}`}>Edit</button>
-                                                    {/*<EditCategorie service={article}/>*/}
+                                                    <EditArticle articles={article} categories={categories} marques={marques}/>
                                                     <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletes${article.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
                                                 </th>
                                                 <div className="collapse" id={`deletes${article.id}`}>

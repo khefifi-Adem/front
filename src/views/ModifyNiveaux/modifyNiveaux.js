@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {useLocation} from "react-router-dom";
@@ -7,13 +7,39 @@ import EditNiveau from "../EditNiveaux/editNiveau";
 function ModifyNiveaux() {
 
     const location = useLocation();
-    console.log(location);
+
 
 
     const [niveaux, setNiveaux] = useState([]);
 
-    const initialValues ={ titre: "",description: ""};
-    const [addniveau, setAddniveau] = useState(initialValues);
+    const initialValues ={ titre: "",description: "",theme_id: location.state};
+    const [addniveau, setAddniveau] = useState([initialValues]);
+
+
+    const [file,setFile] = useState([]);
+    const handleFile = (e) => {
+
+        setFile({ file:e.target.files[0]});
+    }
+
+    const deleteNiveau = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
+
+
+            axios.delete(`api/niveaux/${id}`).then(res=>{
+                    if (res.status === 200){
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+                    }
+                }
+            )}
+    })
+
 
     useEffect(()=> {
         const getNiveaux = async () => {
@@ -21,7 +47,7 @@ function ModifyNiveaux() {
                 if (res.status === 200) {
 
                     setNiveaux(res.data.niveaux);
-                    console.log(res.data.niveaux);
+
 
 
                 }
@@ -42,16 +68,21 @@ function ModifyNiveaux() {
 
     const addAdmin = (e) => {
         e.preventDefault();
-        const data= addniveau;
+        const data= new FormData;
+        data.append('titre',addniveau.titre);
+        data.append('description', addniveau.description);
+        data.append('file_path',file.file);
+        data.append('theme_id',location.state);
 
-        axios.post("api/domaines",data).then(res=>{
-                if (res.status === 200){
+
+        axios.post("api/niveaux",data).then(res=>{
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
-                        console.log(res.data.status)
+                        window.location.reload(false);
+
                     }
-                }
+
             }
         )
     }
@@ -77,7 +108,7 @@ function ModifyNiveaux() {
 
                     <div className="collapse w-100" id="ajouter-niveau">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addAdmin} >
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="titre" type="text" name="titre"
@@ -98,6 +129,13 @@ function ModifyNiveaux() {
 
                                     />
                                     <label htmlFor="description">Description </label>
+
+                                </div>
+                                <div className=" mb-3">
+                                    <label htmlFor="file" className="form-label">Selectionner fichier</label>
+                                    <input className="form-control" type="file" id="file"
+                                           onChange={handleFile}
+                                    />
 
                                 </div>
 
@@ -123,6 +161,7 @@ function ModifyNiveaux() {
                             <tr>
                                 <th className="w-20">Niveaux</th>
                                 <th className="w-20">Description</th>
+                                <th className="w-20">Files</th>
                                 <th className="w-20">Action</th>
 
                             </tr>
@@ -134,9 +173,10 @@ function ModifyNiveaux() {
                                 niveaux.map(niveau=>
                                     (
                                         <tr key={niveau.id}>
-                                            <th className="w-25">{niveau.titre}</th>
-                                            <th className="w-50">{niveau.description}</th>
-                                            <th className="w-25">
+                                            <th className="w-auto">{niveau.titre}</th>
+                                            <th className="w-auto">{niveau.description}</th>
+                                            <th className="w-auto"><a className="link-info" href={`http://127.0.0.1:8000/${niveau.file_path}`}> Download file </a></th>
+                                            <th className="w-auto">
                                                 <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#niveau${niveau.id}`}>Edit</button>
                                                 <EditNiveau niveau={niveau}/>
                                                 <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deleteniveau${niveau.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
@@ -145,7 +185,7 @@ function ModifyNiveaux() {
                                                     <div className="d-flex card card-body align-items-center">
                                                         <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                         <div>
-                                                            <button className="btn btn-success m-1">Confirmer</button>
+                                                            <button className="btn btn-success m-1" onClick={deleteNiveau(niveau.id)}>Confirmer</button>
                                                             <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deleteniveau${niveau.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                         </div>
                                                     </div>

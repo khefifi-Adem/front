@@ -70,24 +70,21 @@ function NavBar() {
             <Link
                 to='/services'
                 className='nav-links1 text-uppercase'
-                onClick={closeMobileMenu}
+
             >
               services
             </Link>
           </li>
           <li
             className='nav-item1'
-            onMouseEnter={onMouseEnterF}
-            onMouseLeave={onMouseLeaveF}
           >
             <Link
               to='/formations'
               className='nav-links1 text-uppercase'
-              onClick={closeMobileMenu}
+
             >
-              formations <i className='fas fa-caret-down' />
+              formations
             </Link>
-            {dropdownF && <DropDownFormations />}
           </li>
 
           <li

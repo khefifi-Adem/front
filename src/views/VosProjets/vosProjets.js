@@ -1,10 +1,13 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import IndusNavBar from "../../components/IndusNavBar/indusNavBar";
-import cycleFomations from "../../Data/CycleFormation/CycleFormation.json";
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import swal from "sweetalert";
+import axios from "axios";
 
 function VosProjets() {
+
+    const [projects, setProjects] = useState([]);
+
 
     let navigate = useNavigate();
     useEffect(()=>{
@@ -13,7 +16,19 @@ function VosProjets() {
             navigate(-1);
             swal('Success',"Unhothorized", "success");
         }
+    },[]);
+
+
+    useEffect(()=>{
+        axios.get(`api/project_user/${localStorage.getItem('auth_id')}`).then(res => {
+            if (res.data.status===200) {
+                setProjects(res.data.projects);
+                console.log(res.data.projects);
+            }
+
+        });
     },[])
+
 
 
     return (
@@ -29,16 +44,18 @@ function VosProjets() {
                     </thead>
                     <tbody>
                     {
-                        cycleFomations.map(cycle=>(
-                            <tr key={cycle.id}>
-                                <th scope="row">{cycle.titre}</th>
+                        projects.map(project=>(
+                            <tr key={project.id}>
+                                <th scope="row">{project.title}</th>
                                 <td>
-                                    <Link  className="btn btn-outline-primary" to={`${cycle.id}`} state={cycle} >
-                                        Etat
+                                    <Link  className="btn btn-outline-primary" to={`${project.id}`} state={project} >
+                                        Consulter
                                     </Link>
                                 </td>
                             </tr>
-                        ))}
+                        )
+                        )
+                    }
                     </tbody>
                 </table>
             </section>

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
 import {Link, useNavigate} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
-import automation from "../../assets/automation.jpg";
 import p_4 from "../../assets/p4.jpg"
 import './Acceruil.css';
 import axios from "axios";
@@ -53,38 +52,69 @@ function Acceuil() {
 
 
     useEffect(()=> {
-        axios.get("api/pages/1").then(res => {
+        const getPage = async () => {
+            await axios.get("api/pages/1").then(res => {
             if (res.status === 200) {
                 setPages(res.data.pages);
             }
-        }).catch((e) => {
-            console.log(e)
-        });
+            }).catch((e) => {
+                console.log(e)
+            });
+        };
+        getPage();
 
-        axios.get('api/card-acceuils').then(res=> {
+    },[])
+
+
+    useEffect(()=> {
+        const getCards = async () => {
+            await axios.get("api/card-acceuils").then(res => {
+                if (res.status === 200) {
+
+                    setCards(res.data.cards);
+
+                }
+            }).catch((e) => {
+                console.log(e)
+            });
+        };
+        getCards()
+
+    },[])
+
+
+
+
+
+        useEffect(()=> {
+            const getPartners = async () => {
+                await axios.get('api/nos_parteners').then(res=> {
+                    if (res.status === 200)
+                    {
+                        setPartners(res.data.partners);
+                    }
+                }).catch((e) => {
+                    console.log(e)
+                });
+            };
+            getPartners();
+        },[])
+
+
+        useEffect(()=> {
+            const getProjects = async () => {
+                await axios.get('api/projects').then(res=> {
             if (res.status === 200)
             {
-
-                setCards(res.data.cards);
-            }
-        });
-
-        axios.get('api/nos_parteners').then(res=> {
-            if (res.status === 200)
-            {
-
-                setPartners(res.data.partners);
-            }
-        });
-        axios.get('api/projects').then(res=> {
-            if (res.status === 200)
-            {
-
                 setProjects(res.data.projects);
             }
-        });
+            }).catch((e) => {
+                console.log(e)
+            });
+            };
+            getProjects();
+        },[])
 
-    },[]);
 
     return(
         <div className="cont">
@@ -174,38 +204,25 @@ function Acceuil() {
 
                                 </div>
                             </div>
-                            <div className="carousel-item">
-                                <div className="row gx-5 justify-content-center">
-                                    <div className="col-lg-4 mb-5">
-                                        <div className="card h-100 shadow border-0">
-                                            <img className="card-img-top" src={p_4} alt="..." />
-                                            <div className="card-body p-4">
-                                                <div className="badge bg-primary bg-gradient rounded-pill mb-2">INDUSTRIE LAITIÈRE</div>
-                                                <Link className="text-decoration-none link-dark stretched-link" to="#!"><h5 className="card-title mb-3"> TUNISIE-LAIT "ELBENE"</h5></Link>
-                                                <p className="card-text mb-0">2015/2016 => Remise en état, Automatisation d'un TANK ASEPTIQUE TETRAPACK UHT. 2017=> Intégration de la gestion de production et Nettoyage d'une machine de Conditionnement de Produit Frais via une batterie de vannes (PROCESS PIERRE GUERIN)</p>
-                                            </div>
 
+                            {
+                                projects.map(project=>(
+                                <div className="carousel-item">
+                                    <div className="row gx-5 justify-content-center">
+                                        <div className="col-lg-4 mb-5">
+                                            <div className="card h-100 shadow border-0">
+                                                <img className="card-img-top" src={`http://127.0.0.1:8000/${project.image}`} alt="..." />
+                                                <div className="card-body p-4">
+                                                    <div className="badge bg-primary bg-gradient rounded-pill mb-2">{project.domaine.titre}</div>
+                                                    <Link className="text-decoration-none link-dark stretched-link" to="#!"><h5 className="card-title mb-3">{project.user.nom_jurdique}</h5></Link>
+                                                    <p className="card-text mb-0">{project.description}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
-                            </div>
-                            <div className="carousel-item">
-                                <div className="row gx-5 justify-content-center">
-                                    <div className="col-lg-4 mb-5">
-                                        <div className="card h-100 shadow border-0">
-                                            <img className="card-img-top" src={p_4} alt="..." />
-                                            <div className="card-body p-4">
-                                                <div className="badge bg-primary bg-gradient rounded-pill mb-2">INDUSTRIE LAITIÈRE</div>
-                                                <Link className="text-decoration-none link-dark stretched-link" to="#!"><h5 className="card-title mb-3"> TUNISIE-LAIT "ELBENE"</h5></Link>
-                                                <p className="card-text mb-0">2015/2016 => Remise en état, Automatisation d'un TANK ASEPTIQUE TETRAPACK UHT. 2017=> Intégration de la gestion de production et Nettoyage d'une machine de Conditionnement de Produit Frais via une batterie de vannes (PROCESS PIERRE GUERIN)</p>
-                                            </div>
+                                ))}
 
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
 
 
                         </div>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import NavBar from "../../components/NavBar/navBar";
 import Footer from "../../components/Footer/Footer";
 import './Formations.css';
-import {Outlet, useNavigate} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
 import formation_v1 from "../../assets/formation_v1.jpg";
 import SideBar from "../../components/SideBar/sideBar";
 import formations from '../../Data/FormationData/formation.json'
@@ -16,6 +16,7 @@ function Formations() {
 
     const [pages, setPages]= useState({});
     const [secteurs, setSecteurs]= useState([]);
+    const [cycles, setCycles]= useState([]);
 
 
     let navigate = useNavigate();
@@ -41,6 +42,16 @@ function Formations() {
                 setSecteurs(res.data.secteurs);
 
             }
+
+            axios.get('api/cycle_formations').then(res=> {
+            if (res.status === 200)
+            {
+
+                setCycles(res.data.cycles);
+                console.log(res.data.cycles);
+
+
+            }})
         });
 
 
@@ -106,23 +117,28 @@ function Formations() {
                             <div className="cycle-container">
                                 <table className="cycle">
                                     <tr className="cycle-head">
-                                        <th className="title">Niveau</th>
-                                        <th>Date de debut</th>
-                                        <th>Date de fin</th>
-                                        <th>Nombre d'heure</th>
-                                        <th>Action</th>
+                                        <th className='w-auto'>Niveau</th>
+                                        <th className='w-auto'>Date de debut</th>
+                                        <th className='w-auto'>Date de fin</th>
+                                        <th className='w-auto'>Nombre d'heure</th>
+                                        <th className='w-auto'>Places disponible</th>
+                                        <th className='w-auto'>Action</th>
                                     </tr>
-                                    <tr className="cycle-body">
-                                        <td>Niveau 1</td>
-                                        <td>11/12/2022</td>
-                                        <td>31/12/2022</td>
-                                        <td>35</td>
-                                        <td className="action">
-                                            <button className="btn btn-outline-primary m-1">S'inscrire</button>
-                                            <button className="btn btn-outline-primary m-1">Détails</button>
-                                            <button className="btn btn-outline-primary m-1">Programme</button>
-                                        </td>
-                                    </tr>
+                                    {
+                                        cycles.map(cycle=>(
+                                        <tr className="cycle-body">
+                                            <td>{cycle.titre}</td>
+                                            <td>{cycle.date_debut}</td>
+                                            <td>{cycle.date_fin}</td>
+                                            <td>{cycle.nb_heures}</td>
+                                            <td>{cycle.nb_places_dispo}</td>
+                                            <td className="action">
+                                                <Link to={'/sign-in'} className="btn btn-outline-primary m-1">S'inscrire</Link>
+                                                <a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_details.file_path}`}>Détails</a>
+                                                <a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_programme.file_path}`}>Programme</a>
+                                            </td>
+                                        </tr>
+                                        ))}
 
                                 </table>
                             </div>

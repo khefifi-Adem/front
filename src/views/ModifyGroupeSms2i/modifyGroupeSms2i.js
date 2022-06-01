@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import axios from "axios";
 import swal from "sweetalert";
 import EditSociete from "../EditSociete/editSociete";
@@ -18,7 +18,23 @@ function ModifyGroupeSms2i() {
 
 
 
+    const deleteSoc = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
 
+
+            axios.delete(`api/groupe_sms2i/${id}`).then(res=>{
+                    if (res.status === 200){
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+                    }
+                }
+            )}
+    })
 
 
 
@@ -35,7 +51,7 @@ function ModifyGroupeSms2i() {
 
     const handlePicture = (e) => {
 
-        setPicture({ image:e.target.file[0]});
+        setPicture({ image:e.target.files[0]});
     }
 
     const handlePictureGroupe = (e) => {
@@ -101,8 +117,11 @@ function ModifyGroupeSms2i() {
 
     const updateGroupeIntro = (e) => {
         e.preventDefault();
-
-        const data = groupe;
+        const data = new FormData();
+        data.append('page_name','services');
+        data.append('titre',groupe.titre);
+        data.append('description',groupe.description);
+        data.append('image_path',picture.image);
         axios.post("api/pages/5", data).then(res=>{
             if (res.data.status === 200)
             {
@@ -143,7 +162,10 @@ function ModifyGroupeSms2i() {
                             <tr key={pages.id}>
                                 <th className="w-25">{pages.titre}</th>
                                 <th className="w-25">{pages.description}</th>
-                                <th className="w-25">{pages.image_path}</th>
+                                <th className="w-25">
+                                    <img  className="w-100" src={`http://localhost:8000/${pages.image_path}`}/>
+
+                                </th>
                                 <th className="w-25">
                                     <button className="btn btn-success  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="false" aria-controls="collapseExample">Edit</button>
                                 </th>
@@ -211,7 +233,7 @@ function ModifyGroupeSms2i() {
 
                     <div className="collapse w-100" id="ajouter">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50"  onSubmit={addGroupe}>
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="nom_soc" type="text" name="nom_soc"
@@ -252,9 +274,9 @@ function ModifyGroupeSms2i() {
                         <table className="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Titre</th>
-                                <th>Icon</th>
-                                <th>Text</th>
+                                <th>Societe</th>
+                                <th>Description</th>
+                                <th>Image</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -265,7 +287,9 @@ function ModifyGroupeSms2i() {
                                     <tr key={grp.id}>
                                         <th className="w-25 font-monospace fw-normal">{grp.nom_soc}</th>
                                         <th className="w-25 font-monospace fw-normal">{grp.description}</th>
-                                        <th className="w-25  font-monospace fw-normal m-1">{grp.image_path}</th>
+                                        <th className="w-25  font-monospace fw-normal m-1">
+                                            <img  className="w-100" src={`http://localhost:8000/${grp.image_path}`}/>
+                                        </th>
                                         <th >
                                             <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#groupe${grp.id}`}>Edit</button>
                                             <EditSociete societe={grp}/>
@@ -275,7 +299,7 @@ function ModifyGroupeSms2i() {
                                                 <div className="d-flex card card-body align-items-center">
                                                     <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                     <div>
-                                                        <button className="btn btn-success m-1">Confirmer</button>
+                                                        <button className="btn btn-success m-1" onClick={deleteSoc(grp.id)}>Confirmer</button>
                                                         <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#delete${grp.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                     </div>
                                                 </div>

@@ -1,10 +1,11 @@
 import React, { useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import {useNavigate} from "react-router-dom";
 
 function EditNiveau({niveau}) {
 
-    const initialValues ={ titre: "", description: ""};
+    const initialValues ={ titre: niveau.titre, description: niveau.description};
     const [updateNiveau, setUpdateNiveau] = useState(initialValues);
 
     const handleInput = (e) => {
@@ -13,12 +14,20 @@ function EditNiveau({niveau}) {
         setUpdateNiveau({ ...updateNiveau, [name]: value });
 
     }
+    const [file,setFile] = useState([]);
+    const handleFile = (e) => {
+
+        setFile({ file:e.target.files[0]});
+    }
 
     const updateNiveauData = (e) => {
         e.preventDefault();
 
         const niveau_id = niveau.id;
-        const data = updateNiveau;
+        const data = new FormData;
+        data.append('titre', updateNiveau.titre)
+        data.append('description', updateNiveau.description)
+        data.append('file_path', file.file)
         axios.post(`api/niveaux/${niveau_id}`, data).then(res=>{
             if (res.data.status === 200)
             {
@@ -59,6 +68,13 @@ function EditNiveau({niveau}) {
 
                         </div>
 
+                        <div className=" mb-3">
+                            <label htmlFor="file" className="form-label">Selectionner fichier</label>
+                            <input className="form-control" type="file" id="file"
+                                   onChange={handleFile}
+                            />
+
+                        </div>
 
 
                         <div className="d-flex justify-content-center">

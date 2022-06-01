@@ -12,6 +12,7 @@ function FormateurSpaceIndus() {
 
 
 
+
     useEffect(()=>{
 
         if ((localStorage.getItem('auth_token') && localStorage.getItem('auth_type')!== 'formateur')||(!localStorage.getItem('auth_token')))
@@ -34,7 +35,7 @@ function FormateurSpaceIndus() {
     const fileProgramme = (cycle) => {
         if(cycle.file_programme.length !==0)
         {
-            return(<a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_programme[0].file_path}`} target="_blank">Programme</a>)
+            return(<a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_programme.file_path}`} target="_blank">Programme</a>)
         }
         else {
             return(<a className="nav-link disabled" href={"#"} target="_blank">Programme</a>)
@@ -45,7 +46,7 @@ function FormateurSpaceIndus() {
     const fileDetails = (cycle) => {
         if(cycle.file_details.length !==0)
         {
-            return(<a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_details[0].file_path}`} target="_blank">Détails</a>)
+            return(<a className="btn btn-outline-primary m-1" href={`http://127.0.0.1:8000/${cycle.file_details.file_path}`} target="_blank">Détails</a>)
         }
         else {
             return(<a className="nav-link disabled " href={"#"} target="_blank" >Détails</a>)
@@ -80,12 +81,12 @@ function FormateurSpaceIndus() {
                                     {
                                         cycles.map(cycle=>(
                                             <tr className="cycle-body" key={cycle.id}>
-                                                <td>{cycle.titre}</td>
-                                                <td>{cycle.date_debut}</td>
-                                                <td>{cycle.date_fin}</td>
-                                                <td>{cycle.nb_heures}</td>
-                                                <td>{cycle.niveaux.titre}</td>
-                                                <td className="action">
+                                                <td >{cycle.titre}</td>
+                                                <td className="w-auto">{cycle.date_debut}</td>
+                                                <td className="w-auto">{cycle.date_fin}</td>
+                                                <td className="w-auto">{cycle.nb_heures}</td>
+                                                <td className="w-auto">{cycle.niveaux.titre}</td>
+                                                <td className="action w-auto">
                                                     <Link className="btn btn-outline-primary m-1" to={`${cycle.id}`} state={cycle} >Consulter</Link>
                                                     {fileProgramme(cycle)}
                                                     {fileDetails(cycle)}

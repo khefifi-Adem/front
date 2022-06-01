@@ -53,6 +53,10 @@ import ModifyArticles from "./views/ModifyArticles/modifyArticles";
 import FormateurCycleDetails from "./views/FormateurCycleDetails/formateurCycleDetails";
 import FormateurSpaceIndus from "./views/FormateurSpaceIndus/formateurSpaceIndus";
 import FormateurCycleDetailsIndus from "./views/FormateurCycleDetailsIndus/formateurCycleDetailsIndus";
+import Profile from "./views/Profile/profile";
+import ProfileClient from "./views/Profile/profileClient";
+import ProfileIndus from "./views/Profile/profileIndus";
+import ProfileFormateur from "./views/Profile/profileFormateur";
 
 
 axios.defaults.withCredentials = true;
@@ -60,6 +64,7 @@ axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://127.0.0.1:8000/"
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 axios.defaults.headers.post["Accept"] = 'application/json';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 window.axios = require('axios');
 axios.interceptors.request.use(function (config){
     const token = localStorage.getItem('auth_token');
@@ -92,19 +97,20 @@ function App() {
 
             <Route path="/references" element={<References/>}>
 
-                <Route path="SMS2I" element={<ServicesLocalData/>}>
+
+                <Route path="/references/sms2i-service-locals" element={<ServicesLocalData/>}>
                     <Route path=":id" element={<DataContainer/>}/>
                 </Route>
 
-                <Route path="BTC%20Commerce%20International" element={<BtcCommercial/>}>
+                <Route path="/references/btc-commerce-international" element={<BtcCommercial/>}>
                     <Route path=":id" element={<DataContainer/>}/>
                 </Route>
 
-                <Route path="SMI" element={<SmiInternational/>}>
+                <Route path="/references/smi-international" element={<SmiInternational/>}>
                     <Route path=":id" element={<DataContainer/>}/>
                 </Route>
 
-                <Route path="sms3i" element={<Sms3i/>}>
+                <Route path="/references/sms3i" element={<Sms3i/>}>
                     <Route path=":id" element={<DataContainer/>}/>
                 </Route>
 
@@ -136,6 +142,7 @@ function App() {
             <Route path="/client/vos-inscriptions" element={<VosInscriptions/>}>
                 <Route path=":id" element={<InscriptionDetails/>}/>
             </Route>
+            <Route path="/client/profile" element={<ProfileClient/>}/>
 
             <Route path="/client-indus/formations" element={<IndusFormation/>}>
                 <Route path=":id" element={<DataContainer/>}/>
@@ -148,7 +155,7 @@ function App() {
             <Route path="/client-indus/vos-projets" element={<VosProjets/>}>
                 <Route path=":id" element={<ProjetDetails/>}/>
             </Route>
-
+            <Route path="/client-indus/profile" element={<ProfileIndus/>}/>
 
             <Route path='/formateur' element={<FormateurSpace/>}>
                 <Route path=":id" element={<FormateurCycleDetails/>}/>
@@ -157,6 +164,7 @@ function App() {
             <Route path='/formateur-indus' element={<FormateurSpaceIndus/>}>
                 <Route path=":id" element={<FormateurCycleDetailsIndus/>}/>
             </Route>
+            <Route path="/formateur/profile" element={<ProfileFormateur/>}/>
 
             <Route path="/dashboard-admin" element={<AdminDashboard/>}>
                 <Route path="acceuil" element={<ModifyAcceuil/>}/>
@@ -189,6 +197,7 @@ function App() {
                     <Route path=":id" element={<CycleFormationDetails/>}/>
                 </Route>
                 <Route path="articles" element={<ModifyArticles/>}/>
+                <Route path="profile" element={<Profile/>}/>
 
             </Route>
 

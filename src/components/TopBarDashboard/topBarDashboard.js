@@ -1,6 +1,6 @@
 import React from "react";
 import "./topBarDashboard.css";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 
@@ -44,8 +44,7 @@ function TopBarDashboard() {
                             <i className="fas fa-user me-2"/>{localStorage.auth_nom +' '+localStorage.auth_prenom }
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="#">Profile</a></li>
-                            <li><a className="dropdown-item" href="#">Settings</a></li>
+                            <li><Link className="dropdown-item" to="profile">Profile</Link></li>
                             <li><button className="dropdown-item" type="button" onClick={logout}>Logout</button></li>
                         </ul>
                     </li>

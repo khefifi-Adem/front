@@ -193,7 +193,7 @@ function FormateurCycleDetailsIndus() {
                                         </div>
                                         <div>
                                             <button className="btn btn-success m-1" type='submit'>Confirmer</button>
-                                            <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletefile${file.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
+                                            <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#update${location.state.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                         </div>
                                     </form>
 

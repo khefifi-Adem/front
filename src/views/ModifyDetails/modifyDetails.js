@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {Link, Outlet} from "react-router-dom";
@@ -53,6 +53,23 @@ function ModifyDetails() {
     }
 
 
+    const deleteSecteurs = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
+
+
+            axios.delete(`api/secteurs/${id}`).then(res=>{
+
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+
+                }
+            )}
+    })
 
 
 
@@ -73,7 +90,7 @@ function ModifyDetails() {
 
                     <div className="collapse w-100" id="ajouter-secteur">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addSecteur}  method="POST">
 
                                 <div className="form-floating mb-3 w-100">
@@ -144,7 +161,7 @@ function ModifyDetails() {
                                                     <div className="d-flex card card-body align-items-center">
                                                         <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                         <div>
-                                                            <button className="btn btn-success m-1">Confirmer</button>
+                                                            <button className="btn btn-success m-1" type='button' onClick={deleteSecteurs(secteur.id)}>Confirmer</button>
                                                             <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletesecteur${secteur.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                         </div>
                                                     </div>

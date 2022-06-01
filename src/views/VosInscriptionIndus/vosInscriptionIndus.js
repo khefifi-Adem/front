@@ -1,10 +1,14 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import cycleFomations from "../../Data/CycleFormation/CycleFormation.json";
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import IndusNavBar from "../../components/IndusNavBar/indusNavBar";
 import swal from "sweetalert";
+import axios from "axios";
 
 function VosInscriptionIndus() {
+
+    const [cycles, setCycles] = useState([]);
+
 
     let navigate = useNavigate();
     useEffect(()=>{
@@ -13,7 +17,18 @@ function VosInscriptionIndus() {
             navigate(-1);
             swal('Success',"Unhothorized", "success");
         }
-    },[])
+    },[]);
+
+
+    useEffect(()=>{
+        axios.get(`api/cycle_user/${localStorage.getItem('auth_id')}`).then(res => {
+                if (res.data.status===200) {
+                    setCycles(res.data.cycles);
+                    console.log(res.data.cycles);
+                }
+
+            });
+        },[])
 
 
     return(
@@ -29,7 +44,7 @@ function VosInscriptionIndus() {
                     </thead>
                     <tbody>
                     {
-                        cycleFomations.map(cycle=>(
+                        cycles.map(cycle=>(
                             <tr key={cycle.id}>
                                 <th scope="row">{cycle.titre}</th>
                                 <td>

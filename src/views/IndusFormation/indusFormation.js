@@ -27,8 +27,11 @@ function IndusFormation() {
     const [isSubmit, setIsSubmit] = useState(false);
 
     const [niveaux, setNiveaux] = useState([]);
-    const [selectedNiveau, setSelectedNiveau] = useState([]);
-    const [selectedType, setSelectedType] = useState([]);
+    const [selectedNiveau, setSelectedNiveau] = useState(0);
+    const [selectedType, setSelectedType] = useState(0);
+    const [pages, setPages]= useState({});
+
+
 
 
     const addDemands = () => {
@@ -63,10 +66,15 @@ function IndusFormation() {
                 setSecteurs(res.data.secteurs);
 
             }});
+
+        axios.get('api/pages/3').then(res=> {
+            if (res.status === 200)
+            {
+
+                setPages(res.data.pages);
+            }
+        });
         },[]);
-
-
-
 
 
 
@@ -94,7 +102,7 @@ function IndusFormation() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setFormErrors(validate(formValues));
+        setFormErrors(validate(formValues,selectedNiveau,selectedType));
         setIsSubmit(true);
     };
 
@@ -109,22 +117,22 @@ function IndusFormation() {
     }, [formErrors,isSubmit]);
 
 
-    const validate = (values) => {
+    const validate = (values,selectedNiveau,selectedType) => {
         const errors = {};
 
         if (!values.nb_personne) {
             errors.nb_personne = "Nombre personne is required!";
         }
 
-        // if (!values.type) {
-        //     errors.type = "Type is required";
-        // }
+        if (selectedType === 0) {
+            errors.type = "Type is required";
+        }
         if (!values.message) {
             errors.message = "Message is required";
         }
-        // if (!values.niveau) {
-        //     errors.niveau = "Niveau is required";
-        // }
+        if (selectedNiveau === 0) {
+            errors.niveau = "Niveau is required";
+        }
         return errors;
     };
 
@@ -138,8 +146,8 @@ function IndusFormation() {
                     <div className="row gx-5 align-items-center justify-content-center">
                         <div className="col-lg-8 col-xl-7 col-xxl-6">
                             <div className="my-5 text-center text-xl-start">
-                                <h1 className="display-5 fw-bolder text-dark mb-2">La formation pour une industrie au top</h1>
-                                <p className="lead fw-normal text-dark-50 mb-4">Pour rester compétitif, il suffit d’assurer des formations de qualité à tous les employés, tout au long de leur vie professionnelle et adapter les formations aux opportunités professionnelles</p>
+                                <h1 className="display-5 fw-bolder text-dark mb-2">{pages.titre}</h1>
+                                <p className="lead fw-normal text-dark-50 mb-4">{pages.description}</p>
                                 <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                                     <a className="btn btn-primary btn-lg px-4 me-sm-3" href="#">En vedette</a>
                                 </div>
@@ -190,7 +198,7 @@ function IndusFormation() {
                                     <select className="form-select" id="niveau" name="niveau"
                                             aria-label="Floating label select example"
                                             onChange={e=>setSelectedNiveau(e.target.value)}>
-                                        <option value="">Choose Niveau</option>
+                                        <option value={0}>Choose Niveau</option>
                                         {niveaux.map(niveau=>(<option key={niveau.id} value={niveau.id}>{niveau.titre}</option>))}
                                     </select>
                                     <p>

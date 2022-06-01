@@ -5,7 +5,7 @@ import swal from "sweetalert";
 function EditCycleIndus({cycle,niveaux,formateurs,clients}) {
 
 
-    const initialValues ={ title: "",description: "",date_debut: "", date_fin: "",nb_jours:"",nb_heures:"",nb_places:"",etat:"",cout:""};
+    const initialValues ={ titre: cycle.titre,description: cycle.description, date_debut: cycle.date_debut, date_fin: cycle.date_fin,nb_jours: cycle.nb_jours, nb_heures: cycle.nb_heures,nb_places: cycle.nb_places,cout: cycle.cout, link : cycle.link};
     const [addCycle, setAddCycle] = useState(initialValues);
     const [selectedFormateur, setSelectedFormateur] = useState([]);
     const [selectedClient, setSelectedClient] = useState([]);
@@ -44,6 +44,7 @@ function EditCycleIndus({cycle,niveaux,formateurs,clients}) {
         data.append('id_user',selectedClient);
         data.append('id_formateur',selectedFormateur);
         data.append('niveau_id',selectedNiveau);
+        data.append('link',addCycle.link);
 
 
         const dataDetails = new FormData();
@@ -54,25 +55,18 @@ function EditCycleIndus({cycle,niveaux,formateurs,clients}) {
 
 
         axios.post(`api/cycle_indus/${cycle.id}`,data).then(res=>{
-                if (res.status === 200){
-                    if (res.data.status === 200)
+            if (res.data.status === 200) {
+                let res1 = res;
+                const fileDetails = new FormData;
+                fileDetails.append('file_path',detailsFile.file);
+                axios.post(`api/details_files/${cycle.file_details[0].id}`,fileDetails);
+                const fileProgramme = new FormData;
+                fileProgramme.append('file_path',programmeFile.file);
+                axios.post(`api/programme_files/${cycle.file_programme[0].id}`,fileProgramme);
+                swal("Success",res1.data.message,"success");
+                window.location.reload(false);
 
-                    {
-                        swal("Success",res.data.message,"success");
-                        axios.post(`details_files/${cycle.details.id}`,dataDetails).then(resD=>{
-                            if (resD.data.status === 200 ){
-                                swal("Success",res.data.message,"success");
-                            }
-                        });
-
-                        axios.post(`programme_files/${cycle.programme.id}`,dataProgs).then(resP=>{
-                            if (resP.data.status === 200 ){
-                                swal("Success",res.data.message,"success");
-                            }
-                        });
-
-                    }
-                }
+            }
             }
         )
     }
@@ -166,6 +160,16 @@ function EditCycleIndus({cycle,niveaux,formateurs,clients}) {
 
                             />
                             <label htmlFor="cout">Prix </label>
+
+                        </div>
+
+                        <div className="form-floating mb-3 w-100">
+                            <input className="form-control w-100" id="link" type="text" name="link"
+                                   placeholder="Enter your titre here... "
+                                   value={addCycle.link}
+                                   onChange={handleInput}
+                            />
+                            <label htmlFor="link">   Lien du groupe</label>
 
                         </div>
 

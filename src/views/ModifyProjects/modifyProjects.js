@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {Link, Outlet} from "react-router-dom";
@@ -18,6 +18,23 @@ function ModifyProjects() {
     const [picture, setPicture] = useState([]);
 
 
+    const deleteProject = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
+
+
+            axios.delete(`api/projects/${id}`).then(res=>{
+                    if (res.status === 200){
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+                    }
+                }
+            )}
+    })
 
     useEffect(()=> {
         const getProjects = async () => {
@@ -128,24 +145,7 @@ function ModifyProjects() {
             }
         )
     }
-    const deleteProject = (e, id) => {
 
-        e.preventDefault();
-        axios.delete(`api/projects/${id}`).then(res=>{
-            console.log(res)
-                if (res.status === 200){
-                    if (res.data.status === 200)
-                    {
-                        swal("Success",res.data.message,"success");
-
-                    }
-                }
-                else {
-                    swal("Failed",res.data.message,"failed");
-                }
-            }
-        )
-    }
 
 
 
@@ -168,7 +168,7 @@ function ModifyProjects() {
 
                     <div className="collapse w-100" id="ajouter-secteur">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addProject}  method="POST">
 
                                 <div className="form-floating mb-3 w-100">
@@ -258,6 +258,7 @@ function ModifyProjects() {
                                 <th className="w-auto">Description</th>
                                 <th className="w-auto">Client</th>
                                 <th className="w-auto">Realisé par</th>
+                                <th className="w-auto">Image</th>
                                 <th className="w-auto">Action</th>
 
                             </tr>
@@ -273,6 +274,7 @@ function ModifyProjects() {
                                             <th className="w-auto">{project.description}</th>
                                             <th className="w-auto">{project.user.nom_jurdique}</th>
                                             <th className="w-auto">{project.societe.nom_soc}</th>
+                                            <th className="w-auto"><img className=" img-fluid rounded-3 w-50" src={`http://127.0.0.1:8000/${project.image}`} alt="..." /></th>
                                             <th className="w-auto">
                                                 <Link className="btn btn-primary  m-1" to={`${project.title}`} state={project}>Consulter</Link>
                                                 <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#project${project.id}`}>Edit</button>
@@ -283,7 +285,7 @@ function ModifyProjects() {
                                                     <div className="d-flex card card-body align-items-center">
                                                         <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                         <div>
-                                                            <button className="btn btn-success m-1" onClick={(e) => deleteProject(e,project.id)}>Confirmer</button>
+                                                            <button className="btn btn-success m-1" onClick={deleteProject(project.id)}>Confirmer</button>
                                                             <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletesecteur${project.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                         </div>
                                                     </div>

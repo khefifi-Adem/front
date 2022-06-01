@@ -7,11 +7,11 @@ import EditTheme from "../EditTheme/editTheme";
 function ModifyThemes() {
 
     const location = useLocation();
-    console.log(location);
+
 
     const [themes, setThemes] = useState([]);
 
-    const initialValues ={ titre: "",description: ""};
+    const initialValues ={ titre: "",description: "",domaine_id: location.state};
     const [addtheme, setAddtheme] = useState(initialValues);
 
     useEffect(()=> {
@@ -20,7 +20,7 @@ function ModifyThemes() {
                 if (res.status === 200) {
 
                     setThemes(res.data.themes);
-                    console.log(res.data.themes);
+
 
 
                 }
@@ -43,12 +43,12 @@ function ModifyThemes() {
         e.preventDefault();
         const data= addtheme;
 
-        axios.post("api/domaines",data).then(res=>{
+        axios.post("api/themes",data).then(res=>{
                 if (res.status === 200){
                     if (res.data.status === 200)
                     {
                         swal("Success",res.data.message,"success");
-                        console.log(res.data.status)
+                        window.location.reload(false)
                     }
                 }
             }
@@ -76,7 +76,7 @@ function ModifyThemes() {
 
                     <div className="collapse w-100" id="ajouter-theme">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addAdmin} >
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="titre" type="text" name="titre"
@@ -135,7 +135,7 @@ function ModifyThemes() {
                                             <th className="w-25">{theme.titre}</th>
                                             <th className="w-50">{theme.description}</th>
                                             <th className="w-25">
-                                                <Link className="btn btn-primary  m-1" to={`${theme.titre}`} state={theme.id} >Consulter</Link>
+                                                <Link className="btn btn-primary  m-1" to={`${theme.id}`} state={theme.id} >Consulter</Link>
                                                 <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#theme${theme.id}`}>Edit</button>
                                                 <EditTheme theme={theme}/>
                                                 <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletetheme${theme.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>

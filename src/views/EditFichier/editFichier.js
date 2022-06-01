@@ -5,7 +5,7 @@ import swal from "sweetalert";
 function EditFichier({fileg}) {
 
 
-    const [fileName,setFileName] = useState([]);
+    const [fileName,setFileName] = useState({titre: fileg.titre});
     const [file,setFile] = useState([]);
 
 

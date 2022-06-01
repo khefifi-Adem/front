@@ -4,7 +4,7 @@ import swal from "sweetalert";
 
 function EditTheme({theme}) {
 
-    const initialValues ={ titre: "", description: ""};
+    const initialValues ={ titre: theme.titre, description: theme.description};
     const [updateTheme, seUpdatetTheme] = useState(initialValues);
 
     const handleInput = (e) => {

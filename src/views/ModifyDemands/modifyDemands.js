@@ -164,50 +164,41 @@ function ModifyDemands() {
         e.preventDefault();
 
         const data = new FormData();
-        data.append('titre',addCycle.titre);
-        data.append('description',addCycle.description);
-        data.append('date_debut',addCycle.date_debut);
-        data.append('date_fin',addCycle.date_fin);
-        data.append('nb_jours',addCycle.nb_jours);
-        data.append('nb_heures',addCycle.nb_heures);
-        data.append('nb_places',addCycle.nb_places);
-        data.append('cout',addCycle.cout);
-        data.append('id_user',selectedClient);
-        data.append('id_formateur',selectedFormateur);
-        data.append('niveau_id',selectedNiveau);
+        data.append('titre', addCycle.titre);
+        data.append('description', addCycle.description);
+        data.append('date_debut', addCycle.date_debut);
+        data.append('date_fin', addCycle.date_fin);
+        data.append('nb_jours', addCycle.nb_jours);
+        data.append('nb_heures', addCycle.nb_heures);
+        data.append('nb_places', addCycle.nb_places);
+        data.append('cout', addCycle.cout);
+        data.append('id_user', selectedClient);
+        data.append('id_formateur', selectedFormateur);
+        data.append('link', addCycle.link);
+        data.append('niveau_id', selectedNiveau);
 
 
-        const dataDetails = new FormData();
-        dataDetails.append('file_path',detailsFile.file)
-        const dataProgs = new FormData();
-        dataProgs.append('file_path',programmeFile.file)
+        axios.post("api/cycle_indus", data).then(res => {
+            if (res.status === 200) {
+                let res1 = res;
+                const fileDetails = new FormData;
+                fileDetails.append('file_path',detailsFile.file);
+                fileDetails.append('id_induses',res1.data.cycle.id);
+                axios.post("api/details_files_indus",fileDetails);
+                const fileProgramme = new FormData;
+                fileProgramme.append('file_path',programmeFile.file);
+                fileProgramme.append('id_induses',res1.data.cycle.id);
+                axios.post("api/programme_files_indus",fileProgramme);
+                swal("Success",res1.data.message,"success");
 
-
-
-        axios.post("api/cycle_indus",data).then(res=>{
-                if (res.status === 200){
-                    if (res.data.status === 200)
-                    dataDetails.append('id_induses',res.data.cycle.id)
-                    dataProgs.append('id_induses',res.data.cycle.id)
-                    {
-                        swal("Success",res.data.message,"success");
-                        axios.post('details_files',dataDetails).then(resD=>{
-                            if (resD.data.status === 200 ){
-                                swal("Success",res.data.message,"success");
-                            }
-                        });
-
-                        axios.post('programme_files',dataProgs).then(resP=>{
-                            if (resP.data.status === 200 ){
-                                swal("Success",res.data.message,"success");
-                            }
-                        });
-
-                    }
-                }
             }
-        )
+        });
+
     }
+
+
+
+
 
 
     const handleInput = (e) => {
@@ -215,6 +206,74 @@ function ModifyDemands() {
         const { name, value } = e.target;
         setAddCycle({ ...addCycle, [name]: value });
 
+    }
+
+
+    const demandes = (demands) => {
+      if (!demands)
+      {
+          return(<h4>Aucune demande</h4>)
+      }else {
+          return (<tbody>
+
+
+          {
+              demands.map(demand=>
+                  (
+                      <tr key={demand.id}>
+                          <th className="w-25">{demand.client.nom_jurdique}</th>
+                          <th className="w-25">{demand.niveau.titre}</th>
+                          <th className="w-25">{demand.type}</th>
+                          <th className="w-25">{demand.message}</th>
+                      </tr>
+                  ))
+          }
+
+          </tbody>)
+      }
+    }
+
+
+    const cycleData = (cycles) => {
+      if (cycles.length === 0)
+      {
+          return(<h4>Aucune cycle</h4>)
+      }else {
+          return (
+              <tbody>
+
+
+              {
+                  cycles.map(cycle=>
+                      (
+                          <tr key={cycle.id}>
+                              <th className="w-auto">{cycle.titre}</th>
+
+                              <th className="w-auto">
+                                  <Link className="btn btn-primary  m-1" to={`${cycle.titre}`} state={cycle}>Consulter</Link>
+                                  <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#cycle${cycle.id}`}>Edit</button>
+                                  <EditCycleIndus cycle={cycle} formateurs={formateurs} niveaux={niveaux} clients={clients} />
+                                  <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletecycle${cycle.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
+
+                                  <div className="collapse" id={`deletecycle${cycle.id}`}>
+                                      <div className="d-flex card card-body align-items-center">
+                                          <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
+                                          <div>
+                                              <button className="btn btn-success m-1" onClick={(e) => deleteCycle(e,cycle.id)}>Confirmer</button>
+                                              <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletecycle${cycle.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </th>
+
+                          </tr>
+                      ))
+              }
+
+              </tbody>
+          )
+      }
     }
 
 
@@ -233,7 +292,7 @@ function ModifyDemands() {
 
                     <div className="collapse w-100" id="ajouter-cycle">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addCycleData}  method="POST">
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="titre" type="text" name="titre"
@@ -312,7 +371,14 @@ function ModifyDemands() {
                                         <label htmlFor="cout">Prix </label>
 
                                     </div>
-
+                                <div className="form-floating mb-3 w-100">
+                                    <input className="form-control w-100" id="link" type="text" name="link"
+                                           placeholder="Enter your titre here... "
+                                           value={addCycle.link}
+                                           onChange={handleInput}
+                                    />
+                                    <label htmlFor="link">    Lien du groupe</label>
+                                </div>
 
 
                                     <div className="mb-3 w-100">
@@ -391,22 +457,7 @@ function ModifyDemands() {
                                 <th className="w-20">Message</th>
                             </tr>
                             </thead>
-                            <tbody>
-
-
-                            {
-                                demands.map(demand=>
-                                    (
-                                        <tr key={demand.id}>
-                                            <th className="w-25">{demand.client.nom_jurdique}</th>
-                                            <th className="w-25">{demand.niveau.titre}</th>
-                                            <th className="w-25">{demand.type}</th>
-                                            <th className="w-25">{demand.message}</th>
-                                        </tr>
-                                    ))
-                            }
-
-                            </tbody>
+                            {demandes(demands)}
                         </table>
                     </div>
                 </div>
@@ -421,38 +472,7 @@ function ModifyDemands() {
 
                         </tr>
                         </thead>
-                        <tbody>
-
-
-                        {
-                            cycles.map(cycle=>
-                                (
-                                    <tr key={cycle.id}>
-                                        <th className="w-auto">{cycle.titre}</th>
-
-                                        <th className="w-auto">
-                                            <Link className="btn btn-primary  m-1" to={`${cycle.titre}`} state={cycle}>Consulter</Link>
-                                            <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#cycle${cycle.id}`}>Edit</button>
-                                            <EditCycleIndus cycle={cycle} formateurs={formateurs} niveaux={niveaux} clients={clients} />
-                                            <button className="btn  btn-danger  m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletecycle${cycle.id}`} aria-expanded="false" aria-controls="collapseExample">Supprimer</button>
-
-                                            <div className="collapse" id={`deletecycle${cycle.id}`}>
-                                                <div className="d-flex card card-body align-items-center">
-                                                    <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
-                                                    <div>
-                                                        <button className="btn btn-success m-1" onClick={(e) => deleteCycle(e,cycle.id)}>Confirmer</button>
-                                                        <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletecycle${cycle.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </th>
-
-                                    </tr>
-                                ))
-                        }
-
-                        </tbody>
+                        {cycleData(cycles)}
                     </table>
                 </div>
             </section>

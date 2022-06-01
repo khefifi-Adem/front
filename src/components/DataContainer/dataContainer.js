@@ -16,8 +16,8 @@ function DataContainer(){
                             <h6 className="lead fw-normal text-dark-50 mb-5 text-uppercase">{location.state.titre}</h6>
                             <p className=" fw-normal text-dark-50 mb-4">{location.state.description}</p>
                             <div className="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                <div className="btn btn-primary btn-lg px-4 me-sm-3" data-bs-toggle="modal" data-bs-target="#showfilemodal">lire plus</div>
-                                <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfilemodal"/>
+                                <a href={`http://127.0.0.1:8000/${location.state.file_path}`} className="btn btn-primary btn-lg px-4 me-sm-3">lire plus</a>
+                                {/*<ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview" id="showfilemodal"/>*/}
                             </div>
                         </div>
                     </div>

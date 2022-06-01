@@ -34,9 +34,26 @@ function CycleFormationIndusDetails() {
                         <th className="w-auto">{location.state.nb_heures}</th>
                     </tr>
                     <tr>
-                        <th className="w-auto">Client</th>
-                        <th className="w-auto">{location.state.client.nom_jurdique}</th>
+                        <th className="w-auto">Niveau</th>
+                        <th className="w-auto">{location.state.niveaux.titre}</th>
                     </tr>
+                    <tr>
+                        <th className="w-auto">Client</th>
+                        <th className="w-auto">{location.state.user.nom_jurdique}</th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Formateur</th>
+                        <th className="w-auto">{location.state.formateur.nom+" "+location.state.formateur.prenom}</th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Programe</th>
+                        <th className="w-auto"><a href={`http://127.0.0.1:8000/${location.state.file_programme[0].file_path}`}>ouvrir</a></th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Details</th>
+                        <th className="w-auto"><a href={`http://127.0.0.1:8000/${location.state.file_details[0].file_path}`}>ouvrir</a></th>
+                    </tr>
+
 
                     </tbody>
                 </table>

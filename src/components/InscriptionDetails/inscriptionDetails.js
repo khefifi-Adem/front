@@ -6,6 +6,8 @@ import ShowFileModal from "../ShowFileModal/showFileModal";
 function InscriptionDetails() {
 
     const location = useLocation()
+
+    console.log(location)
     return (
         <div className="cont m-5 ">
             <div className=" w-100 p-5 justify-content-center  ">
@@ -33,8 +35,16 @@ function InscriptionDetails() {
                         <th className="w-auto">{location.state.nb_heures}</th>
                     </tr>
                     <tr>
-                        <th className="w-auto">Nombre des places disponible</th>
-                        <th className="w-auto">{location.state.nb_places_dispo}</th>
+                        <th className="w-auto">Groupe Discussion</th>
+                        <th className="w-auto"><a href={`${location.state.link}`} target="_blank">Visitez</a></th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Details</th>
+                        <th className="w-auto"><a href={`http://127.0.0.1:8000/${location.state.file_details.file_path}`} >Lire plus</a></th>
+                    </tr>
+                    <tr>
+                        <th className="w-auto">Programme</th>
+                        <th className="w-auto"><a href={`http://127.0.0.1:8000/${location.state.file_programme.file_path}`} >Lire plus</a></th>
                     </tr>
 
                     </tbody>
@@ -53,26 +63,28 @@ function InscriptionDetails() {
                             <table className="table m-3">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Cycle Formation</th>
+                                    <th scope="col">Fichierss</th>
                                     <th scope="col">Action</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {/*{*/}
-                                {/*    cycleFomations.map(cycle=>(*/}
-                                        <tr >
-                                            <th scope="row">chapitre 1</th>
-                                            <td>
-                                                <div className="btn btn-primary btn-lg px-4 me-sm-3" data-bs-toggle="modal" data-bs-target="#showfilemodal">lire plus</div>
-                                                <ShowFileModal path="https://drive.google.com/file/d/1ZdxB3drQCEE6qvBj-UAOD3UFMc2ryub5/preview"/>
-                                            </td>
-                                        </tr>
-                                    {/*))}*/}
+                                {
+                                    location.state.files.map(file=>
+                                        (<tr>
+                                                <th scope="row">{file.titre}</th>
+                                                <td>
+                                                    <a className="btn btn-primary btn-lg px-4 me-sm-3"  href={`http://127.0.0.1:8000/${file.file_path}`} target="_blank">
+                                                        lire plus
+                                                    </a>
+
+                                                </td>
+                                            </tr>)
 
 
 
 
+                                    )}
                                 </tbody>
                             </table>
                         </div>

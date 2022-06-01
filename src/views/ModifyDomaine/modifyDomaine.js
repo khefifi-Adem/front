@@ -75,7 +75,7 @@ function ModifyDomaines() {
 
                     <div className="collapse w-100" id="ajouter-domaine">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addAdmin} >
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="titre" type="text" name="titre"

@@ -14,7 +14,7 @@ function SmiInternational() {
 
                             {
                                 references.map(reference=>(
-                                    <div key={reference.id}>
+                                    <div className="sideside" key={reference.id}>
                                         <h2 className='py-2 p-5'>{reference.titre}</h2>
                                         <SideBar data={reference.childrens}/>
                                     </div>

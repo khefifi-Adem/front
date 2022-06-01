@@ -16,7 +16,7 @@ function ModifyFormation() {
 
     const handlepicture = (e) => {
 
-        setPicture({ image:e.target.file[0]});
+        setPicture({ image:e.target.files[0]});
     }
 
     useEffect(()=> {
@@ -38,7 +38,11 @@ function ModifyFormation() {
     const updateFormationIntro = (e) => {
         e.preventDefault();
 
-        const data = formation;
+        const data = new FormData();
+        data.append('page_name', 'formation')
+        data.append('titre', formation.titre)
+        data.append('description', formation.description)
+        data.append('image_path', picture.image)
         axios.post("api/pages/3", data).then(res=>{
             if (res.data.status === 200)
             {
@@ -80,7 +84,9 @@ function ModifyFormation() {
                             <tr key={pages.id}>
                                 <th className="w-25">{pages.titre}</th>
                                 <th className="w-25">{pages.description}</th>
-                                <th className="w-25">{pages.image_path}</th>
+                                <th className="w-25">
+                                    <img  className="w-100" src={`http://localhost:8000/${pages.image_path}`}/>
+                                </th>
                                 <th className="w-25">
                                     <button className="btn btn-success  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="false" aria-controls="collapseExample">Edit</button>
                                 </th>

@@ -16,7 +16,7 @@ function ModifyReference() {
 
     const handlepicture = (e) => {
 
-        setPicture({ image:e.target.file[0]});
+        setPicture({ image:e.target.files[0]});
     }
 
     useEffect(()=> {
@@ -39,7 +39,11 @@ function ModifyReference() {
     const updateReferencesIntro = (e) => {
         e.preventDefault();
 
-        const data = reference;
+        const data = new FormData;
+        data.append('page_name', 'references')
+        data.append('titre', reference.titre)
+        data.append('description', reference.description)
+        data.append('image_path', picture.image)
         axios.post("api/pages/4", data).then(res=>{
             if (res.data.status === 200)
             {
@@ -81,7 +85,10 @@ function ModifyReference() {
                             <tr key={pages.id}>
                                 <th className="w-25">{pages.titre}</th>
                                 <th className="w-25">{pages.description}</th>
-                                <th className="w-25">{pages.image_path}</th>
+                                <th className="w-25">
+                                    <img  className="w-100" src={`http://localhost:8000/${pages.image_path}`}/>
+
+                                </th>
                                 <th className="w-25">
                                     <button className="btn btn-success  m-1" type="button" data-bs-toggle="collapse" data-bs-target="#edit" aria-expanded="false" aria-controls="collapseExample">Edit</button>
                                 </th>

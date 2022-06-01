@@ -22,7 +22,7 @@ function ModifyFormateur() {
 
                 }
             }).catch((e) => {
-                console.log(e)
+                console.log(e.request)
             });
         };
         getFormmateur()
@@ -47,13 +47,12 @@ function ModifyFormateur() {
                         swal("Success",res.data.message,"success");
                         window.location.reload(false);
 
-                    }else {
-                        setErrors(res.errors);
-                        console.log(res);
-                    }
-               
-            }
-        )
+                    }}).catch((e) => {
+            swal("Success",e.request.response,"success");
+        });
+
+
+
     }
 
     return(
@@ -72,7 +71,7 @@ function ModifyFormateur() {
 
                     <div className="collapse w-100" id="ajouter">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addFormateur} >
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="nom" type="text" name="nom"

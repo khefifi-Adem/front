@@ -10,7 +10,7 @@ function ModifyServices() {
     const [services, setServices] = useState([])
 
     const initialValueService = { titre:"", description:"" };
-    const [addServices, setAddServices] = useState([])
+    const [addServices, setAddServices] = useState(initialValueService)
     const [picture, setPicture] = useState([]);
 
 
@@ -64,7 +64,7 @@ function ModifyServices() {
 
 
 
-    const initialValueHome = { titre:"", description:"" };
+    const initialValueHome = { page_name: 'services',titre:"", description:"" };
     const [home, setHome] = useState(initialValueHome);
 
 
@@ -170,7 +170,11 @@ function ModifyServices() {
     const updateServiceIntro = (e) => {
         e.preventDefault();
 
-        const data = home;
+        const data = new FormData();
+        data.append('page_name', 'servives');
+        data.append('titre', home.titre);
+        data.append('description', home.description);
+
         axios.post("api/pages/2", data).then(res=>{
             if (res.data.status === 200)
             {
@@ -271,7 +275,7 @@ function ModifyServices() {
 
                     <div className="collapse w-100" id="ajouter">
                         <div className="d-flex card card-body align-items-center">
-                            <h1 className="fw-normal"> Ajouer </h1>
+                            <h1 className="fw-normal"> Ajouter </h1>
                             <form className="w-50" onSubmit={addCard} >
                                 <div className="form-floating mb-3 w-100">
                                     <input className="form-control w-100" id="titre" type="text" name="titre"
@@ -428,7 +432,9 @@ function ModifyServices() {
                                     <tr key={service.id}>
                                         <th className="w-25">{service.titre}</th>
                                         <th className="w-25">{service.description}</th>
-                                        <th className="w-25">{service.image_path}</th>
+                                        <th className="w-25">
+                                            <img  className="w-100" src={`http://localhost:8000/${service.image_path}`}/>
+                                            </th>
                                         <th className="w-25">
                                             <th>
                                                 <button className="btn btn-success  m-1" data-bs-toggle="modal" data-bs-target={`#service${service.id}`}>Edit</button>
