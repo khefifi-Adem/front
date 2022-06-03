@@ -163,7 +163,7 @@ function Acceuil() {
                             {
                                 partners.map(partner => (
 
-                                    <div className="col-3  d-xl-block text-center" key={partner.id}>
+                                    <div className="col-md-3 mb-5 p-2  d-xl-block text-center" key={partner.id}>
                                         <img className=" img-fluid rounded-3 my-5" src={`http://127.0.0.1:8000/${partner.image_path}`} alt="..." />
                                     </div>
                                     ))

@@ -117,7 +117,7 @@ function Formations() {
                             <div className="cycle-container">
                                 <table className="cycle">
                                     <tr className="cycle-head">
-                                        <th className='w-auto'>Niveau</th>
+                                        <th className='w-auto'>Titre</th>
                                         <th className='w-auto'>Date de debut</th>
                                         <th className='w-auto'>Date de fin</th>
                                         <th className='w-auto'>Nombre d'heure</th>

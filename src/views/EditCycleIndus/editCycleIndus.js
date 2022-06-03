@@ -59,10 +59,10 @@ function EditCycleIndus({cycle,niveaux,formateurs,clients}) {
                 let res1 = res;
                 const fileDetails = new FormData;
                 fileDetails.append('file_path',detailsFile.file);
-                axios.post(`api/details_files/${cycle.file_details[0].id}`,fileDetails);
+                axios.post(`api/details_files/${cycle.file_details.id}`,fileDetails);
                 const fileProgramme = new FormData;
                 fileProgramme.append('file_path',programmeFile.file);
-                axios.post(`api/programme_files/${cycle.file_programme[0].id}`,fileProgramme);
+                axios.post(`api/programme_files/${cycle.file_programme.id}`,fileProgramme);
                 swal("Success",res1.data.message,"success");
                 window.location.reload(false);
 

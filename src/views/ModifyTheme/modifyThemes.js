@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {Link, Outlet, useLocation} from "react-router-dom";
@@ -7,6 +7,25 @@ import EditTheme from "../EditTheme/editTheme";
 function ModifyThemes() {
 
     const location = useLocation();
+
+
+    const deleteTheme = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
+
+
+            axios.delete(`api/themes/${id}`).then(res=>{
+                    if (res.status === 200){
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+                    }
+                }
+            )}
+    })
 
 
     const [themes, setThemes] = useState([]);
@@ -144,7 +163,7 @@ function ModifyThemes() {
                                                     <div className="d-flex card card-body align-items-center">
                                                         <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                         <div>
-                                                            <button className="btn btn-success m-1">Confirmer</button>
+                                                            <button className="btn btn-success m-1" onClick={deleteTheme(theme.id)}>Confirmer</button>
                                                             <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletetheme${theme.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                         </div>
                                                     </div>

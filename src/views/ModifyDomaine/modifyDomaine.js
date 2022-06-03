@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import {Link, Outlet, useLocation} from "react-router-dom";
@@ -7,12 +7,33 @@ import EditDomaine from "../EditDomain/editDomain";
 function ModifyDomaines() {
 
     const location = useLocation();
-    console.log(location.state);
+
+
 
     const [domaines, setDomaines] = useState([]);
 
     const initialValues ={ titre: "",description: "",secteur_id: location.state};
     const [adddomaine, setAdddomaine] = useState(initialValues);
+
+
+    const deleteDomaine = useCallback( (id) => {
+        return async (e) => {
+            e.preventDefault()
+
+
+            axios.delete(`api/domaines/${id}`).then(res=>{
+                    if (res.status === 200){
+                        if (res.data.status === 200)
+                        {
+                            swal("Success",res.data.message,"success");
+                            console.log(res.data.status)
+                            window.location.reload(false);
+                        }
+                    }
+                }
+            )}
+    })
+
 
     useEffect(()=> {
         const getDomaine = async () => {
@@ -145,7 +166,7 @@ function ModifyDomaines() {
                                                     <div className="d-flex card card-body align-items-center">
                                                         <h6 className="fw-bolder">Vous voulez confirmer la suppression</h6>
                                                         <div>
-                                                            <button className="btn btn-success m-1">Confirmer</button>
+                                                            <button className="btn btn-success m-1"onClick={deleteDomaine(domaine.id)}>Confirmer</button>
                                                             <button className="btn btn-danger m-1" type="button" data-bs-toggle="collapse" data-bs-target={`#deletedomaine${domaine.id}`} aria-expanded="false" aria-controls="collapseExample">Annuler</button>
                                                         </div>
                                                     </div>

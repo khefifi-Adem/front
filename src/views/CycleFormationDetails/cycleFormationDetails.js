@@ -47,11 +47,11 @@ function CycleFormationDetails() {
                     </tr>
                     <tr>
                         <th className="w-auto">Programe</th>
-                        <th className="w-auto"><a href={`http://127.0.0.1:8000/${location.state.file_programme[0].file_path}`}>ouvrir</a></th>
+                        <th className="w-auto"><a href={`http://127.0.0.1:8000/${location.state.file_programme.file_path}`}>ouvrir</a></th>
                     </tr>
                     <tr>
                         <th className="w-auto">Details</th>
-                        <th className="w-auto"><a href={`http://127.0.0.1:8000/${location.state.file_details[0].file_path}`}>ouvrir</a></th>
+                        <th className="w-auto"><a href={`http://127.0.0.1:8000/${location.state.file_details.file_path}`}>ouvrir</a></th>
                     </tr>
 
             </tbody>
