@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import axios from "axios";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Acceuil from "./views/Acceuil/Acceuil";
 import Contact from "./views/Contact/Contact";
@@ -21,9 +22,6 @@ import SignIn from "./views/SignIn/signIn";
 import ClientFormation from "./views/ClientFormation/clientFormation";
 import VosInscriptions from "./views/VosInscriptions/vosInscriptions";
 import InscriptionDetails from "./components/InscriptionDetails/inscriptionDetails";
-
-
-import axios from "axios";
 import IndusFormation from "./views/IndusFormation/indusFormation";
 import VosInscriptionIndus from "./views/VosInscriptionIndus/vosInscriptionIndus";
 import VosProjets from "./views/VosProjets/vosProjets";
